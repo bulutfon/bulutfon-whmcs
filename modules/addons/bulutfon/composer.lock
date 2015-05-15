@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "336079de418036acb4d77fada2016671",
+    "hash": "21b1a9c1d3b78cb3e72529505679d9f1",
     "packages": [
         {
             "name": "bulutfon/php-sdk",
@@ -143,6 +143,48 @@
                 "web service"
             ],
             "time": "2015-03-18 18:23:50"
+        },
+        {
+            "name": "hipchat/hipchat-php",
+            "version": "v1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hipchat/hipchat-php.git",
+                "reference": "f928cc4f2bea0ac5f9367e5a2790d4be082a5d6a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hipchat/hipchat-php/zipball/f928cc4f2bea0ac5f9367e5a2790d4be082a5d6a",
+                "reference": "f928cc4f2bea0ac5f9367e5a2790d4be082a5d6a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "HipChat": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "HipChat",
+                    "email": "support@hipchat.com",
+                    "homepage": "https://www.hipchat.com",
+                    "role": "Company"
+                }
+            ],
+            "description": "PHP library for HipChat",
+            "homepage": "http://github.com/hipchat/hipchat-php",
+            "keywords": [
+                "hipchat"
+            ],
+            "time": "2014-06-02 17:03:35"
         },
         {
             "name": "j4mie/idiorm",
@@ -472,6 +514,52 @@
                 "validator"
             ],
             "time": "2014-12-27 16:32:29"
+        },
+        {
+            "name": "xuma/bfxm",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hakanersu/bfxm.git",
+                "reference": "9bccc26c13b07f5522e798636ab6afb91b88140a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hakanersu/bfxm/zipball/9bccc26c13b07f5522e798636ab6afb91b88140a",
+                "reference": "9bccc26c13b07f5522e798636ab6afb91b88140a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Xuma\\Bfxm": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Hakan ERSU",
+                    "email": "hakanersu@gmail.com"
+                }
+            ],
+            "description": "BFXM Json Builder",
+            "keywords": [
+                "bfxm",
+                "bulutfon",
+                "bulutfonxm"
+            ],
+            "time": "2015-04-30 05:11:13"
         }
     ],
     "packages-dev": [],
@@ -480,7 +568,8 @@
     "stability-flags": {
         "bulutfon/php-sdk": 20,
         "vlucas/valitron": 20,
-        "j4mie/idiorm": 20
+        "j4mie/idiorm": 20,
+        "xuma/bfxm": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

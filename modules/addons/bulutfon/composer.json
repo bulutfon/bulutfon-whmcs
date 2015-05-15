@@ -4,7 +4,9 @@
         "symfony/http-foundation": "2.6.*",
         "bulutfon/php-sdk": "dev-master",
         "vlucas/valitron": "dev-master",
-        "j4mie/idiorm": "dev-master"
+        "j4mie/idiorm": "dev-master",
+        "hipchat/hipchat-php": ">=1.0.0",
+        "xuma/bfxm": "dev-master"
     },
     "autoload": {
         "psr-4": {"Bulutfon\\Libraries\\": "libraries/"}

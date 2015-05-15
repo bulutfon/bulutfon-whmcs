@@ -17,4 +17,7 @@ function dd($var){
 
 $repository = new \Bulutfon\Libraries\Repository();
 
-dd($repository->addNumber(1,905070420619));
+$numbers = $repository->checkNumber(905070420619,true);
+foreach($numbers as $number){
+    print_r($number->phonenumber);
+}

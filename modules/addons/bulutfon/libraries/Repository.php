@@ -43,7 +43,7 @@ class Repository{
         return $phone;
     }
 
-    public function addNumber($userid,$number)
+    private function checkNumber($number,$list=false)
     {
         $numbers = ORM::for_table('tblclients')
             ->raw_query("SELECT
@@ -62,7 +62,15 @@ class Repository{
                         WHERE
                              mod_bulutfon_phonenumbers.phonenumber LIKE :phonenumber", array('phonenumber' =>"%$number%"))->find_many();
 
-        if(count($numbers)) return false;
+        if(count($numbers)>0) return true;
+
+        return false;
+    }
+
+    public function addNumber($userid,$number)
+    {
+
+        if($this->checkNumber($number)) return false;
 
         $phone = ORM::for_table('mod_bulutfon_phonenumbers')->create();
 

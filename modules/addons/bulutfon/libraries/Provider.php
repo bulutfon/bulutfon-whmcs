@@ -25,21 +25,10 @@ class Provider{
     {
         $keys = $this->repository->getKeys();
 
-        $url = parse_url($keys['redirectUri'],PHP_URL_QUERY);
-
-        parse_str($url, $result);
-
-        $hash = $result['hash'];
-
-        if($this->request->get('hash')!=$hash){
-           Helper::json("Hatali url");
-        }
-
         $this->provider = new Bulutfon($keys);
 
         if (!$this->request->get('code')) {
             if($this->request->get('refresh_token')) {
-                $grant = new RefreshToken();
 
                 $token = new AccessToken(Helper::decamelize($this->repository->getTokens()));
 
@@ -56,6 +45,8 @@ class Provider{
                 );
 
                 $this->repository->setTokens(json_encode($token));
+
+                $this->redirect("/{$this->path}/addonmodules.php?module=bulutfon&code={$this->request->get('code')}}");
 
             }else {
                 echo "Code Doesn't exist";
@@ -76,7 +67,7 @@ class Provider{
 
     private function redirect($url)
     {
-        header("Location:{$_SERVER['HTTP_HOST']}{$url}");
+        header("Location:{$_SERVER['HTTP_HOST']}/{$url}");
         exit;
     }
 }
