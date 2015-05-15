@@ -1,0 +1,201 @@
+#content_container #content #content_padded #tabs ul.bulutfon_tabs li:first-child,
+#content_container #content #content_padded #clienttabs ul.bulutfon_tabs li:first-child{
+    margin-left:0;
+}
+.bulutfon_wrapper {
+    width:400px;
+    display: block;
+    margin:0 auto;
+    margin-bottom:100px;
+    border: 1px solid #C9C9C9;
+    box-shadow: 0 1px 2px rgba(0,0,0,.21);
+    -webkit-border-radius: 4px 4px 0 0;
+    -moz-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+}
+.bulutfon_module {
+    background: #f3f3f3;
+    padding:10px;
+    min-height: 100px;
+    border:1px solid #ccc;
+}
+
+.bulutfon_header {
+    position: relative;
+    padding:10px;
+    min-height: 62px;
+    background-color: #018fd7;
+
+}
+.bulutfon_header .logo {
+    display: block;
+    margin:0 auto;
+    margin-top:10px;
+    width:100px;
+}
+.bulutfon_header ul{
+
+}
+.bulutfon_header ul li{
+    float:left;
+}
+.bulutfon_header ul li a{
+    padding:23px 20px;
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:14px;
+    color:#fff;
+    text-shadow: 0 -1px rgba(0,0,0, 0.5);
+    text-decoration: none;
+}
+.bulutfon_header ul li.active ,.bulutfon_header ul li:hover{
+    background: rgba(0, 0, 0, 0.2);
+}
+.bulutfon_content {
+    background: rgb(245,245,245);
+    padding:10px;
+}
+ #content_container #content #content_padded #clienttabs ul li.bulutfon-link.selected a{
+
+     font-weight:bold;
+}
+#bulutfon-clientsummary{
+    background:#018fd7;
+    min-height:300px;
+    width:100%;
+}
+.bulutfon-loader {
+    display: block;
+    margin:0 auto;
+}
+
+.bulutfon-table .datatable td {
+    padding:5px 15px;
+}
+
+
+
+.bulutfon_content .p {
+    position: relative;
+}
+
+.bulutfon_content label {
+    position: absolute;
+    font: 11px Helvetica Neue, Helvetica, sans-serif;
+    color: #444;
+    text-transform: uppercase;
+    margin-top: 14px;
+    margin-left: 12px;
+    z-index: 1;
+    font-weight: 500;
+    transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+}
+.bulutfon_content label.active {
+    color: #62B9ED;
+    transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+}
+
+.bulutfon_content input[type=text] {
+    width: 356px;
+    background: #fff;
+    color: #62B9ED;
+    border-radius: 3px;
+    outline: 0;
+    border: 3px solid #ccc;
+    position: relative;
+    padding: 24px 8px 6px;
+    font: 18px Helvetica Neue, Helvetica, sans-serif;
+    transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+}
+.bulutfon_content input[type=text]:focus {
+  
+}
+.bulutfon_content input[type=text].parsley-error {
+    border-color: red;
+    color: red;
+}
+.bulutfon_content input[type=text].parsley-success {
+    width: 238px;
+    padding: 24px 48px 6px 8px;
+}
+
+.bulutfon_content input + span {
+    background: url("http://assets.atjayjo.com/img/green-check.svg") no-repeat;
+    opacity: 0;
+    display: block;
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    top: 17px;
+    z-index: 1;
+    right: 18px;
+    pointer-events: none;
+    transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+}
+
+.bulutfon_content input.parsley-success + span {
+    opacity: 1;
+    right: 10px;
+    display: block;
+    transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -webkit-transition: all 0.2s;
+}
+
+/* Error Handling */
+.bulutfon_content .parsley-error-list {
+    list-style: none;
+    margin: 0;
+    height: 12px;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+
+.bulutfon_content .parsley-error-list li {
+    position: absolute;
+    display: block;
+    font: 12px Helvetica Neue, Helvetica, sans-serif;
+    background: red;
+    font-weight: 300;
+    color: #fff;
+    padding: 4px 10px;
+    right: 40px;
+    top: -46px;
+    margin: 0;
+    z-index: 10;
+}
+
+
+
+
+#kullanici-searchresults .searchresultheader {
+    display: none;
+}
+
+#kullanici-searchresults .searchresult{
+    border:1px solid #ccc;
+    padding:5px;
+    background: #fff;
+    margin-bottom:5px;
+}
+.bulutfon-number td{
+        background-color:#fff;
+        -webkit-transition: background 0.5s linear;
+        -moz-transition: background 0.5s linear;
+        -ms-transition: background 0.5s linear;
+        -o-transition: background 0.5s linear;
+        transition: background 0.5s linear;
+}
+
+.bulutfon-number.deleted td,table.datatable tr.bulutfon-number.deleted:hover td{
+     background-color:#a94442;
+}
