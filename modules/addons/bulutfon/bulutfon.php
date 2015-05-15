@@ -5,8 +5,6 @@ use Bulutfon\OAuth2\Client\Provider\Bulutfon;
 use League\OAuth2\Client\Token\AccessToken;
 use Symfony\Component\HttpFoundation\Request;
 
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
 if (!defined("WHMCS")) die("This file cannot be accessed directly");
 
 function bulutfon_config(){
