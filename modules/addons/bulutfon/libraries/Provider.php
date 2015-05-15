@@ -18,11 +18,24 @@ class Provider{
         $this->repository = $repository;
         $this->request =  Request::createFromGlobals();
         $this->path = '/'.$path ?:'';
+
     }
 
     public function init()
     {
-        $this->provider = new Bulutfon($this->repository->getKeys());
+        $keys = $this->repository->getKeys();
+
+        $url = parse_url($keys['redirectUri'],PHP_URL_QUERY);
+
+        parse_str($url, $result);
+
+        $hash = $result['hash'];
+
+        if($this->request->get('hash')!=$hash){
+           Helper::json("Hatali url");
+        }
+
+        $this->provider = new Bulutfon($keys);
 
         if (!$this->request->get('code')) {
             if($this->request->get('refresh_token')) {

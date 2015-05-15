@@ -15,10 +15,10 @@ function bulutfon_config(){
         "author" => "Bulutfon",
         "language" => "turkish",
         "fields" => array(
-            "clientId" => array("clientId" => "Uygulama Anahtarı", "Type" => "text", "Size" => "60", "Description" => "Bulutfon API uygulama anahtarı.", "Default" => "" ),
-            "clientSecret" => array("clientSecret" => "Gizli Anahtar", "Type" => "text", "Size" => "60", "Description" => "Bulutfon API gizli anahtarı.", "Default" => "" ),
-            "redirectUri" => array("redirectUri" => "Yönlendirme Adresi ", "Type" => "text", "Size" => "120", "Description" => "Bulutfon API yönlendirme adresi.", "Default" => "" ),
-            "verifySSL"=>array("verifySSL"=>"SSL Doğrulama","Type"=>"dropdown","Options" =>"true,false","Description" => "SSL Doğrulaması")
+            "clientId" => array("FriendlyName"=>"cliendId", "clientId" => "Uygulama Anahtarı", "Type" => "text", "Size" => "60", "Description" => "Bulutfon API uygulama anahtarı.", "Default" => "" ),
+            "clientSecret" => array("FriendlyName"=>"clientSecret","clientSecret" => "Gizli Anahtar", "Type" => "text", "Size" => "60", "Description" => "Bulutfon API gizli anahtarı.", "Default" => "" ),
+            "redirectUri" => array("FriendlyName"=>"Yönlendirme Adresi","redirectUri" => "Yönlendirme Adresi ", "Type" => "text", "Size" => "120", "Description" => "Lütfen hash değerini değiştiriniz.", "Default" => "" ),
+            "verifySSL"=>array("FriendlyName"=>"SSL Doğrulama","verifySSL"=>"SSL Doğrulama","Type"=>"dropdown","Options" =>"true,false","Description" => "SSL Doğrulaması")
         )
     );
 
