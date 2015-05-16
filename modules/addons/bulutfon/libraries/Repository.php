@@ -1,9 +1,18 @@
 <?php
 namespace Bulutfon\Libraries;
+
 use ORM;
+
 class Repository{
-	public function getKeys()
-	{
+
+    /**
+     * Get bulutfon api keys from module settings
+     * table.
+     *
+     * @return array
+     */
+    public function getKeys()
+    {
         $results = ORM::for_table('tbladdonmodules')->where('module', 'bulutfon')->findMany();
         $fields = array('clientId','clientSecret','redirectUri','verifySSL');
         $keys = array();
@@ -14,8 +23,13 @@ class Repository{
         }
         $keys['verifySSL'] = filter_var($keys['verifySSL'], FILTER_VALIDATE_BOOLEAN);
         return $keys;
-	}
+    }
 
+    /**
+     * Set new tokens.
+     *
+     * @param $token
+     */
     public function setTokens($token)
     {
         ORM::for_table('mod_bulutfon_tokens')->delete_many();
@@ -27,12 +41,24 @@ class Repository{
         $query->save();
     }
 
-	public function getTokens()
-	{
+    /**
+     * Get tokens from table.
+     *
+     * @return array
+     */
+    public function getTokens()
+    {
         $tokens = ORM::for_table('mod_bulutfon_tokens')->findOne();
         return (array)json_decode($tokens->tokens);
-	}
+    }
 
+    /**
+     * Delete a number from mod_bulutfon_phonumbers.
+     * Whmcs numbers cant deleted for now.
+     *
+     * @param $number
+     * @return mixed
+     */
     public function deleteNumber($number)
     {
         $phone  = ORM::for_table('mod_bulutfon_phonenumbers')
@@ -43,6 +69,14 @@ class Repository{
         return $phone;
     }
 
+    /**
+     * Check number is exists in both whmcs tables and
+     * bulutfon tables.
+     *
+     * @param $number
+     * @param bool $list
+     * @return bool
+     */
     private function checkNumber($number,$list=false)
     {
         $numbers = ORM::for_table('tblclients')
@@ -67,6 +101,12 @@ class Repository{
         return false;
     }
 
+    /**
+     * Add phone number to bulutfon mod database.
+     * @param $userid
+     * @param $number
+     * @return bool
+     */
     public function addNumber($userid,$number)
     {
 
@@ -86,6 +126,13 @@ class Repository{
 
     }
 
+    /**
+     * Get users phone numbers from whmcs and
+     * bulutfon mod table.
+     *
+     * @param $userid
+     * @return array|bool
+     */
     public function getUserNumbers($userid)
     {
 

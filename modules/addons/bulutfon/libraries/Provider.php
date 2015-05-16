@@ -1,10 +1,13 @@
 <?php
 namespace Bulutfon\Libraries;
+
 use Bulutfon\OAuth2\Client\Provider\Bulutfon;
 use League\OAuth2\Client\Grant\RefreshToken;
 use League\OAuth2\Client\Token\AccessToken;
 use Symfony\Component\HttpFoundation\Request;
+
 class Provider{
+
     protected $repository;
 
     protected $request;
@@ -14,13 +17,18 @@ class Provider{
     protected $path;
 
     public function __construct(Repository $repository,$path)
-	{
+    {
         $this->repository = $repository;
         $this->request =  Request::createFromGlobals();
         $this->path = '/'.$path ?:'';
 
     }
 
+    /**
+     * Check api requests.
+     *
+     * Most part will be extracted own methods.
+     */
     public function init()
     {
         $keys = $this->repository->getKeys();
@@ -28,6 +36,7 @@ class Provider{
         $this->provider = new Bulutfon($keys);
 
         if (!$this->request->get('code')) {
+            
             if($this->request->get('refresh_token')) {
 
                 $token = new AccessToken(Helper::decamelize($this->repository->getTokens()));
