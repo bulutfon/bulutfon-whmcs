@@ -1,6 +1,6 @@
 <?php
 /**
- * Just a placeholder.For clientare.
+ * Just a placeholder.For clientarea.
  *
  * @param $vars
  * @return array|string

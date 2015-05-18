@@ -5,6 +5,7 @@ class Helper
 {
     /**
      * Is it an ajax request ?
+     *
      * @return bool
      */
     public static function isAjax()
