@@ -14,14 +14,15 @@ class Provider{
 
     protected $provider;
 
-    protected $path;
+    protected $paths;
 
-    public function __construct(Repository $repository,$path)
+    public function __construct(Repository $repository,$paths)
     {
         $this->repository = $repository;
-        $this->request =  Request::createFromGlobals();
-        $this->path = $path ? "/{$path}/" : "/admin/";
 
+        $this->request =  Request::createFromGlobals();
+
+        $this->paths = $paths;
     }
 
     /**
@@ -60,7 +61,7 @@ class Provider{
 
         $this->repository->setTokens(json_encode($token));
 
-        $this->redirect("{$this->path}addonmodules.php?module=bulutfon&code={$this->request->get('code')}}");
+        $this->redirect("{$this->paths['admin_url']}addonmodules.php?module=bulutfon&code={$this->request->get('code')}}");
     }
 
     /**
@@ -75,7 +76,7 @@ class Provider{
 
         $this->repository->setTokens(json_encode($token));
 
-        $this->redirect("{$this->path}addonmodules.php?module=bulutfon&code={$this->request->get('code')}&state={$this->request->get('state')}");
+        $this->redirect("{$this->paths['admin_url']}addonmodules.php?module=bulutfon&code={$this->request->get('code')}&state={$this->request->get('state')}");
     }
 
     /**

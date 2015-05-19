@@ -14,14 +14,24 @@ class Repository{
     public function getKeys()
     {
         $results = ORM::for_table('tbladdonmodules')->where('module', 'bulutfon')->findMany();
-        $fields = array('clientId','clientSecret','redirectUri','verifySSL');
+
+        $url = ORM::for_table('tblconfiguration')->where('setting','SystemURL')->findOne();
+
+        $fields = array('clientId','clientSecret','verifySSL');
+
         $keys = array();
+
         foreach($results as $key){
             if(in_array($key->setting, $fields)){
                 $keys[$key->setting] = $key->value;
             }
         }
+        
+        // Url must be https
+        $keys['redirectUri'] = rtrim(preg_replace("/^http:/i", "https:", $url->value),'/').'/modules/addons/bulutfon/callback.php';
+
         $keys['verifySSL'] = filter_var($keys['verifySSL'], FILTER_VALIDATE_BOOLEAN);
+
         return $keys;
     }
 

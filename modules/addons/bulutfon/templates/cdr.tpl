@@ -50,9 +50,7 @@
                         <th>Aranan</th>
                         <th>Arama Zamanı</th>
                         <th>Cevaplanma Zamanı</th>
-                        {if $fields}
-                            <th>İşlemler</th>
-                        {/if}
+                       
                     </tr>
                     </thead>
                     <tbody>
@@ -84,9 +82,7 @@
                                 {$cdr->answer_time|date_format:"%e %B %Y"}
                                 {$cdr->answer_time|date_format:"%H:%M:%S"}
                             </td>
-                            {if $fields}
-                                <td></td>
-                            {/if}
+                         
                         </tr>
                     {/foreach}
                     </tbody>
@@ -103,17 +99,17 @@
     {if $page==1}
     « Önceki Sayfa &nbsp;
     {else}
-    <a href="clientssummary.php?bulutfon=1&amp;page={$page-1}&amp;userid={$userid}{if $limit}&amp;limit={$limit}{/if}">« Önceki Sayfa</a>
+    <a href="clientssummary.php?bulutfon=1&amp;page={$page-1}&amp;userid={$userid}{if $limit}&amp;limit={$limit}{/if}">« Önceki Sayfa </a>
     {/if}
-    <a href="clientssummary.php?bulutfon=1&amp;page={$page+1}&amp;userid={$userid}{if $limit}&amp;limit={$limit}{/if}">Next Page »</a>
+    <a href="clientssummary.php?bulutfon=1&amp;page={$page+1}&amp;userid={$userid}{if $limit}&amp;limit={$limit}{/if}">Next Page » </a>
 </p>
 {else}
 <p align="center">
     {if $page==1}
     « Önceki Sayfa &nbsp;
     {else}
-    <a href="clientssummary.php?bulutfon=1&amp;page={$page-1}{if $limit}&amp;limit={$limit}{/if}">« Önceki Sayfa</a>
+    <a href="addonmodules.php?module=bulutfon&amp;page={$page-1}{if $limit}&amp;limit={$limit}{/if}">« Önceki Sayfa </a>
     {/if}
-    <a href="clientssummary.php?bulutfon=1&amp;page={$page+1}{if $limit}&amp;limit={$limit}{/if}">Next Page »</a>
+    <a href="addonmodules.php?module=bulutfon&amp;page={$page+1}{if $limit}&amp;limit={$limit}{/if}">Next Page » </a>
 </p>
 {/if}
