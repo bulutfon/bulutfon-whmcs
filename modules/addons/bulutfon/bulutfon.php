@@ -162,6 +162,7 @@ function bulutfon_output($vars){
 
             $userid = $request->get('userid');
 
+            // 100 results a bit overkill setted to 10.
             $filters = array('limit' => (int)$request->get('limit',10));
 
             $fields = true;
@@ -178,10 +179,7 @@ function bulutfon_output($vars){
 
                 $numbers = Helper::imp($numbers);
 
-                $filters = array(
-                    'caller_or_callee'=>$numbers,
-                    'limit' => (int)$request->get('limit',10)
-                );
+                $filters = array('caller_or_callee'=>$numbers);
             }
 
             $smarty->assign('cdrs',$provider->getCdrs($token, $filters, $page)->cdrs);
