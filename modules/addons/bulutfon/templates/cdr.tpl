@@ -61,7 +61,7 @@
                             {if strlen($cdr->caller)>4}
                                 <td>
                                     +{$cdr->caller|substr:0:2} ({$cdr->caller|substr:2:3}) {$cdr->caller|substr:5:3} {$cdr->caller|substr:8:4}
-                                    <a href="addonmodules.php?module=bulutfon&tab=addtouser&number={$cdr->caller}"><img src="/modules/addons/bulutfon/assets/img/add.png" alt=""/></a>
+                                    <a href="addonmodules.php?module=bulutfon&tab=addtouser&number={$cdr->caller}"><img src="../modules/addons/bulutfon/assets/img/add.png" alt=""/></a>
                                 </td>
                             {else}
                                 <td>{$cdr->caller}</td>
@@ -69,7 +69,7 @@
                             {if strlen($cdr->callee)>4}
                                 <td>
                                     +{$cdr->callee|substr:0:2} ({$cdr->callee|substr:2:3}) {$cdr->callee|substr:5:3} {$cdr->callee|substr:8:4}
-                                    <a href="addonmodules.php?module=bulutfon&tab=addtouser&number={$cdr->callee}"><img src="/modules/addons/bulutfon/assets/img/add.png" alt=""/></a>
+                                    <a href="addonmodules.php?module=bulutfon&tab=addtouser&number={$cdr->callee}"><img src="../modules/addons/bulutfon/assets/img/add.png" alt=""/></a>
                                 </td>
 
                             {else}

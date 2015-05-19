@@ -179,7 +179,7 @@ function bulutfon_output($vars){
 
                 $numbers = Helper::imp($numbers);
 
-                $filters = array('caller_or_callee'=>$numbers);
+                $filters['caller_or_callee'] = $numbers;
             }
 
             $smarty->assign('cdrs',$provider->getCdrs($token, $filters, $page)->cdrs);
