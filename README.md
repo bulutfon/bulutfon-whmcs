@@ -1,5 +1,7 @@
 # Bulutfon WHMCS ADDON
 
+Henüz hazırlık aşamasındadır.
+
 ### Özellikler
 
 * Gelen/giden aramaları listeleme.
