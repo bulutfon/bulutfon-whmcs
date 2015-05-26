@@ -1,6 +1,6 @@
 # Bulutfon WHMCS ADDON
 
-**Bulutfon WHMCS Addon**'u [buradan](https://github.com/hakanersu/bulutfon-whmcs/releases/download/0.0.1/Bulutfon_WHMCS_Addon.zip) indirebilirsiniz.
+**Bulutfon WHMCS Addon**'u [buradan](https://github.com/hakanersu/bulutfon-whmcs/releases/download/0.0.2/Bulutfon.WHMCS.Addon.zip) indirebilirsiniz.
 
 ### Güncellemeler
 #### v0.0.2
