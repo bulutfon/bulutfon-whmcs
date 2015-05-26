@@ -177,6 +177,12 @@ function bulutfon_output($vars){
 
                 $smarty->assign('userNumbers',$numbers);
 
+                foreach($numbers as $number){
+                    if(strlen($number)>9 && strlen($number)<12){
+                        array_push($numbers,'90'.ltrim($number,'0'));
+                    }        
+                }
+                
                 $numbers = Helper::imp($numbers);
 
                 $filters['caller_or_callee'] = $numbers;
