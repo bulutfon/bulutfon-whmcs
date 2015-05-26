@@ -6,6 +6,7 @@
 #### v0.0.2
 * Whmcs **Phone Number** alanında düzgün formatlanmamış numaralar için Türkiye alan koduyla ekstra numara sorgusu eklendi.
 * 
+
 ### Özellikler
 
 * Gelen/giden aramaları listeleme.
