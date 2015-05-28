@@ -2,6 +2,8 @@
 
 **Bulutfon WHMCS Addon**'u [buradan](https://github.com/hakanersu/bulutfon-whmcs/releases/download/0.0.2/Bulutfon.WHMCS.Addon.zip) indirebilirsiniz.
 
+Kurulum ile ilgili videoya [buradan](https://www.youtube.com/watch?v=Qf_wd-owvjA) ulaşabilirsiniz.
+
 ### Güncellemeler
 #### v0.0.2
 * Whmcs **Phone Number** alanında düzgün formatlanmamış numaralar için Türkiye alan koduyla ekstra numara sorgusu eklendi.
