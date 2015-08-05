@@ -16,8 +16,3 @@ ORM::configure('password',$db_password);
 function pp($var){
     echo "<pre>",print_r($var),"</pre>";
 }
-function dd($var){
-    echo "<pre>",print_r($var),"</pre>";
-    die();
-}
-
