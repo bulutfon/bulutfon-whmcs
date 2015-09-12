@@ -1,10 +1,11 @@
 var bulutfon ={
     addLinks:function(){
-        $('#clienttabs ul').append('<li class="tab bulutfon-link"><a href="clientssummary.php?userid='+this.getUrl('userid')+'&bulutfon=1">Bulutfon</a></li>');
+        $('#clienttabs ul,.client-tabs ul').append('<li class="tab bulutfon-link"><a href="clientssummary.php?userid='+this.getUrl('userid')+'&bulutfon=1">Bulutfon</a></li>');
         if(this.getUrl('bulutfon') == 1){
+            console.log('bulutfon');
             $('.bulutfon-link').addClass('selected');
             $('.tabselected').removeClass('tabselected').addClass('tab');
-            $('#tab_content').html("<div style='min-height:200px;'><img src='../modules/addons/bulutfon/assets/img/loader.gif' class='bulutfon-loader'/></div>");
+            $('#tab_content,.tab-content').html("<div style='min-height:200px;'><img src='../modules/addons/bulutfon/assets/img/loader.gif' class='bulutfon-loader'/></div>");
             this.showBulutfonContent(this.getUrl('userid'),this.getUrl('page'),this.getUrl('limit'));
         }
     },
@@ -24,7 +25,7 @@ var bulutfon ={
     showBulutfonContent: function(id,page,limit){
         page = page !== 'null' ?  page : 1;
         limit = limit !== 'null' ?  limit : 10;
-        $.getJSON('addonmodules.php?module=bulutfon&userid='+id+'&page='+page+'&limit='+limit, function(data){  $('#tab_content').html(data.html); });
+        $.getJSON('addonmodules.php?module=bulutfon&userid='+id+'&page='+page+'&limit='+limit, function(data){  $('#tab_content,.tab-content').html(data.html); });
     }
 };
 $(function(){
