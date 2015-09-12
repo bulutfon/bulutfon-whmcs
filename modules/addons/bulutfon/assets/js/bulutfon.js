@@ -47,7 +47,7 @@ $(function(){
         $("#kullanici").val("");
         $("#kullanici-searchresults").slideUp("slow");
     });
-    $('#tab_content').on('click','.delete-bulutfon-number',function(){
+    $('#tab_content,.tab-content').on('click','.delete-bulutfon-number',function(){
         bulutfon.deleteNumber($(this).data('number'),$(this));
     });
     $('#kullanici-searchresults').on('click','.searchresult a',function(){
