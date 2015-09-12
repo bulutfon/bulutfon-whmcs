@@ -1,10 +1,14 @@
-# Bulutfon WHMCS ADDON
-
-**Bulutfon WHMCS Addon**'u [buradan](https://github.com/hakanersu/bulutfon-whmcs/releases/download/0.0.2/Bulutfon.WHMCS.Addon.zip) indirebilirsiniz.
+# Bulutfon WHMCS ADDON 
 
 Kurulum ile ilgili videoya [buradan](https://www.youtube.com/watch?v=Qf_wd-owvjA) ulaşabilirsiniz.
 
+Güncel versiyon için lütfen git reposunu kullanın.
+
 ### Güncellemeler
+
+#### v0.0.3
+* Whmcs 6 için güncelleme yapıldı.
+ 
 #### v0.0.2
 * Whmcs **Phone Number** alanında düzgün formatlanmamış numaralar için Türkiye alan koduyla ekstra numara sorgusu eklendi.
 
