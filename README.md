@@ -2,7 +2,7 @@
 
 Kurulum ile ilgili videoya [buradan](https://www.youtube.com/watch?v=Qf_wd-owvjA) ulaşabilirsiniz.
 
-Güncel versiyon için lütfen git reposunu kullanın.
+Addonu [buradan](https://github.com/hakanersu/bulutfon-whmcs/releases/download/0.0.4/bfwhmcs-0.0.4.zip) indirebilirsiniz.
 
 ### Güncellemeler
 
