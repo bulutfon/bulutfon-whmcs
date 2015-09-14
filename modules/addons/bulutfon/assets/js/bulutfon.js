@@ -1,6 +1,6 @@
 var bulutfon ={
     addLinks:function(){
-        $('#clienttabs ul,.client-tabs ul').append('<li class="tab bulutfon-link"><a href="clientssummary.php?userid='+this.getUrl('userid')+'&bulutfon=1">Bulutfon</a></li>');
+        $('#clienttabs ul,ul.client-tabs').append('<li class="tab bulutfon-link"><a href="clientssummary.php?userid='+this.getUrl('userid')+'&bulutfon=1">Bulutfon</a></li>');
         if(this.getUrl('bulutfon') == 1){
             console.log('bulutfon');
             $('.bulutfon-link').addClass('selected');
