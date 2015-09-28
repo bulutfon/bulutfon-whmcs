@@ -1,4 +1,15 @@
 <?php
+
+/*
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
+*/
+include __DIR__.'/../../../configuration.php';
+include __DIR__.'/vendor/autoload.php';
+
+$dotenv = new Dotenv\Dotenv(__DIR__);
+$dotenv->load();
+
 /**
  * Just a placeholder.For clientarea.
  *
@@ -26,6 +37,21 @@ function header_output(){
 }
 add_hook("AdminAreaHeadOutput",2,"header_output");
 
+function sendPusherMessage($message){
+    //include __DIR__.'/vendor/autoload.php';
+   
+
+    $pusher = new Pusher(
+        getenv('PUSHER_KEY'),
+        getenv('PUSHER_SECRET'),
+        getenv('PUSHER_ID'),
+        array('encrypted' => true)
+    );
+    $data['message'] = $message;
+    $pusher->trigger('test_channel', 'my_event', $data);
+}
+
+
 /**
  * Get all hooks
  * @return array hooks added.
@@ -41,6 +67,9 @@ function getHooks(){
     }
     return $file;
 }
+$hooks = getHooks();
+
 foreach($hooks as $hook){
     add_hook($hook['hook'], 1, $hook['function'], "");
 }
+

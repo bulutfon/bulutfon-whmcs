@@ -7,7 +7,8 @@
         "j4mie/idiorm": "dev-master",
         "hipchat/hipchat-php": ">=1.0.0",
         "xuma/bfxm": "dev-master",
-        "pusher/pusher-php-server": "^2.2"
+        "pusher/pusher-php-server": "^2.2",
+        "vlucas/phpdotenv": "2.0.*"
     },
     "autoload": {
         "psr-4": {"Bulutfon\\Libraries\\": "libraries/"}

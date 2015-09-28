@@ -9,7 +9,7 @@ $hook = array(
 );
 if(!function_exists('AdminLogin_admin')){
     function AdminLogin_admin($args){
-     
+        //sendPusherMessage("{$args['username']} giris yapti.");
     }
 }
 
