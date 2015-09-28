@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "21b1a9c1d3b78cb3e72529505679d9f1",
+    "hash": "abdfa98fa0a0b585c575088db895a7b1",
     "packages": [
         {
             "name": "bulutfon/php-sdk",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bulutfon/php-sdk.git",
-                "reference": "ed1c4bdb2055d12fb67094fe6da4f2dc6e77c77e"
+                "reference": "48aab6fac9ec5c98a4bf40733a3aa479e9ba96fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bulutfon/php-sdk/zipball/ed1c4bdb2055d12fb67094fe6da4f2dc6e77c77e",
-                "reference": "ed1c4bdb2055d12fb67094fe6da4f2dc6e77c77e",
+                "url": "https://api.github.com/repos/bulutfon/php-sdk/zipball/48aab6fac9ec5c98a4bf40733a3aa479e9ba96fc",
+                "reference": "48aab6fac9ec5c98a4bf40733a3aa479e9ba96fc",
                 "shasum": ""
             },
             "require": {
@@ -47,7 +47,7 @@
                 "oauth",
                 "package"
             ],
-            "time": "2015-05-13 11:48:41"
+            "time": "2015-08-31 08:27:45"
         },
         {
             "name": "guzzle/guzzle",
@@ -146,16 +146,16 @@
         },
         {
             "name": "hipchat/hipchat-php",
-            "version": "v1.3",
+            "version": "v1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hipchat/hipchat-php.git",
-                "reference": "f928cc4f2bea0ac5f9367e5a2790d4be082a5d6a"
+                "reference": "5936c0a48d2d514d94bfc1d774b04c42cd3bc39e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hipchat/hipchat-php/zipball/f928cc4f2bea0ac5f9367e5a2790d4be082a5d6a",
-                "reference": "f928cc4f2bea0ac5f9367e5a2790d4be082a5d6a",
+                "url": "https://api.github.com/repos/hipchat/hipchat-php/zipball/5936c0a48d2d514d94bfc1d774b04c42cd3bc39e",
+                "reference": "5936c0a48d2d514d94bfc1d774b04c42cd3bc39e",
                 "shasum": ""
             },
             "require": {
@@ -184,7 +184,7 @@
             "keywords": [
                 "hipchat"
             ],
-            "time": "2014-06-02 17:03:35"
+            "time": "2015-04-28 22:48:40"
         },
         {
             "name": "j4mie/idiorm",
@@ -246,16 +246,16 @@
         },
         {
             "name": "league/oauth2-client",
-            "version": "0.11.0",
+            "version": "0.12.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/oauth2-client.git",
-                "reference": "ea977f95f3842ab24ad47c0458cbf1aa3634d862"
+                "reference": "670ec6e743f5c95441263440afcdabc3fc720547"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/oauth2-client/zipball/ea977f95f3842ab24ad47c0458cbf1aa3634d862",
-                "reference": "ea977f95f3842ab24ad47c0458cbf1aa3634d862",
+                "url": "https://api.github.com/repos/thephpleague/oauth2-client/zipball/670ec6e743f5c95441263440afcdabc3fc720547",
+                "reference": "670ec6e743f5c95441263440afcdabc3fc720547",
                 "shasum": ""
             },
             "require": {
@@ -270,11 +270,6 @@
                 "squizlabs/php_codesniffer": "~2.0"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.10.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "League\\OAuth2\\Client\\": "src/"
@@ -303,21 +298,65 @@
                 "oauth2",
                 "single sign on"
             ],
-            "time": "2015-04-25 20:41:03"
+            "time": "2015-06-20 16:06:31"
         },
         {
-            "name": "symfony/class-loader",
-            "version": "v2.6.7",
-            "target-dir": "Symfony/Component/ClassLoader",
+            "name": "pusher/pusher-php-server",
+            "version": "v2.2.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/ClassLoader.git",
-                "reference": "695134c9b39559297fa5d1dcff6a9054bb56facb"
+                "url": "https://github.com/pusher/pusher-http-php.git",
+                "reference": "79d755cc5d5b02b67779e2a40782fd6e3726657d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ClassLoader/zipball/695134c9b39559297fa5d1dcff6a9054bb56facb",
-                "reference": "695134c9b39559297fa5d1dcff6a9054bb56facb",
+                "url": "https://api.github.com/repos/pusher/pusher-http-php/zipball/79d755cc5d5b02b67779e2a40782fd6e3726657d",
+                "reference": "79d755cc5d5b02b67779e2a40782fd6e3726657d",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "lib/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Library for interacting with the Pusher REST API",
+            "homepage": "https://github.com/pusher/pusher-php-server",
+            "keywords": [
+                "events",
+                "php-pusher-server",
+                "publish",
+                "pusher",
+                "realtime",
+                "rest",
+                "trigger"
+            ],
+            "time": "2015-05-13 11:01:46"
+        },
+        {
+            "name": "symfony/class-loader",
+            "version": "v2.6.11",
+            "target-dir": "Symfony/Component/ClassLoader",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/class-loader.git",
+                "reference": "c5311911ee5bf1c4bfcd8b5788037e7534e4e17d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/class-loader/zipball/c5311911ee5bf1c4bfcd8b5788037e7534e4e17d",
+                "reference": "c5311911ee5bf1c4bfcd8b5788037e7534e4e17d",
                 "shasum": ""
             },
             "require": {
@@ -354,25 +393,24 @@
             ],
             "description": "Symfony ClassLoader Component",
             "homepage": "https://symfony.com",
-            "time": "2015-05-02 15:18:45"
+            "time": "2015-06-25 11:21:15"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.6.7",
-            "target-dir": "Symfony/Component/EventDispatcher",
+            "version": "v2.7.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "672593bc4b0043a0acf91903bb75a1c82d8f2e02"
+                "url": "https://github.com/symfony/event-dispatcher.git",
+                "reference": "ae4dcc2a8d3de98bd794167a3ccda1311597c5d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/672593bc4b0043a0acf91903bb75a1c82d8f2e02",
-                "reference": "672593bc4b0043a0acf91903bb75a1c82d8f2e02",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/ae4dcc2a8d3de98bd794167a3ccda1311597c5d9",
+                "reference": "ae4dcc2a8d3de98bd794167a3ccda1311597c5d9",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": ">=5.3.9"
             },
             "require-dev": {
                 "psr/log": "~1.0",
@@ -389,11 +427,11 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.6-dev"
+                    "dev-master": "2.7-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
+                "psr-4": {
                     "Symfony\\Component\\EventDispatcher\\": ""
                 }
             },
@@ -413,21 +451,21 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2015-05-02 15:18:45"
+            "time": "2015-09-22 13:49:29"
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v2.6.7",
+            "version": "v2.6.11",
             "target-dir": "Symfony/Component/HttpFoundation",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/HttpFoundation.git",
-                "reference": "8a0d00980ef9f6b47ddbf24bdfbf70fead760816"
+                "url": "https://github.com/symfony/http-foundation.git",
+                "reference": "e8fd1b73ac1c3de1f76c73801ddf1a8ecb1c1c9c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/8a0d00980ef9f6b47ddbf24bdfbf70fead760816",
-                "reference": "8a0d00980ef9f6b47ddbf24bdfbf70fead760816",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/e8fd1b73ac1c3de1f76c73801ddf1a8ecb1c1c9c",
+                "reference": "e8fd1b73ac1c3de1f76c73801ddf1a8ecb1c1c9c",
                 "shasum": ""
             },
             "require": {
@@ -467,7 +505,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2015-05-02 15:18:45"
+            "time": "2015-07-22 10:08:40"
         },
         {
             "name": "vlucas/valitron",
@@ -475,12 +513,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/vlucas/valitron.git",
-                "reference": "d09596881bab793736deee668c872df0856342dd"
+                "reference": "af596cd25295368bd0c766c9be6d0f4576a12d02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vlucas/valitron/zipball/d09596881bab793736deee668c872df0856342dd",
-                "reference": "d09596881bab793736deee668c872df0856342dd",
+                "url": "https://api.github.com/repos/vlucas/valitron/zipball/af596cd25295368bd0c766c9be6d0f4576a12d02",
+                "reference": "af596cd25295368bd0c766c9be6d0f4576a12d02",
                 "shasum": ""
             },
             "require": {
@@ -513,7 +551,7 @@
                 "validation",
                 "validator"
             ],
-            "time": "2014-12-27 16:32:29"
+            "time": "2015-09-21 20:16:23"
         },
         {
             "name": "xuma/bfxm",
