@@ -24,5 +24,23 @@ function header_output(){
         <script type="text/javascript" src="../modules/addons/bulutfon/assets/js/bulutfon.js"></script>';
     return $head_return;
 }
-
 add_hook("AdminAreaHeadOutput",2,"header_output");
+
+/**
+ * Get all hooks
+ * @return array hooks added.
+ */
+function getHooks(){
+    if ($handle = opendir(dirname(__FILE__).'/hooks')) {
+        while (false !== ($entry = readdir($handle))) {
+            if(substr($entry,strlen($entry)-4,strlen($entry)) == ".php"){
+                $file[] = require_once('hooks/'.$entry);
+            }
+        }
+        closedir($handle);
+    }
+    return $file;
+}
+foreach($hooks as $hook){
+    add_hook($hook['hook'], 1, $hook['function'], "");
+}
