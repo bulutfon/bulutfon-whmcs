@@ -1,7 +1,7 @@
 <?php
 namespace Bulutfon\Libraries;
 
-use ORM;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 class Repository{
 
@@ -13,25 +13,24 @@ class Repository{
      */
     public function getKeys()
     {
-        $results = ORM::for_table('tbladdonmodules')->where('module', 'bulutfon')->findMany();
-
-        $url = ORM::for_table('tblconfiguration')->where('setting','SystemURL')->findOne();
-
+        $settings = Capsule::table('tbladdonmodules')->where('module', 'bulutfon')->get();
+        
+        $callbackUrl = Capsule::table('tblconfiguration')->where('setting', 'SystemURL')->first();
+        
+        $callbackUrl = rtrim(preg_replace("/^http:/i", "https:", $callbackUrl->value),'/').'/modules/addons/bulutfon/callback.php';
+        
         $fields = array('clientId','clientSecret','verifySSL');
 
-        $keys = array();
+        $keys = array('redirectUri'=>$callbackUrl);
 
-        foreach($results as $key){
-            if(in_array($key->setting, $fields)){
+        foreach($settings as $key) {
+            if(in_array($key->setting, $fields)) {
                 $keys[$key->setting] = $key->value;
             }
         }
-        
-        // Url must be https
-        $keys['redirectUri'] = rtrim(preg_replace("/^http:/i", "https:", $url->value),'/').'/modules/addons/bulutfon/callback.php';
 
         $keys['verifySSL'] = filter_var($keys['verifySSL'], FILTER_VALIDATE_BOOLEAN);
-
+        
         return $keys;
     }
 
@@ -42,13 +41,7 @@ class Repository{
      */
     public function setTokens($token)
     {
-        ORM::for_table('mod_bulutfon_tokens')->delete_many();
-
-        $query = ORM::for_table('mod_bulutfon_tokens')->create();
-
-        $query->tokens = $token;
-
-        $query->save();
+        return Capsule::table('mod_bulutfon_settings')->where('name','tokens')->update(['value' => $token]);
     }
 
     /**
@@ -58,8 +51,8 @@ class Repository{
      */
     public function getTokens()
     {
-        $tokens = ORM::for_table('mod_bulutfon_tokens')->findOne();
-        return (array)json_decode($tokens->tokens);
+        $tokens = Capsule::table('mod_bulutfon_settings')->where('name', 'tokens')->first();
+        return (array)json_decode($tokens->value);
     }
 
     /**
@@ -71,12 +64,7 @@ class Repository{
      */
     public function deleteNumber($number)
     {
-        $phone  = ORM::for_table('mod_bulutfon_phonenumbers')
-            ->select('id')
-            ->where('phonenumber',$number)
-            ->find_one()
-            ->delete();
-        return $phone;
+        return Capsule::table('mod_bulutfon_phonenumbers')->where('phonenumber',$number)->delete();
     }
 
     /**
@@ -89,26 +77,11 @@ class Repository{
      */
     private function checkNumber($number,$list=false)
     {
-        $numbers = ORM::for_table('tblclients')
-            ->raw_query("SELECT
-                            tblclients.phonenumber
-                        FROM
-                            tblclients
-                        WHERE
-                            tblclients.phonenumber LIKE :phonenumber
+        $whmcsNumbers = Capsule::table('tblclients')->where('phonenumber','LIKE',"%$number%")->get();
+        
+        $bulutfonNumbers = Capsule::table('mod_bulutfon_phonenumbers')->where('phonenumber','LIKE',"%$number%")->union($whmcsNumbers)->get();
 
-                        UNION
-
-                        SELECT
-                            mod_bulutfon_phonenumbers.phonenumber
-                        FROM
-                            mod_bulutfon_phonenumbers
-                        WHERE
-                             mod_bulutfon_phonenumbers.phonenumber LIKE :phonenumber", array('phonenumber' =>"%$number%"))->find_many();
-
-        if(count($numbers)>0) return true;
-
-        return false;
+        return $bulutfonNumbers ? true : false;
     }
 
     /**
@@ -122,17 +95,9 @@ class Repository{
 
         if($this->checkNumber($number)) return false;
 
-        $phone = ORM::for_table('mod_bulutfon_phonenumbers')->create();
-
-        $phone->userid = $userid;
-
-        $phone->phonenumber = $number;
-
-        $phone->save();
-
-        if($phone->id()) return true;
-
-        return false;
+        return Capsule::table('mod_bulutfon_phonenumbers')->insert(
+            ['userid' => $userid, 'phonenumber' =>$number]
+        );
 
     }
 

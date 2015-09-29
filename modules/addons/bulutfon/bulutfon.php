@@ -5,6 +5,7 @@ use Bulutfon\Libraries\Repository;
 use Bulutfon\OAuth2\Client\Provider\Bulutfon;
 use League\OAuth2\Client\Token\AccessToken;
 use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 if (!defined("WHMCS")) die("This file cannot be accessed directly");
 
@@ -62,7 +63,7 @@ function bulutfon_output($vars){
 
     require_once "init.php";
 
-    $repository = new Repository();
+    dd($xuma);
 
     $request = Request::createFromGlobals();
 

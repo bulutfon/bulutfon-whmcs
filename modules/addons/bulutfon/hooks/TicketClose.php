@@ -14,7 +14,7 @@ $hook = array(
 
 if(!function_exists('TicketClose')){
     function TicketClose($args){
-        sendPusherMessage(json_encode($args));
+        //sendPusherMessage(json_encode($args));
     }
 }
 
