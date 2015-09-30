@@ -1,4 +1,6 @@
 <?php
+include __DIR__.'/../../../configuration.php';
+include __DIR__.'/vendor/autoload.php';
 
 use Bulutfon\Libraries\Helper;
 use Bulutfon\Libraries\Repository;
@@ -6,6 +8,7 @@ use Bulutfon\OAuth2\Client\Provider\Bulutfon;
 use League\OAuth2\Client\Token\AccessToken;
 use Symfony\Component\HttpFoundation\Request;
 use Illuminate\Database\Capsule\Manager as Capsule;
+
 
 if (!defined("WHMCS")) die("This file cannot be accessed directly");
 
@@ -59,11 +62,10 @@ function bulutfon_smarty(){
 
     return $smarty;
 }
+
 function bulutfon_output($vars){
 
-    require_once "init.php";
-
-    dd($xuma);
+    $repository = new Repository();
 
     $request = Request::createFromGlobals();
 
@@ -91,7 +93,37 @@ function bulutfon_output($vars){
             Helper::json('failed');
 
             break;
+        case 'sms-templates';
+            $templates = Capsule::table('mod_bulutfon_smstemplates')->get();
+            $id = (int)$request->get('id',false);
+            if($id){
+                $smarty->assign('selected',$id);
+            }
+            if(isset($_GET['active'])) {
+                 Capsule::table('mod_bulutfon_smstemplates')->where('id',$id)->update([
+                    'active'=> (int)$request->get('active',false)
+                ]);
+                if($request->get('back',false) == 'list'){
+                    header("location: addonmodules.php?module=bulutfon&tab=sms-templates");
+                }else {
+                    header("location: addonmodules.php?module=bulutfon&tab=sms-templates&id={$id}");
+                }
+               
+            }
+            if($request->get('template',false)) {
+                Capsule::table('mod_bulutfon_smstemplates')->where('id',$id)->update([
+                    'template'=> $request->get('template',false)
+                ]);
+                header("location: addonmodules.php?module=bulutfon&tab=sms-templates&id={$id}");
+             
+            }
+            $smarty->assign('templates',$templates);
+            $smarty->display('sms_templates.tpl');
+        break;
+        case 'sms-settings';
 
+            $smarty->display('sms_settings.tpl');
+        break;
         case 'addtouser':
 
             $smarty->assign('number',$request->get('number'));

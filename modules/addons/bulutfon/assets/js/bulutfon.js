@@ -58,4 +58,7 @@ $(function(){
 
        return false;
     });
+    if(bulutfon.getUrl('module')=='bulutfon'){
+        $('#sidebar').html('<img src="../modules/addons/bulutfon/assets/img/Bulutfon_Logo.png" class="bulutfon-logo"/>');
+    }
 });

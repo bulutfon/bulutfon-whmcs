@@ -1,5 +1,6 @@
-{if $userNumbers}
-<table width="100%" class="form bulutfon-table" style="margin-bottom:15px;float:left;">
+{include file='header.tpl'}
+        {if $userNumbers}
+        <table width="100%" class="form bulutfon-table" style="margin-bottom:15px;float:left;">
     <tbody>
         <tr>
             <td colspan="2" class="fieldarea" style="text-align:center;"><strong>Kullanıcı Telefon Numaraları</strong></td>
@@ -113,3 +114,5 @@
     <a href="addonmodules.php?module=bulutfon&amp;page={$page+1}{if $limit}&amp;limit={$limit}{/if}">Next Page » </a>
 </p>
 {/if}
+
+{include file='footer.tpl'}

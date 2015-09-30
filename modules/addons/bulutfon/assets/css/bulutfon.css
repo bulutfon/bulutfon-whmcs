@@ -68,9 +68,13 @@
     display: block;
     margin:0 auto;
 }
-
+table.form.bulutfon-table {
+    border-radius: 0;
+    border-spacing: 0;
+}
 .bulutfon-table .datatable td {
     padding:5px 15px;
+
 }
 
 
@@ -198,4 +202,37 @@
 
 .bulutfon-number.deleted td,table.datatable tr.bulutfon-number.deleted:hover td{
      background-color:#a94442;
+}
+.bulutfon-logo {
+    max-width: 100%;
+}
+.bulutfon-row .side-menu {
+    list-style: none;
+    padding:0;
+    margin:0;
+}
+
+.bulutfon-row .side-menu li a{
+   padding: 10px;
+   margin-bottom: 5px;
+   background: #E2E7E9;
+   display: block;
+   font-size:16px;
+   line-height: 26px;
+   position: relative;
+   padding-left:45px;
+   margin-right:-30px;
+}
+.bulutfon-row .side-menu li a:hover {
+ 
+}
+.bulutfon-row .side-menu li a.active {
+    background: #efefef;
+}
+.bulutfon-row .side-menu li a .fa {
+    font-size:24px;
+    margin-right:5px;
+    position: absolute;
+    top:11px;
+    left: 10px;
 }
