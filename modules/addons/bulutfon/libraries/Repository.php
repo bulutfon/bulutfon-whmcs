@@ -138,10 +138,12 @@ class Repository{
         foreach($numbers as $number){
             // Lets remove any alpha characters
             // then try to trim 9 and 0  (we will send message only turkey atm.)
-            $temp = ltrim(ltrim(preg_replace("/[^0-9,.]/", "", $number),9),0);
+            $temp = ltrim(ltrim(preg_replace("/[^0-9]/", "", $number),9),0);
             if(strlen($temp)==10 && $temp[0]==5){
-                // we were checked whmcs first if any gsm numbers
+                // we were checked whmcs database first if any gsm numbers
                 // setted whmcs number will return first.
+                // and checked is number start with 5. I am not expert about
+                // gsm numbers so for now we will only send messages to number starts with 5.
                 //lets add 90
                 $gsm = '90'.$temp;
                 break;

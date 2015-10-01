@@ -13,7 +13,8 @@ use League\OAuth2\Client\Token\AccessToken;
 
 
 /**
- * Get active hooks.
+ * Hooks directly activated. And we need to activate bulutfon with hooks too. But when module activated
+ * without tokens and permission it wont work. 
  */
 try {
     $activeHooks = Capsule::table('mod_bulutfon_smstemplates')->where('active', 1)->get();
@@ -28,7 +29,7 @@ try {
     $provider = new Bulutfon($repository->getKeys());
     $tokens = $repository->getTokens();
     $token = new AccessToken(Helper::decamelize($tokens));
-   
+
     /**
      * Load active hooks.
      */
