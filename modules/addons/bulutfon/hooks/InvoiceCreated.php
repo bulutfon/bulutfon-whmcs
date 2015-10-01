@@ -12,9 +12,12 @@ $hook = array(
     'variables' => '{firstname}, {lastname}, {duedate}, {total}, {invoiceid}'
 );
 if(!function_exists('InvoiceCreated')){
-    function InvoiceCreated($args){
 
+    function InvoiceCreated($args){
+        //file_put_contents(__DIR__.'/test.txt', 'Invoice created');
+      
     }
 }
+
 
 return $hook;

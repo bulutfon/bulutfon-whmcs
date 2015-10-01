@@ -8,6 +8,7 @@ use Bulutfon\OAuth2\Client\Provider\Bulutfon;
 use League\OAuth2\Client\Token\AccessToken;
 use Symfony\Component\HttpFoundation\Request;
 use Illuminate\Database\Capsule\Manager as Capsule;
+use Illuminate\Support\File;
 
 
 if (!defined("WHMCS")) die("This file cannot be accessed directly");
@@ -30,21 +31,44 @@ function bulutfon_config(){
 }
 
 function bulutfon_activate(){
-    $query = "CREATE TABLE  IF NOT EXISTS `mod_bulutfon_phonenumbers` ( `id` INT(11) NOT NULL AUTO_INCREMENT,  `userid` INT(11) NOT NULL,`phonenumber` VARCHAR(20) NOT NULL, UNIQUE (phonenumber),PRIMARY KEY id(id))";
-    mysql_query($query);
+    Capsule::schema()->create('mod_bulutfon_phonenumbers',function ($table) {
+        $table->increments('id');
+        $table->integer('userid');
+        $table->string('phonenumber',20)->unique();
+        $table->timestamps();
+    });
 
-    $query = "CREATE TABLE  IF NOT EXISTS `mod_bulutfon_tokens` (`tokens` TEXT NOT NULL)";
-    mysql_query($query);
+    Capsule::schema()->create('mod_bulutfon_settings',function ($table) {
+        $table->increments('id');
+        $table->string('name',64);
+        $table->longText('value');
+        $table->timestamps();
+    });
+
+    Capsule::schema()->create('mod_bulutfon_smstemplates',function ($table) {
+        $table->increments('id');
+        $table->string('name',64);
+        $table->enum('type', array('client', 'admin'));
+        $table->string('admingsm',255);
+        $table->string('template',240);
+        $table->string('variables',500);
+        $table->tinyInteger('active');
+        $table->string('extra',3);
+        $table->text('description');
+        $table->timestamps();
+    });
+
+   Capsule::unprepared(file_get_contents(__DIR__."/install/templates.sql"));
 
     return array('status'=>'success','description'=>'Bulutfon succesfully activated :)');
 }
 
 function bulutfon_deactivate(){
-    $query = "DROP TABLE `mod_bulutfon_phonenumbers`";
-    mysql_query($query);
+    Capsule::schema()->dropIfExists('mod_bulutfon_phonenumbers');
+    Capsule::schema()->dropIfExists('mod_bulutfon_settings');
+    Capsule::schema()->dropIfExists('mod_bulutfon_smstemplates');
 
-    $query = "DROP TABLE `mod_bulutfon_tokens`";
-    mysql_query($query);
+   
 
     return array('status'=>'success','description'=>'Bulutfon succesfully deactivated :(');
 }
@@ -64,7 +88,7 @@ function bulutfon_smarty(){
 }
 
 function bulutfon_output($vars){
-
+   
     $repository = new Repository();
 
     $request = Request::createFromGlobals();

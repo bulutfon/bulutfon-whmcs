@@ -41,7 +41,11 @@ class Repository{
      */
     public function setTokens($token)
     {
-        return Capsule::table('mod_bulutfon_settings')->where('name','tokens')->update(['value' => $token]);
+        $tokens = Capsule::table('mod_bulutfon_settings')->where('name','tokens')->first();
+        if($tokens) {
+            return Capsule::table('mod_bulutfon_settings')->where('name','tokens')->update(['value' => $token]);
+        }
+        return Capsule::table('mod_bulutfon_settings')->insert(['name'=>'tokens','value' => $token]);  
     }
 
     /**
@@ -116,5 +120,42 @@ class Repository{
         foreach($addon as $a) array_push($numbers, $a->phonenumber);
         
         return count($numbers)>0 ? $numbers : false;
+    }
+
+    public function findUserByTicketId($ticketID)
+    {
+        $user = Capsule::table('tbltickets')->where('tbltickets.id',$ticketID)->join('tblclients','tbltickets.userid','=','tblclients.id')->first();
+        return $user;
+    }
+
+    public function getFirstGsm($user)
+    {
+        //$user = $this->findUserByTicketId($ticketID);
+        $numbers = $this->getUserNumbers($user->userid);
+
+        //Actually it must be helper function 
+        $gsm = false;
+        foreach($numbers as $number){
+            // Lets remove any alpha characters
+            // then try to trim 9 and 0  (we will send message only turkey atm.)
+            $temp = ltrim(ltrim(preg_replace("/[^0-9,.]/", "", $number),9),0);
+            if(strlen($temp)==10 && $temp[0]==5){
+                // we were checked whmcs first if any gsm numbers
+                // setted whmcs number will return first.
+                //lets add 90
+                $gsm = '90'.$temp;
+                break;
+            }
+        }
+        return $gsm;
+    }
+
+    public function getSmsMessage($name,$variables)
+    {
+        $template = Capsule::table('mod_bulutfon_smstemplates')->where('name',$name)->first();
+        $replacefrom = explode(',',$template->variables);
+        $replaceto = $variables;
+        $message = str_replace($replacefrom,$replaceto,$template->template);
+        return $message;
     }
 }

@@ -3,40 +3,40 @@
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 */
-
-use Illuminate\Database\Capsule\Manager as Capsule;
 include __DIR__.'/../../../configuration.php';
 include __DIR__.'/vendor/autoload.php';
+use Illuminate\Database\Capsule\Manager as Capsule;
+use Bulutfon\Libraries\Helper;
+use Bulutfon\Libraries\Repository;
+use Bulutfon\OAuth2\Client\Provider\Bulutfon;
+use League\OAuth2\Client\Token\AccessToken;
 
-/**
- * Load Env values.
- * @var Dotenv
- */
-$dotenv = new Dotenv\Dotenv(__DIR__);
-$dotenv->load();
 
 /**
  * Get active hooks.
  */
-$activeHooks = Capsule::table('mod_bulutfon_smstemplates')->where('active', 1)->get();
-array_push($activeHooks,(object)['name'=>'AdminAreaHeadOutput']);
-array_push($activeHooks,(object)['name'=>'AdminAreaClientSummaryPage']);
+try {
+    $activeHooks = Capsule::table('mod_bulutfon_smstemplates')->where('active', 1)->get();
+    array_push($activeHooks,(object)['name'=>'AdminAreaHeadOutput']);
+    array_push($activeHooks,(object)['name'=>'AdminAreaClientSummaryPage']);
 
-/**
- * Load active hooks.
- */
-foreach($activeHooks as $hooks) {
-    $hook = require_once("hooks/{$hooks->name}.php");
-    add_hook($hook['hook'], 1, $hook['function'], "");
+    /**
+     * We have to activate bulutfon for each hook.
+     * It will be globally avalaible.
+     */
+    $repository = new Repository();
+    $provider = new Bulutfon($repository->getKeys());
+    $tokens = $repository->getTokens();
+    $token = new AccessToken(Helper::decamelize($tokens));
+   
+    /**
+     * Load active hooks.
+     */
+    foreach($activeHooks as $hooks) {
+        add_hook($hooks->name, 1,require_once("hooks/{$hooks->name}.php"), "");
+    } 
+} catch (Exception $e) {
+    
 }
 
-function sendPusherMessage($message){
-    $pusher = new Pusher(
-        getenv('PUSHER_KEY'),
-        getenv('PUSHER_SECRET'),
-        getenv('PUSHER_ID'),
-        array('encrypted' => true)
-    );
-    $data['message'] = $message;
-    $pusher->trigger('test_channel', 'my_event', $data);
-}
+

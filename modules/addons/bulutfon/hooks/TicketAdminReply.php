@@ -1,21 +1,18 @@
 <?php
-$hook = array(
-    'hook' => 'TicketAdminReply',
-    'function' => 'TicketAdminReply',
-    'description' => array(
-        'turkish' => 'Bir ticket güncellendiğinde mesaj gönderir',
-        'english' => 'After ticket replied by admin'
-    ),
-    'type' => 'client',
-    'extra' => '',
-    'variables' => '{firstname},{lastname},{ticketsubject}',
-    'defaultmessage' => 'Sayin {firstname} {lastname}, ({ticketsubject}) konu baslikli destek talebiniz yanitlandi.',
-);
 
-if(!function_exists('TicketAdminReply')){
-    function TicketAdminReply($args){
-
-    }
+if(!isset($TicketAdminReply)) {
+    $TicketAdminReply = function($args) use($provider,$token,$repository){
+        $user = $repository->findUserByTicketId($args['ticketid']);
+        $gsm = $repository->getFirstGsm($user);
+        if($gsm) {
+            $message = $provider->sendMessage($token,[
+                'title'=>'NETINTERNET',
+                'content'=>$repository->getSmsMessage('TicketAdminReply',[$user->firstname,$user->lastname,$args['subject']]),
+                'receivers' => $gsm
+            ]);
+        }
+    };
 }
 
-return $hook;
+
+return $TicketAdminReply;
