@@ -77,11 +77,8 @@ class Repository{
      */
     private function checkNumber($number,$list=false)
     {
-        $whmcsNumbers = Capsule::table('tblclients')->where('phonenumber','LIKE',"%$number%")->get();
-        
-        $bulutfonNumbers = Capsule::table('mod_bulutfon_phonenumbers')->where('phonenumber','LIKE',"%$number%")->union($whmcsNumbers)->get();
-
-        return $bulutfonNumbers ? true : false;
+        if($this->getUserNumbers($numbers) && count($this->getUserNumbers($numbers))>0) return true;
+        return false;
     }
 
     /**
@@ -110,30 +107,14 @@ class Repository{
      */
     public function getUserNumbers($userid)
     {
-
-        $numbers = ORM::for_table('tblclients')
-            ->raw_query("SELECT
-                            tblclients.phonenumber
-                        FROM
-                            tblclients
-                        WHERE
-                            tblclients.id=:id AND tblclients.phonenumber IS NOT NULL AND  tblclients.phonenumber <> ''
-
-                        UNION
-
-                        SELECT
-                            mod_bulutfon_phonenumbers.phonenumber
-                        FROM
-                            mod_bulutfon_phonenumbers
-                        WHERE
-                            userid=:id AND mod_bulutfon_phonenumbers.phonenumber IS NOT NULL AND  mod_bulutfon_phonenumbers.phonenumber <> ''", array('id' =>$userid))->find_many();
-        if($numbers){
-            $arr = array();
-            foreach($numbers as $number){
-                array_push($arr,$number->phonenumber);
-            }
-            return $arr;
-        }
-        return false;
+        $whmcs = Capsule::select("SELECT tblclients.phonenumber FROM tblclients WHERE tblclients.id=? AND tblclients.phonenumber IS NOT NULL AND  tblclients.phonenumber <> ''",[$userid]);
+        $addon = Capsule::select("SELECT mod_bulutfon_phonenumbers.phonenumber FROM mod_bulutfon_phonenumbers WHERE userid=? AND mod_bulutfon_phonenumbers.phonenumber IS NOT NULL AND  mod_bulutfon_phonenumbers.phonenumber <> ''",[$userid]);
+        // Cant find the union results with laravel raw queries.
+        // its not ideal but dirty and fast.
+        $numbers = [];
+        foreach($whmcs as $n) array_push($numbers, $n->phonenumber);
+        foreach($addon as $a) array_push($numbers, $a->phonenumber);
+        
+        return count($numbers)>0 ? $numbers : false;
     }
 }

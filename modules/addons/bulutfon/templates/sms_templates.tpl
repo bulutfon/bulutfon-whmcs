@@ -1,10 +1,15 @@
 {include file='header.tpl'}
-{if $selected} <form name="hook-kaydi" action="addonmodules.php?module=bulutfon&tab=sms-templates&id={$selected}" method="post">{/if}
-<table class="form bulutfon-table" width="100%">
+<div class="bulutfon_wrapper">
+    <div class="bulutfon_header">
+        SMS Ayarları
+    </div>
+    <div class="bulutfon_content">
+    {if $selected} <form name="hook-kaydi" action="addonmodules.php?module=bulutfon&tab=sms-templates&id={$selected}" method="post">{/if}
+<table width="100%" class="hook-form">
     <tr>
         <td style="width:165px">Hook Adı : </td>
         <td>
-            <select name="hook" id="hook">
+            <select name="hook" id="hook" class="form-control">
             <option value="">Lütfen Hook Seçiniz</option>
                 {foreach from=$templates item=template}
                 {assign var=type value=$template->description|json_decode}
@@ -14,6 +19,7 @@
         </td>
     </tr>
     {if $selected}
+ 
     <tr>
         <td colspan="2">
              {assign var=sid value=($selected-1)}
@@ -78,4 +84,7 @@
         redirect('addonmodules.php?module=bulutfon&tab=sms-templates&id='+goto);
     };
 </script>
+    </div>
+</div>
+
 {include file='footer.tpl'}

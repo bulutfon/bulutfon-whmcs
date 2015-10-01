@@ -3,15 +3,12 @@
     margin-left:0;
 }
 .bulutfon_wrapper {
-    width:400px;
     display: block;
     margin:0 auto;
     margin-bottom:100px;
     border: 1px solid #C9C9C9;
-    box-shadow: 0 1px 2px rgba(0,0,0,.21);
-    -webkit-border-radius: 4px 4px 0 0;
-    -moz-border-radius: 4px 4px 0 0;
-    border-radius: 4px 4px 0 0;
+    font-size: 14px;
+    font-weight: bold;
 }
 .bulutfon_module {
     background: #f3f3f3;
@@ -23,9 +20,8 @@
 .bulutfon_header {
     position: relative;
     padding:10px;
-    min-height: 62px;
-    background-color: #018fd7;
-
+    background-color: #efefef;
+    border-bottom:1px solid #ccc;
 }
 .bulutfon_header .logo {
     display: block;
@@ -54,7 +50,15 @@
 .bulutfon_content {
     background: rgb(245,245,245);
     padding:10px;
+    min-height: 200px;
+    font-weight: normal;
 }
+
+.bulutfon_content.no-padding  {
+    padding:0;
+}
+
+
  #content_container #content #content_padded #clienttabs ul li.bulutfon-link.selected a{
 
      font-weight:bold;
@@ -88,8 +92,8 @@ table.form.bulutfon-table {
     font: 11px Helvetica Neue, Helvetica, sans-serif;
     color: #444;
     text-transform: uppercase;
-    margin-top: 14px;
-    margin-left: 12px;
+    margin-top: 7px;
+    margin-left: 7px;
     z-index: 1;
     font-weight: 500;
     transition: all 0.2s;
@@ -104,12 +108,12 @@ table.form.bulutfon-table {
 }
 
 .bulutfon_content input[type=text] {
-    width: 356px;
+    width: 100%;
     background: #fff;
     color: #62B9ED;
-    border-radius: 3px;
+
     outline: 0;
-    border: 3px solid #ccc;
+    border: 1px solid #ccc;
     position: relative;
     padding: 24px 8px 6px;
     font: 18px Helvetica Neue, Helvetica, sans-serif;
@@ -210,6 +214,7 @@ table.form.bulutfon-table {
     list-style: none;
     padding:0;
     margin:0;
+    margin-top: 41px;
 }
 
 .bulutfon-row .side-menu li a{
@@ -222,12 +227,16 @@ table.form.bulutfon-table {
    position: relative;
    padding-left:45px;
    margin-right:-30px;
+   border:1px solid #ccc;
+   border-right:none;
 }
 .bulutfon-row .side-menu li a:hover {
  
 }
 .bulutfon-row .side-menu li a.active {
-    background: #efefef;
+    background: rgb(245,245,245);
+    margin-right: -31px;
+    z-index: 9999;
 }
 .bulutfon-row .side-menu li a .fa {
     font-size:24px;
@@ -235,4 +244,24 @@ table.form.bulutfon-table {
     position: absolute;
     top:11px;
     left: 10px;
+}
+
+.btn-gonder {
+    padding: 10px 20px;
+    background: #1abc9c;
+    border:none;
+    color: #fff;
+
+}
+
+.hook-form tr td{
+    padding-bottom: 15px;
+}
+
+.bulutfon_content textarea {
+    padding: 5px;
+}
+.bulutfon_content table.form {
+    border-color: transparent;
+    background-color: transparent;
 }
