@@ -31,13 +31,26 @@ try {
     $token = new AccessToken(Helper::decamelize($tokens));
 
     /**
+     * Lets add simple function to send sms. 
+     * Simple is perfection.
+     */
+    $sms = function($gsm,$message) use($provider,$token) {
+       $provider->sendMessage($token,[
+            // TODO : it must be setted on sms settings page
+            'title'=>'NETINTERNET',
+            'content'=>$message,
+            'receivers' => $gsm
+        ]);
+    };
+    
+    /**
      * Load active hooks.
      */
     foreach($activeHooks as $hooks) {
         add_hook($hooks->name, 1,require_once("hooks/{$hooks->name}.php"), "");
     } 
 } catch (Exception $e) {
-    
+    // Push to a service.
 }
 
 

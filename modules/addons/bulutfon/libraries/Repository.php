@@ -128,6 +128,12 @@ class Repository{
         return $user;
     }
 
+    public function findUserByOrderId($orderID)
+    {
+        $user = Capsule::table('tblorders')->where('tblorders.id',$orderID)->join('tbltickets','tblorders.userid','=','tblclients.id')->first();
+        return $user;
+    }
+
     public function getFirstGsm($user)
     {
         //$user = $this->findUserByTicketId($ticketID);
