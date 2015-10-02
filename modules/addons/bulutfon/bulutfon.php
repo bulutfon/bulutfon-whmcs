@@ -40,7 +40,7 @@ function bulutfon_activate(){
 
     Capsule::schema()->create('mod_bulutfon_settings',function ($table) {
         $table->increments('id');
-        $table->string('name',64);
+        $table->string('name',64)->unique();
         $table->longText('value');
         $table->timestamps();
     });
@@ -145,7 +145,13 @@ function bulutfon_output($vars){
             $smarty->display('sms_templates.tpl');
         break;
         case 'sms-settings';
-
+            if($request->get('sms-basligi') && ctype_alpha($request->get('sms-basligi')) && strlen($request->get('sms-basligi'))>=3 && strlen($request->get('sms-basligi'))<12) {
+               Capsule::table('mod_bulutfon_settings')->where('name','title')->update([
+                    'value'=> $request->get('sms-basligi')
+                ]);
+               header("Location: addonmodules.php?module=bulutfon&tab=sms-settings");
+            }
+            $smarty->assign('title',$repository->getTitle());
             $smarty->display('sms_settings.tpl');
         break;
         case 'addtouser':

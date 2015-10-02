@@ -130,7 +130,7 @@ class Repository{
 
     public function findUserByOrderId($orderID)
     {
-        $user = Capsule::table('tblorders')->where('tblorders.id',$orderID)->join('tbltickets','tblorders.userid','=','tblclients.id')->first();
+        $user = Capsule::table('tblorders')->where('tblorders.id',$orderID)->join('tblclients','tblorders.userid','=','tblclients.id')->first();
         return $user;
     }
 
@@ -165,5 +165,19 @@ class Repository{
         $replaceto = $variables;
         $message = str_replace($replacefrom,$replaceto,$template->template);
         return $message;
+    }
+
+    public function activeHooks()
+    {
+        $activeHooks = Capsule::table('mod_bulutfon_smstemplates')->where('active', 1)->get();
+        array_push($activeHooks,(object)['name'=>'AdminAreaHeadOutput']);
+        array_push($activeHooks,(object)['name'=>'AdminAreaClientSummaryPage']);
+        return $activeHooks;
+    }
+
+    public function getTitle()
+    {
+        $title = Capsule::table('mod_bulutfon_settings')->where('name','title')->first();
+        return $title->value;
     }
 }

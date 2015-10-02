@@ -1,7 +1,7 @@
 <?php
 
 if(!isset($TicketAdminReply)) {
-    $TicketAdminReply = function($args) use($provider,$token,$repository,$sms){
+    $TicketAdminReply = function($args) use($repository,$sms){
         $user = $repository->findUserByTicketId($args['ticketid']);
         $gsm = $repository->getFirstGsm($user);
         

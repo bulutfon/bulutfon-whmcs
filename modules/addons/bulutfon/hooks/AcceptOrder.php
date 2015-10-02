@@ -5,7 +5,8 @@ if(!isset($AcceptOrder)) {
        $user = $repository->findUserByOrderId($args['orderid']);
        $gsm = $repository->getFirstGsm($user);
        if($gsm) {
-        
+            $message = $repository->getSmsMessage('AcceptOrder',[$user->firstname,$user->lastname,$args['orderid']]);
+            $sms($gsm,$message);
        }
     };
 }

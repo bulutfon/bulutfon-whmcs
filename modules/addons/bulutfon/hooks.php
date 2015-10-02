@@ -17,36 +17,28 @@ use League\OAuth2\Client\Token\AccessToken;
  * without tokens and permission it wont work. 
  */
 try {
-    $activeHooks = Capsule::table('mod_bulutfon_smstemplates')->where('active', 1)->get();
-    array_push($activeHooks,(object)['name'=>'AdminAreaHeadOutput']);
-    array_push($activeHooks,(object)['name'=>'AdminAreaClientSummaryPage']);
-
     /**
      * We have to activate bulutfon for each hook.
      * It will be globally avalaible.
      */
     $repository = new Repository();
-    $provider = new Bulutfon($repository->getKeys());
+    $provider = new Bulutfon($repository->getKeys()); 
     $tokens = $repository->getTokens();
+    $title= $repository->getTitle();
     $token = new AccessToken(Helper::decamelize($tokens));
 
     /**
      * Lets add simple function to send sms. 
      * Simple is perfection.
      */
-    $sms = function($gsm,$message) use($provider,$token) {
-       $provider->sendMessage($token,[
-            // TODO : it must be setted on sms settings page
-            'title'=>'NETINTERNET',
-            'content'=>$message,
-            'receivers' => $gsm
-        ]);
+    $sms = function($gsm,$message) use($provider,$token,$title) {
+       $provider->sendMessage($token,['title'=>$title,'content'=>$message,'receivers' => $gsm]);
     };
     
     /**
      * Load active hooks.
      */
-    foreach($activeHooks as $hooks) {
+    foreach($repository->activeHooks() as $hooks) {
         add_hook($hooks->name, 1,require_once("hooks/{$hooks->name}.php"), "");
     } 
 } catch (Exception $e) {
