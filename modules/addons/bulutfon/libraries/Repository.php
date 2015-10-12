@@ -134,6 +134,12 @@ class Repository{
         return $user;
     }
 
+    public function findUserById($id)
+    {
+        $user = Capsule::table('tblclients')->where('id',$id)->first;
+        return $user;
+    }
+
     public function getFirstGsm($user)
     {
         //$user = $this->findUserByTicketId($ticketID);
