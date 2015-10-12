@@ -1,9 +1,8 @@
 <?php
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
 use Bulutfon\Libraries\Provider;
 use Bulutfon\Libraries\Repository;
 
+require "init.php";
 include __DIR__.'/../../../init.php';
 
 $provider = new Provider(
