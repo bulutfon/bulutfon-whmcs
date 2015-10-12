@@ -1,5 +1,11 @@
-{if $userNumbers}
-<table width="100%" class="form bulutfon-table" style="margin-bottom:15px;float:left;">
+{include file='header.tpl'}
+<div class="bulutfon_wrapper">
+    <div class="bulutfon_header">
+        Arama Kayıtları
+    </div>
+    <div class="bulutfon_content no-padding">
+                      {if $userNumbers}
+        <table width="100%" class="form bulutfon-table" style="margin-bottom:15px;float:left;">
     <tbody>
         <tr>
             <td colspan="2" class="fieldarea" style="text-align:center;"><strong>Kullanıcı Telefon Numaraları</strong></td>
@@ -36,9 +42,7 @@
 
 <table width="100%" class="form bulutfon-table">
     <tbody>
-        <tr>
-            <td colspan="2" class="fieldarea" style="text-align:center;"><strong>Arama Kayıtları</strong></td>
-        </tr>
+
         <tr>
             <td align="center">
                 <table class="datatable" style="width:100%">
@@ -104,12 +108,17 @@
     <a href="clientssummary.php?bulutfon=1&amp;page={$page+1}&amp;userid={$userid}{if $limit}&amp;limit={$limit}{/if}">Next Page » </a>
 </p>
 {else}
-<p align="center">
+<p align="center" style="padding:0 0 5px 0;margin:0;">
     {if $page==1}
     « Önceki Sayfa &nbsp;
     {else}
     <a href="addonmodules.php?module=bulutfon&amp;page={$page-1}{if $limit}&amp;limit={$limit}{/if}">« Önceki Sayfa </a>
     {/if}
-    <a href="addonmodules.php?module=bulutfon&amp;page={$page+1}{if $limit}&amp;limit={$limit}{/if}">Next Page » </a>
+    <a href="addonmodules.php?module=bulutfon&amp;page={$page+1}{if $limit}&amp;limit={$limit}{/if}">Sonraki Sayfa » </a>
 </p>
 {/if}
+   
+    </div>
+ </div>
+       
+{include file='footer.tpl'}

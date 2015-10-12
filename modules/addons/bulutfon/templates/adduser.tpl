@@ -1,6 +1,7 @@
+{include file='header.tpl'}
 <div class="bulutfon_wrapper">
     <div class="bulutfon_header">
-        <img src="https://www.bulutfon.com/assets/logo-67b9333837f7548483355b2c0cee4623.png" alt="" class="logo"/>
+        Kullanıcıya numara ekle
     </div>
     <div class="bulutfon_content">
         {if $success}
@@ -14,29 +15,41 @@
             </div>
         {/if}
         <form action="addonmodules.php?module=bulutfon&tab=addtouser" id="form-kullanici" method="post">
-            <p>
-                <label for="telefon-numarasi">Telefon Numarası:</label>
-                <input type="text" name="telefon-numarasi" value="{$number}" id="telefon-numarasi" placeholder="Lütfen telefon numarası giriniz."  data-required="true" data-error-message="Lütfen telefon numarası giriniz."/>
-                <span></span>
-                {if $telefon}
-                    {$telefon}
-                {/if}
-            </p>
-            <p>
-                <label for="kullanici">Kullanıcı:</label>
-                <input type="text" name="value" value="" id="kullanici" placeholder="Kullanıcı seçiniz." autocomplete="off" />
-                <span></span>
-                {if $user}
-                    {$user}
-                {/if}
-            </p>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>
+                        <label for="telefon-numarasi">Telefon Numarası:</label>
+                        <input type="text" name="telefon-numarasi" value="{$number}" id="telefon-numarasi" placeholder="Lütfen telefon numarası giriniz."  data-required="true" data-error-message="Lütfen telefon numarası giriniz." />
+                        <span></span>
+                        {if $telefon}
+                            {$telefon}
+                        {/if}
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <p >
+                        <label for="kullanici">Kullanıcı:</label>
+                        <input type="text" name="value" value="" id="kullanici" placeholder="Kullanıcı seçiniz." autocomplete="off" style="min-width: 270px;"/>
+                        <span></span>
+                        {if $user}
+                            {$user}
+                        {/if}
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <input type="submit" value="Numarayı Ekle" class="btn-gonder"/>
+                    
+                </div>
+            </div>
+            <br>
+            
             <div align="left" id="kullanici-searchresults"></div>
-            <p>
-                <input type="submit" value="Numarayı Ekle"/>
-            </p>
+            
             <input type="hidden" value="" name="clientid" id="bulutfon-clientid"/>
             <input type="hidden" name="intellisearch" value="1"/>
         </form>
     </div>
  </div>
-
+{include file='footer.tpl'}
