@@ -1,7 +1,6 @@
 var bulutfon ={
     addLinks:function(){
-        $('#clienttabs ul li,ul.client-tabs li').removeClass('active');
-        $('#clienttabs ul,ul.client-tabs').append('<li class="tab bulutfon-link active"><a href="clientssummary.php?userid='+this.getUrl('userid')+'&bulutfon=1">Bulutfon</a></li>');
+        $('#clienttabs ul,ul.client-tabs').append('<li class="tab bulutfon-link"><a href="clientssummary.php?userid='+this.getUrl('userid')+'&bulutfon=1">Bulutfon</a></li>');
         if(this.getUrl('bulutfon') == 1){
             console.log('bulutfon');
             $('.bulutfon-link').addClass('selected');
@@ -26,7 +25,7 @@ var bulutfon ={
     showBulutfonContent: function(id,page,limit){
         page = page !== 'null' ?  page : 1;
         limit = limit !== 'null' ?  limit : 10;
-        $.getJSON('addonmodules.php?module=bulutfon&userid='+id+'&page='+page+'&limit='+limit, function(data){  $('#tab_content,.tab-content').html("<br>"+data.html); });
+        $.getJSON('addonmodules.php?module=bulutfon&userid='+id+'&page='+page+'&limit='+limit, function(data){  $('#tab_content,.tab-content').html(data.html); });
     }
 };
 $(function(){
@@ -59,7 +58,4 @@ $(function(){
 
        return false;
     });
-    if(bulutfon.getUrl('module')=='bulutfon'){
-        $('#sidebar').html('<img src="../modules/addons/bulutfon/assets/img/Bulutfon_Logo.png" class="bulutfon-logo"/>');
-    }
 });
