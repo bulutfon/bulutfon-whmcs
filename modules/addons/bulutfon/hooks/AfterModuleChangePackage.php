@@ -5,7 +5,7 @@ if(!isset($AfterModuleChangePackage)) {
         $user = $repository->findUserById($args['userid']);
         $gsm = $repository->getFirstGsm($user);
         if($gsm) {
-            //TODO
+            //TODO : AfterModuleChangePackage Template'i Yazilmali!
             $sms($gsm,$message);
         }
     };

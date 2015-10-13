@@ -5,7 +5,7 @@ if(!isset($ClientChangePassword)) {
         $user = $repository->findUserById($args['userid']);
         $gsm = $repository->getFirstGsm($user);
         if($gsm) {
-            //TODO
+            $message = $repository->getSmsMessage('ClientChangePassword',[$user->lastname]);
             $sms($gsm,$message);
         }
     };

@@ -5,7 +5,8 @@ if(!isset($AfterModuleCreate_Hosting)) {
         $user = $repository->findUserById($args['userid']);
         $gsm = $repository->getFirstGsm($user);
         if($gsm) {
-            //TODO
+            $message = $repository->getSmsMessage('AfterModuleCreate_Hosting',[$user->firstname,$user->lastname,$args['domainid']]);
+            // TODO : domainid yi cekecek sorgu gerekli
             $sms($gsm,$message);
         }
 

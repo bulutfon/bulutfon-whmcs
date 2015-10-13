@@ -5,7 +5,8 @@ if(!isset($InvoicePaid)) {
        //TODO :invoiceid icin method gerekli
         $gsm = $repository->getFirstGsm($user);
         if($gsm) {
-            //TODO
+            $message = $repository->getSmsMessage('InvoicePaid',[$user->firstname,$user->lastname]);
+
             $sms($gsm,$message);
         }
 

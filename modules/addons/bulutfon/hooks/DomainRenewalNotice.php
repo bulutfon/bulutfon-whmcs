@@ -5,7 +5,7 @@ if(!isset($DomainRenewalNotice)) {
      //TODO :Hook bulunamadi
         $gsm = $repository->getFirstGsm($user);
         if($gsm) {
-            //TODO
+            $message = $repository->getSmsMessage('DomainRenewalNotice',[$user->lastname,$args['domainid']]);
             $sms($gsm,$message);
         }
     };

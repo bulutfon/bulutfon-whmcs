@@ -5,7 +5,8 @@ if(!isset($AfterModuleChangePassword)) {
         $user = $repository->findUserById($args['userid']);
         $gsm = $repository->getFirstGsm($user);
         if($gsm) {
-            //TODO
+            $message = $repository->getSmsMessage('AfterModuleChangePassword',[$user->firstname,$user->lastname,$args['domainid']]);
+            //TODO : domainid yi cekecek sorgu gerekli!
             $sms($gsm,$message);
         }
 

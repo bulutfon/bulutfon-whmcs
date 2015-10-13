@@ -5,7 +5,8 @@ if(!isset($InvoicePaymentReminder_Firstoverdue)) {
         //TODO : Hook bulunamadi
         $gsm = $repository->getFirstGsm($user);
         if($gsm) {
-            //TODO
+            $message = $repository->getSmsMessage('InvoicePaymentReminder_Firstoverdue',[$user->lastname]);
+
             $sms($gsm,$message);
         }
 

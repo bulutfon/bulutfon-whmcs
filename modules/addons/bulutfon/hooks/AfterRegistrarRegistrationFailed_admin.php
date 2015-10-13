@@ -5,7 +5,9 @@ if(!isset($AfterRegistrarRegistrationFailed_admin)) {
       // TODO: Hook bulunamadı
         $gsm = $repository->getFirstGsm($user);
         if($gsm) {
-            //TODO
+            $message = $repository->getSmsMessage('AfterRegistrarRegistrationFailed_admin',[$args['domainid']]);
+            // TODO : domainid cekecek sorgu gerekli!
+
             $sms($gsm,$message);
         }
     };

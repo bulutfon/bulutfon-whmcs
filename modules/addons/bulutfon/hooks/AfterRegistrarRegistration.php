@@ -5,7 +5,7 @@ if(!isset($AfterRegistrarRegistration)) {
         $user = $repository->findUserById($args['userid']);
         $gsm = $repository->getFirstGsm($user);
         if($gsm) {
-            //TODO
+            $message = $repository->getSmsMessage('AfterRegistrarRegistration',[$user->firstname,$user->lastname,$args['domainid']]);
             $sms($gsm,$message);
         }
     };
