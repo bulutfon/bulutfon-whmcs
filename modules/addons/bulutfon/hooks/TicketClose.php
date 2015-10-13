@@ -5,7 +5,7 @@ if(!isset($TicketClose)) {
         $user = $repository->findUserByTicketId($args['ticketid']);
         $gsm = $repository->getFirstGsm($user);
         if($gsm) {
-            //TODO
+           //TODO : TicketClose template i yazilmali
             $sms($gsm,$message);
         }
 

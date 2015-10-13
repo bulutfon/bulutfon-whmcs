@@ -5,7 +5,8 @@ if(!isset($AfterModuleUnsuspend)) {
         $user = $repository->findUserById($args['userid']);
         $gsm = $repository->getFirstGsm($user);
         if($gsm) {
-            //TODO
+            $message = $repository->getSmsMessage('AfterModuleUnsuspend',[$user->firstname,$user->lastname,$args['domainid']]);
+            // TODO : domainid yi cekecek sorgu gerekli!
             $sms($gsm,$message);
         }
 

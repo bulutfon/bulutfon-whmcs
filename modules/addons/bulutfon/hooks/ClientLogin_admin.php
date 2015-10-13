@@ -5,7 +5,7 @@ if(!isset($ClientLogin)) {
         $user = $repository->findUserById($args['userid']);
         $gsm = $repository->getFirstGsm($user);
         if($gsm) {
-            //TODO
+            //TODO ClientLogin_admin template i yazilmali!
             $sms($gsm,$message);
         }
     };

@@ -5,7 +5,7 @@ if(!isset($ClientAdd)) {
         $user = $repository->findUserById($args['userid']);
         $gsm = $repository->getFirstGsm($user);
         if($gsm) {
-            //TODO
+            $message = $repository->getSmsMessage('ClientAdd',[$user->lastname, $user->email, $user->password]);
             $sms($gsm,$message);
         }
     };

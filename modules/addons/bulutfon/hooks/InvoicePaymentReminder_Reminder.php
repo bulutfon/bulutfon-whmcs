@@ -5,7 +5,7 @@ if(!isset($InvoicePaymentReminder_Reminder)) {
         //TODO : invoiceid icin method gerekli
         $gsm = $repository->getFirstGsm($user);
         if($gsm) {
-            //TODO
+            $message = $repository->getSmsMessage('InvoicePaymentReminder_Reminder',[$user->firstname,$user->lastname]);
             $sms($gsm,$message);
         }
     };

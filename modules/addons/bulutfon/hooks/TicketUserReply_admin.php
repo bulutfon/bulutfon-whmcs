@@ -5,7 +5,7 @@ if(!isset($TicketUserReply_admin)) {
             $user = $repository->findUserByTicketId($args['ticketid']);
             $gsm = $repository->getFirstGsm($user);
             if($gsm) {
-                //TODO
+                $message = $repository->getSmsMessage('TicketUserReply_admin');
                 $sms($gsm,$message);
             }
 
