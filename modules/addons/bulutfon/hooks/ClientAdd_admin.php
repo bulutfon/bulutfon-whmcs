@@ -5,7 +5,7 @@ if(!isset($ClientAdd_admin)) {
        //TODO :Hook bulunamadi!
         $gsm = $repository->getFirstGsm($user);
         if($gsm) {
-            $message = $repository->getSmsMessage('ClientAdd_admin');
+            $message = $repository->getSmsMessage('ClientAdd_admin',[]);
             $sms($gsm,$message);
         }
     };
