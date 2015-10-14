@@ -5,7 +5,7 @@ if(!isset($AfterRegistrarRenewalFailed_admin)) {
      //TODO: Hook bulunamadi
         $gsm = $repository->getFirstGsm($user);
         if($gsm) {
-            $message = $repository->getSmsMessage('AfterRegistrarRenewalFailed_admin',[$args['domainid']]);
+            //$message = $repository->getSmsMessage('AfterRegistrarRenewalFailed_admin',[$args['domainid']]);
             //TODO: domainid cekecek sorgu gerekli!
             $sms($gsm,$message);
         }

@@ -5,7 +5,7 @@ if(!isset($TicketUserReply_admin)) {
             $user = $repository->findUserByTicketId($args['ticketid']);
             $gsm = $repository->getFirstGsm($user);
             if($gsm) {
-                $message = $repository->getSmsMessage('TicketUserReply_admin');
+                $message = $repository->getSmsMessage('TicketUserReply_admin');//TODO : Subject eklenecek!
                 $sms($gsm,$message);
             }
 
