@@ -190,6 +190,6 @@ class Repository{
     public function getTitle()
     {
         $title = Capsule::table('mod_bulutfon_settings')->where('name','title')->first();
-        return $title->value;
+        return $title ? $title->value : 'FIRMA';
     }
 }
