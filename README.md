@@ -1,26 +1,15 @@
 # Bulutfon WHMCS ADDON 
 
-Kurulum ile ilgili videoya [buradan](https://www.youtube.com/watch?v=Qf_wd-owvjA) ulaşabilirsiniz.
-
-Addonu [buradan](https://github.com/hakanersu/bulutfon-whmcs/releases/download/0.0.4/bfwhmcs-0.0.4.zip) indirebilirsiniz.
-
-### Güncellemeler
-
-#### v0.0.3
-* Whmcs 6 için güncelleme yapıldı.
- 
-#### v0.0.2
-* Whmcs **Phone Number** alanında düzgün formatlanmamış numaralar için Türkiye alan koduyla ekstra numara sorgusu eklendi.
-
 ### Özellikler
 
 * Gelen/giden aramaları listeleme.
 * Gelen/giden aramaları kullanıcı profil sayfasından listeleme.
 * Kullanıcıya birden fazla numara tanımlama.
+* WHMCS kancaları ile kullanıcılara SMS gönderebilme.
 
 ### Gereksinimler
 
-* PHP 5.4+
+* PHP 5.5+
 * WHMCS genel ayarlarınızda sistem adresinizi tanımlanmış olması.
 
 
@@ -29,10 +18,12 @@ Addonu [buradan](https://github.com/hakanersu/bulutfon-whmcs/releases/download/0
 * İndirmiş olduğunuz dosyaları whmcs dizinine yapıştırınız veya indirmiş olduğunuz dosya içerisinden **/modules/addons/bulutfon** klasörünü WHMCS **/modules/addons/** klasörüne taşıyınız.
 * WHMCS Setup > Addon Modules menüsünü tıklayıp, yüklü addon modüller arasından **Bulutfon WHMCS Addon**'u aktif ediniz.
 * **Bulutfon WHMCS Addon** aktif ediltikten sonra **Configure** butonu ile Bulutfon **cliendId** ve **clientSecret** alanlarını doldurunuz.(clientID ve clientSecret anahtarlarını bulutfon panelinizden almanız gerekmekte.)
-* Modül için gerekli izinleri **Access Control** kısmından verdikten sonra ayarlarınız kaydederek **Bulutfon WHMCS Addon**'u kullanmaya başlayabilirsiniz.
+* SSL doğrulama özelliğini false olarak seçin.
+* SMS özelliğini kullanmak istiyorsanız lütfen Sms ayarlarından gönderici ismini belirleyiniz.
+* Modül için gerekli izinleri **Access Control** kısmından verdikten sonra ayarlarınız kaydederek **Bulutfon WHMCS Addon**'u kullanmaya başlayabilirsiniz.(Addon ilk kullanımda Bulutfon oAuth2 sunucusundan izin almak için sizi bu adrese yönlendirecektir)
 
 ### Ekran Görüntüleri
 
-![Bulutfon WHMCS](http://ersu.cdn.tc/img/bf/bf-whmcs-1.png "Bulutfon WHMCS Client Area")
+![Bulutfon WHMCS](https://github.com/hakanersu/bulutfon-whmcs/blob/sms/screen-1.png "Bulutfon WHMCS Client Area")
 
-![Bulutfon WHMCS](http://ersu.cdn.tc/img/bf/bf-whmcs-2.png "Bulutfon WHMCS Add Number")
+![Bulutfon WHMCS](https://github.com/hakanersu/bulutfon-whmcs/blob/sms/screen-2.png "Bulutfon WHMCS Add Number")

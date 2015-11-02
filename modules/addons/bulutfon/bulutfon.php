@@ -1,10 +1,15 @@
 <?php
+include __DIR__.'/../../../configuration.php';
+include __DIR__.'/vendor/autoload.php';
 
 use Bulutfon\Libraries\Helper;
 use Bulutfon\Libraries\Repository;
 use Bulutfon\OAuth2\Client\Provider\Bulutfon;
 use League\OAuth2\Client\Token\AccessToken;
 use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Database\Capsule\Manager as Capsule;
+use Illuminate\Support\File;
+
 
 if (!defined("WHMCS")) die("This file cannot be accessed directly");
 
@@ -12,7 +17,7 @@ function bulutfon_config(){
     $configarray = array(
         "name" => "Bulutfon WHMCS Addon",
         "description" => "Bulutfon WHMCS Addon",
-        "version" => "0.0.2",
+        "version" => "0.1.0",
         "author" => "Bulutfon",
         "language" => "turkish",
         "fields" => array(
@@ -26,22 +31,42 @@ function bulutfon_config(){
 }
 
 function bulutfon_activate(){
-    $query = "CREATE TABLE  IF NOT EXISTS `mod_bulutfon_phonenumbers` ( `id` INT(11) NOT NULL AUTO_INCREMENT,  `userid` INT(11) NOT NULL,`phonenumber` VARCHAR(20) NOT NULL, UNIQUE (phonenumber),PRIMARY KEY id(id))";
-    mysql_query($query);
+    Capsule::schema()->create('mod_bulutfon_phonenumbers',function ($table) {
+        $table->increments('id');
+        $table->integer('userid');
+        $table->string('phonenumber',20)->unique();
+        $table->timestamps();
+    });
 
-    $query = "CREATE TABLE  IF NOT EXISTS `mod_bulutfon_tokens` (`tokens` TEXT NOT NULL)";
-    mysql_query($query);
+    Capsule::schema()->create('mod_bulutfon_settings',function ($table) {
+        $table->increments('id');
+        $table->string('name',64)->unique();
+        $table->longText('value');
+        $table->timestamps();
+    });
+
+    Capsule::schema()->create('mod_bulutfon_smstemplates',function ($table) {
+        $table->increments('id');
+        $table->string('name',64);
+        $table->enum('type', array('client', 'admin'));
+        $table->string('admingsm',255);
+        $table->string('template',240);
+        $table->string('variables',500);
+        $table->tinyInteger('active');
+        $table->string('extra',3);
+        $table->text('description');
+        $table->timestamps();
+    });
+
+   Capsule::unprepared(file_get_contents(__DIR__."/install/templates.sql"));
 
     return array('status'=>'success','description'=>'Bulutfon succesfully activated :)');
 }
 
 function bulutfon_deactivate(){
-    $query = "DROP TABLE `mod_bulutfon_phonenumbers`";
-    mysql_query($query);
-
-    $query = "DROP TABLE `mod_bulutfon_tokens`";
-    mysql_query($query);
-
+    Capsule::schema()->dropIfExists('mod_bulutfon_phonenumbers');
+    Capsule::schema()->dropIfExists('mod_bulutfon_settings');
+    Capsule::schema()->dropIfExists('mod_bulutfon_smstemplates');
     return array('status'=>'success','description'=>'Bulutfon succesfully deactivated :(');
 }
 
@@ -58,10 +83,9 @@ function bulutfon_smarty(){
 
     return $smarty;
 }
+
 function bulutfon_output($vars){
-
-    require_once "init.php";
-
+   
     $repository = new Repository();
 
     $request = Request::createFromGlobals();
@@ -90,7 +114,56 @@ function bulutfon_output($vars){
             Helper::json('failed');
 
             break;
+        case 'sms-templates';
+            $templates = Capsule::table('mod_bulutfon_smstemplates')->get();
+            $id = (int)$request->get('id',false);
+            if($id){
 
+                $template = array_where($templates, function($key,$value) use ($id){
+
+                    return ($value->id=="$id") ?  $value : false;
+                });
+         
+                $smarty->assign('template',head($template));
+                $smarty->assign('selected',$id);
+            }
+
+            if(isset($_GET['active'])) {
+                 Capsule::table('mod_bulutfon_smstemplates')->where('id',$id)->update([
+                    'active'=> (int)$request->get('active',false)
+                ]);
+                if($request->get('back',false) == 'list'){
+                    header("location: addonmodules.php?module=bulutfon&tab=sms-templates");
+                }else {
+                    header("location: addonmodules.php?module=bulutfon&tab=sms-templates&id={$id}");
+                }
+               
+            }
+
+            if($request->get('template',false) && $id) {
+                try {
+                    Capsule::table('mod_bulutfon_smstemplates')->where('id',$id)->update([
+                        'template'=> $request->get('template',false)
+                    ]); 
+                } catch (\Exception $e) {
+                  
+                }
+                header("location: addonmodules.php?module=bulutfon&tab=sms-templates&id={$id}#saved");    
+            }
+
+            $smarty->assign('templates',$templates);
+            $smarty->display('sms_templates.tpl');
+        break;
+        case 'sms-settings';
+            if($request->get('sms-basligi') && ctype_alpha($request->get('sms-basligi')) && strlen($request->get('sms-basligi'))>=3 && strlen($request->get('sms-basligi'))<12) {
+               Capsule::table('mod_bulutfon_settings')->where('name','title')->update([
+                    'value'=> $request->get('sms-basligi')
+                ]);
+               header("Location: addonmodules.php?module=bulutfon&tab=sms-settings");
+            }
+            $smarty->assign('title',$repository->getTitle());
+            $smarty->display('sms_settings.tpl');
+        break;
         case 'addtouser':
 
             $smarty->assign('number',$request->get('number'));
