@@ -29,10 +29,9 @@ try {
 
     /**
      * Lets add simple function to send sms. 
-     * Simple is perfection.
      */
     $sms = function($gsm,$message) use($provider,$token,$title) {
-       $provider->sendMessage($token,['title'=>$title,'content'=>$message,'receivers' => $gsm]);
+       $resp = $provider->sendMessage($token,['title'=>$title,'content'=>$message,'receivers' => $gsm]);
     };
     
     /**

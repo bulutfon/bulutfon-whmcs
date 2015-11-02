@@ -14,18 +14,16 @@
             <td>
                 <select name="hook" id="hook" class="form-control">
                 <option value="">Lütfen Hook Seçiniz</option>
-                    {foreach from=$templates item=template}
-                    {assign var=type value=$template->description|json_decode}
-                    <option value="{$template->id}" {if $smarty.get.id eq $template->id} selected="selected"{/if}> {if isset($type->english)}{$type->turkish}{else}{$template->name}{/if}</option>
+                    {foreach from=$templates item=temps}
+                    {assign var=type value=$temps->description|json_decode}
+                    <option value="{$temps->id}" {if $smarty.get.id eq $temps->id} selected="selected"{/if}> {if isset($type->english)}{$type->turkish}{else}{$temps->name}{/if}</option>
                     {/foreach}
                 </select>
             </td>
         </tr>
         <tr>
             <td colspan="2">
-                 {assign var=sid value=($selected-1)}
-              
-               <textarea name="template" id="" cols="30" rows="10" style="width:100%">{$templates.$sid->template}</textarea>
+               <textarea name="template" id="" cols="30" rows="10" style="width:100%">{$template->template}</textarea>
             </td>
         </tr>
         <tr>
@@ -33,13 +31,13 @@
                 Kullanılabilir değişkenler:
             </td>
             <td>
-                {$templates.$sid->variables}
+                {$template->variables}
             </td>
         </tr>
         <tr>
             <td>Hook Durumu:</td>
             <td>
-            {if $templates.$sid->active eq 1}
+            {if $template->active eq 1}
                 <span class="label label-success" style="background:#5cb85c;text-transform:none;padding:3px 15px;font-size:14px;">Aktif</span> [<a href="addonmodules.php?module=bulutfon&tab=sms-templates&id={$selected}&active=0">Pasifleştir</a>]
             {else}
              <span class="label label-success" style="background:#d9534f;text-transform:none;padding:3px 15px;font-size:14px;">Pasif</span> 

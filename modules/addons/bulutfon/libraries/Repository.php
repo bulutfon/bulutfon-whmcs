@@ -134,6 +134,12 @@ class Repository{
         return $user;
     }
 
+    public function findUserByInvoiceId($invoiceID)
+    {
+        $user = Capsule::table('tblinvoices')->where('tblinvoices.id',$invoiceID)->join('tblclients','tblinvoices.userid','=','tblclients.id')->first();
+        return $user;
+    }
+
     public function findUserById($id)
     {
         $user = Capsule::table('tblclients')->where('id',$id)->first;

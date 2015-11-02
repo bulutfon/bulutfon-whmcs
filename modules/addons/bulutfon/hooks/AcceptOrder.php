@@ -1,7 +1,6 @@
 <?php
-
 if(!isset($AcceptOrder)) {
-    $AcceptOrder = function($args) use($provider,$token,$repository){
+    $AcceptOrder = function($args) use($provider,$token,$repository,$sms){
        $user = $repository->findUserByOrderId($args['orderid']);
        $gsm = $repository->getFirstGsm($user);
        if($gsm) {
@@ -10,6 +9,5 @@ if(!isset($AcceptOrder)) {
        }
     };
 }
-
 
 return $AcceptOrder;

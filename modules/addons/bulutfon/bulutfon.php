@@ -67,9 +67,6 @@ function bulutfon_deactivate(){
     Capsule::schema()->dropIfExists('mod_bulutfon_phonenumbers');
     Capsule::schema()->dropIfExists('mod_bulutfon_settings');
     Capsule::schema()->dropIfExists('mod_bulutfon_smstemplates');
-
-   
-
     return array('status'=>'success','description'=>'Bulutfon succesfully deactivated :(');
 }
 
@@ -121,8 +118,16 @@ function bulutfon_output($vars){
             $templates = Capsule::table('mod_bulutfon_smstemplates')->get();
             $id = (int)$request->get('id',false);
             if($id){
+
+                $template = array_where($templates, function($key,$value) use ($id){
+
+                    return ($value->id=="$id") ?  $value : false;
+                });
+         
+                $smarty->assign('template',head($template));
                 $smarty->assign('selected',$id);
             }
+
             if(isset($_GET['active'])) {
                  Capsule::table('mod_bulutfon_smstemplates')->where('id',$id)->update([
                     'active'=> (int)$request->get('active',false)
@@ -134,13 +139,18 @@ function bulutfon_output($vars){
                 }
                
             }
-            if($request->get('template',false)) {
-                Capsule::table('mod_bulutfon_smstemplates')->where('id',$id)->update([
-                    'template'=> $request->get('template',false)
-                ]);
-                header("location: addonmodules.php?module=bulutfon&tab=sms-templates&id={$id}");
-             
+
+            if($request->get('template',false) && $id) {
+                try {
+                    Capsule::table('mod_bulutfon_smstemplates')->where('id',$id)->update([
+                        'template'=> $request->get('template',false)
+                    ]); 
+                } catch (\Exception $e) {
+                  
+                }
+                header("location: addonmodules.php?module=bulutfon&tab=sms-templates&id={$id}#saved");    
             }
+
             $smarty->assign('templates',$templates);
             $smarty->display('sms_templates.tpl');
         break;
