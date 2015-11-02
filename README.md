@@ -19,6 +19,7 @@
 * WHMCS Setup > Addon Modules menüsünü tıklayıp, yüklü addon modüller arasından **Bulutfon WHMCS Addon**'u aktif ediniz.
 * **Bulutfon WHMCS Addon** aktif ediltikten sonra **Configure** butonu ile Bulutfon **cliendId** ve **clientSecret** alanlarını doldurunuz.(clientID ve clientSecret anahtarlarını bulutfon panelinizden almanız gerekmekte.)
 * SSL doğrulama özelliğini false olarak seçin.
+* SMS özelliğini kullanmak istiyorsanız lütfen Sms ayarlarından gönderici ismini belirleyiniz.
 * Modül için gerekli izinleri **Access Control** kısmından verdikten sonra ayarlarınız kaydederek **Bulutfon WHMCS Addon**'u kullanmaya başlayabilirsiniz.(Addon ilk kullanımda Bulutfon oAuth2 sunucusundan izin almak için sizi bu adrese yönlendirecektir)
 
 ### Ekran Görüntüleri
