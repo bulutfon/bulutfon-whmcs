@@ -156,9 +156,15 @@ function bulutfon_output($vars){
         break;
         case 'sms-settings';
             if($request->get('sms-basligi') && ctype_alpha($request->get('sms-basligi')) && strlen($request->get('sms-basligi'))>=3 && strlen($request->get('sms-basligi'))<12) {
-               Capsule::table('mod_bulutfon_settings')->where('name','title')->update([
+               $title = Capsule::table('mod_bulutfon_settings')->where('name','title')->first();
+               if(!$title){
+                    Capsule::table('mod_bulutfon_settings')->insert(['name'=>'title','value' =>$request->get('sms-basligi')]);
+               }else {
+                Capsule::table('mod_bulutfon_settings')->where('name','title')->update([
                     'value'=> $request->get('sms-basligi')
                 ]);
+               }
+               
                header("Location: addonmodules.php?module=bulutfon&tab=sms-settings");
             }
             $smarty->assign('title',$repository->getTitle());
