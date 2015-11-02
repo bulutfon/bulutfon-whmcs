@@ -21,3 +21,8 @@
 * SSL doğrulama özelliğini false olarak seçin.
 * Modül için gerekli izinleri **Access Control** kısmından verdikten sonra ayarlarınız kaydederek **Bulutfon WHMCS Addon**'u kullanmaya başlayabilirsiniz.(Addon ilk kullanımda Bulutfon oAuth2 sunucusundan izin almak için sizi bu adrese yönlendirecektir)
 
+### Ekran Görüntüleri
+
+![Bulutfon WHMCS](https://github.com/hakanersu/bulutfon-whmcs/blob/sms/screen-1.png "Bulutfon WHMCS Client Area")
+
+![Bulutfon WHMCS](https://github.com/hakanersu/bulutfon-whmcs/blob/sms/screen-2.png "Bulutfon WHMCS Add Number")
