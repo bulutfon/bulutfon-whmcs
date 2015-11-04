@@ -10,7 +10,7 @@ class Helper
      */
     public static function isAjax()
     {
-        return ( isset( $_SERVER['HTTP_X_REQUESTED_WITH'] ) && strtolower( $_SERVER['HTTP_X_REQUESTED_WITH'] ) === 'xmlhttprequest' );
+        return (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest');
     }
 
     /**
@@ -24,8 +24,8 @@ class Helper
         header('Content-type: application/json');
 
         $output = json_encode($html);
-        
-        exit('{"html":'.$output.'}');
+
+        exit('{"html":' . $output . '}');
     }
 
     /**
@@ -34,7 +34,10 @@ class Helper
      */
     public static function outputIfAjax($html)
     {
-        if(self::isAjax()) self::json($html);
+        if (self::isAjax()) {
+            self::json($html);
+        }
+
     }
 
     /**
@@ -55,9 +58,9 @@ class Helper
      * @param string $glue
      * @return string
      */
-    public static function imp($array,$glue=',')
+    public static function imp($array, $glue = ',')
     {
-        return implode($glue,$array);
+        return implode($glue, $array);
     }
 
     /**
@@ -67,15 +70,16 @@ class Helper
      * @param string $splitter
      * @return array|string
      */
-    public static function decamelize($camel,$splitter="_") {
-        if(is_array($camel)){
+    public static function decamelize($camel, $splitter = "_")
+    {
+        if (is_array($camel)) {
             $new = array();
-            foreach($camel as $key=>$value){
+            foreach ($camel as $key => $value) {
                 $new[self::decamelize($key)] = $value;
             }
             return $new;
         }
-        $camel=preg_replace('/(?!^)[[:upper:]][[:lower:]]/', '$0', preg_replace('/(?!^)[[:upper:]]+/', $splitter.'$0', $camel));
+        $camel = preg_replace('/(?!^)[[:upper:]][[:lower:]]/', '$0', preg_replace('/(?!^)[[:upper:]]+/', $splitter . '$0', $camel));
         return strtolower($camel);
     }
 }

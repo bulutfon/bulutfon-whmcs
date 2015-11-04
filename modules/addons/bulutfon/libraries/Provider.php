@@ -6,7 +6,8 @@ use League\OAuth2\Client\Grant\RefreshToken;
 use League\OAuth2\Client\Token\AccessToken;
 use Symfony\Component\HttpFoundation\Request;
 
-class Provider{
+class Provider
+{
 
     protected $repository;
 
@@ -16,11 +17,11 @@ class Provider{
 
     protected $paths;
 
-    public function __construct(Repository $repository,$paths)
+    public function __construct(Repository $repository, $paths)
     {
         $this->repository = $repository;
 
-        $this->request =  Request::createFromGlobals();
+        $this->request = Request::createFromGlobals();
 
         $this->paths = $paths;
     }
@@ -34,9 +35,13 @@ class Provider{
 
         $this->provider = new Bulutfon($keys);
 
-        if($this->request->get('code'))  $this->setAccessToken();
+        if ($this->request->get('code')) {
+            $this->setAccessToken();
+        }
 
-        if($this->request->get('refresh_token')) $this->setRefreshToken();
+        if ($this->request->get('refresh_token')) {
+            $this->setRefreshToken();
+        }
 
         Helper::json("Code not exists.");
     }
@@ -48,15 +53,15 @@ class Provider{
     {
         $token = new AccessToken(Helper::decamelize($this->repository->getTokens()));
 
-        $tokens =$this->provider->getAccessToken('refresh_token',[
-            'refresh_token' => $token->refreshToken
+        $tokens = $this->provider->getAccessToken('refresh_token', [
+            'refresh_token' => $token->refreshToken,
         ]);
 
         $token = array(
-            'access_token' =>$tokens->accessToken,
-            'refresh_token' =>$tokens->refreshToken,
+            'access_token' => $tokens->accessToken,
+            'refresh_token' => $tokens->refreshToken,
             'expires' => $tokens->expires,
-            'uid' => $tokens->uid
+            'uid' => $tokens->uid,
         );
 
         $this->repository->setTokens(json_encode($token));
@@ -71,7 +76,7 @@ class Provider{
     {
         $token = $this->provider->getAccessToken('authorization_code', [
             'code' => $this->request->get('code'),
-            'grant_type' => 'authorization_code'
+            'grant_type' => 'authorization_code',
         ]);
 
         $this->repository->setTokens(json_encode($token));
