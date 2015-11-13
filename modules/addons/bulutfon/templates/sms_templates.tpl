@@ -71,9 +71,9 @@
                         </td>
                         <td>
                             {if $temp->active eq 1}
-                                <a href="http://stage.ni.net.tr/panel/admin/addonmodules.php?module=bulutfon&tab=sms-templates&id={$temp->id}&active=0&back=list" class="btn btn-success btn-sm">AKTİF</a>
+                                <a href="addonmodules.php?module=bulutfon&tab=sms-templates&id={$temp->id}&active=0&back=list" class="btn btn-success btn-sm">AKTİF</a>
                             {else}
-                                <a href="http://stage.ni.net.tr/panel/admin/addonmodules.php?module=bulutfon&tab=sms-templates&id={$temp->id}&active=1&back=list" class="btn btn-danger btn-sm">PASİF</a>
+                                <a href="addonmodules.php?module=bulutfon&tab=sms-templates&id={$temp->id}&active=1&back=list" class="btn btn-danger btn-sm">PASİF</a>
                             {/if}
                         </td>
                         <td>
