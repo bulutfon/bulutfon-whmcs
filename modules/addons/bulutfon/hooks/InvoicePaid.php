@@ -4,7 +4,7 @@ if (!isset($InvoicePaid)) {
         $user = $repository->findUserByInvoiceId($args['invoiceid']);
         $gsm = $repository->getFirstGsm($user);
         if ($gsm) {
-            $message = $repository->getSmsMessage('InvoicePaid', [$user->firstname, $user->lastname, $user->duedate]);
+            $message = $repository->getSmsMessage('InvoicePaid', [$user->firstname, $user->lastname, $user->duedate,$user->total]);
             $sms($gsm, $message);
         }
     };
