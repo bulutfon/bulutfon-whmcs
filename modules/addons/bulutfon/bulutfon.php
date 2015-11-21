@@ -178,6 +178,10 @@ function bulutfon_output($vars)
             $smarty->assign('title', $repository->getTitle());
             $smarty->display('sms_settings.tpl');
             break;
+        case 'sms-send':
+            $smarty->assign('all_sms',$provider->getMessages($token));
+            $smarty->display('sms_send.tpl');
+        break;
         case 'addtouser':
 
             $smarty->assign('number', $request->get('number'));
