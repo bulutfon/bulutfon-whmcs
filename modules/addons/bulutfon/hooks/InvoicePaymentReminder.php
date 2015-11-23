@@ -7,7 +7,7 @@ if (!isset($InvoicePaymentReminder)) {
         $reminders = ['reminder', 'firstoverdue', 'secondoverdue', 'thirdoverdue'];
         if ($gsm && in_array($args['type'], $reminders)) {
             $message = $repository->getSmsMessage('InvoicePaymentReminder', [$user->lastname, $user->lastname, $user->duedate]);
-            $sms($gsm, $message);
+            $sms($gsm, $message,$args['invoiceid']);
         }
 
     };

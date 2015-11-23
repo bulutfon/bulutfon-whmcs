@@ -203,4 +203,28 @@ class Repository
         $title = Capsule::table('mod_bulutfon_settings')->where('name', 'title')->first();
         return $title ? $title->value : 'FIRMA';
     }
+
+    public function checkMessage($message,$gsm,$relid)
+    {
+      $message = Capsule::table('mod_bulutfon_messagelog')
+        ->where('message',$message)
+        ->where('gsm',$gsm)
+        ->where('relid',$relid)
+        ->first();
+      if(is_null($message)) {
+        return true;
+      }
+
+      return false;
+    }
+
+    public function logMessage($message,$gsm,$relid)
+    {
+       return Capsule::table('mod_bulutfon_messagelog')->insert([
+         'message'=>$message,
+         'gsm'=>$gsm,
+         'relid'=>$relid
+       ]);
+
+    }
 }

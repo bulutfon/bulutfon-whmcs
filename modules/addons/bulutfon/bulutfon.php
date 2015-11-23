@@ -50,6 +50,7 @@ function bulutfon_activate()
     Capsule::schema()->create('mod_bulutfon_messagelog', function ($table) {
         $table->increments('id');
         $table->integer('userid');
+        $table->string('gsm');
         $table->longText('message');
         $table->integer('relid');
         $table->timestamps();
@@ -78,6 +79,7 @@ function bulutfon_deactivate()
     Capsule::schema()->dropIfExists('mod_bulutfon_phonenumbers');
     Capsule::schema()->dropIfExists('mod_bulutfon_settings');
     Capsule::schema()->dropIfExists('mod_bulutfon_smstemplates');
+    Capsule::schema()->dropIfExists('mod_bulutfon_messagelog');
     return array('status' => 'success', 'description' => 'Bulutfon succesfully deactivated :(');
 }
 
