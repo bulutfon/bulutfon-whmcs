@@ -20,7 +20,7 @@ class Repository
 
         $callbackUrl = rtrim(preg_replace("/^http:/i", "https:", $callbackUrl->value), '/') . '/modules/addons/bulutfon/callback.php';
 
-        $fields = array('clientId', 'clientSecret', 'verifySSL');
+        $fields = array('clientId', 'clientSecret');
 
         $keys = array('redirectUri' => $callbackUrl);
 
@@ -30,7 +30,7 @@ class Repository
             }
         }
 
-        $keys['verifySSL'] = filter_var($keys['verifySSL'], FILTER_VALIDATE_BOOLEAN);
+        $keys['verifySSL'] = false;
 
         return $keys;
     }
