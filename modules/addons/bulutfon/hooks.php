@@ -31,7 +31,7 @@ try {
     $sms = function ($gsm, $message, $relid,$userid) use ($provider, $token, $title, $repository) {
         $check = $repository->checkMessage($message, $gsm, $relid,$userid);
         if ($check) {
-            //$resp = $provider->sendMessage($token, ['title' => $title, 'content' => $message, 'receivers' => $gsm]);
+            $resp = $provider->sendMessage($token, ['title' => $title, 'content' => $message, 'receivers' => $gsm]);
             $repository->logMessage($message, $gsm, $relid,$userid);
         }
     };
