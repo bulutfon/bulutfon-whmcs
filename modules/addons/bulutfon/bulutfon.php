@@ -190,19 +190,30 @@ function bulutfon_output($vars)
             break;
         case 'sms-send':
             //$smarty->assign('all_sms', $provider->getMessages($token));
-          
-        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+            
+            $page = isset($_GET['page']) ? $_GET['page'] : 1;
+            $user = isset($_GET['user']) ? $_GET['user'] : false;
+
+            $url = http_build_query([]);
+
+            if($user){
+                $params = array("user" => $user);
+                $url = http_build_query($params);
+            }
+
             $total = Capsule::table('mod_bulutfon_messagelog')->count();
             $numPerPage = 10;
 
-            $short_message = Capsule::table('mod_bulutfon_messagelog')
-                ->take($numPerPage)
-                ->offset(($page-1) * $numPerPage)
-                ->get();
+            $short_message = Capsule::table('mod_bulutfon_messagelog');
+            $short_message->take($numPerPage);
+            $short_message->offset(($page-1) * $numPerPage);
+            if($user) $short_message->where('userid',$user);
+            $short_message=$short_message->get();
 
             $totalPages= ceil($total/$numPerPage);
 
             $smarty->assign('num_pages',$totalPages);
+            $smarty->assign('url',$url);
             $smarty->assign('all_sms', $short_message);
             $smarty->assign('page', $_GET['page']);
             $smarty->display('sms_send.tpl');

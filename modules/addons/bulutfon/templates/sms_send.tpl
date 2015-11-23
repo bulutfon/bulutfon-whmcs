@@ -4,6 +4,15 @@
         Gonderilen SMS'ler
     </div>
     <div class="bulutfon_content">
+        <form action="addonmodules.php" method="get">
+        <p>
+            <label for="sms-basligi">Kullanici ID:</label>
+            <input type="text" name="user" id="user" placeholder="Filtrelemek istediginiz kullanici ID">
+            <input type="hidden" name="module" value="bulutfon">
+            <input type="hidden" name="tab" value="sms-send">
+            <span></span>
+        </p>
+        </form>
         <table class='table table-bordered'>
         <thead>
         <tr>
@@ -25,9 +34,9 @@
   <ul class="pagination">
     {for $foo=1 to $num_pages}
         {if $page == $foo }
-        <li class="active"><a href="addonmodules.php?module=bulutfon&tab=sms-send&page={$foo}">{$foo}</a></li>
+        <li class="active"><a href="addonmodules.php?module=bulutfon&tab=sms-send&page={$foo}{if $url}&{$url}{/if}">{$foo}</a></li>
         {else}
-        <li><a href="addonmodules.php?module=bulutfon&tab=sms-send&page={$foo}">{$foo}</a></li>
+        <li><a href="addonmodules.php?module=bulutfon&tab=sms-send&page={$foo}{if $url}&{$url}{/if}">{$foo}</a></li>
         {/if}
          
     {/for}
