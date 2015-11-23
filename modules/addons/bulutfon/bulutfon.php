@@ -51,7 +51,7 @@ function bulutfon_activate()
         $table->increments('id');
         $table->integer('userid');
         $table->longText('message');
-        $table->integer('contact_id');
+        $table->integer('relid');
         $table->timestamps();
     });
 
