@@ -9,6 +9,7 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 use League\OAuth2\Client\Token\AccessToken;
 use Symfony\Component\HttpFoundation\Request;
 
+
 if (!defined("WHMCS")) {
     die("This file cannot be accessed directly");
 }
@@ -24,7 +25,6 @@ function bulutfon_config()
         "fields" => array(
             "clientId" => array("FriendlyName" => "cliendId", "clientId" => "Uygulama Anahtarı", "Type" => "text", "Size" => "60", "Description" => "Bulutfon API uygulama anahtarı.", "Default" => ""),
             "clientSecret" => array("FriendlyName" => "clientSecret", "clientSecret" => "Gizli Anahtar", "Type" => "text", "Size" => "60", "Description" => "Bulutfon API gizli anahtarı.", "Default" => ""),
-            "verifySSL" => array("FriendlyName" => "SSL Doğrulama", "verifySSL" => "SSL Doğrulama", "Type" => "dropdown", "Options" => "true,false", "Description" => "SSL Doğrulaması"),
         ),
     );
 
@@ -189,9 +189,24 @@ function bulutfon_output($vars)
             $smarty->display('sms_settings.tpl');
             break;
         case 'sms-send':
-            $smarty->assign('all_sms',$provider->getMessages($token));
+            //$smarty->assign('all_sms', $provider->getMessages($token));
+          
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+            $total = Capsule::table('mod_bulutfon_messagelog')->count();
+            $numPerPage = 10;
+
+            $short_message = Capsule::table('mod_bulutfon_messagelog')
+                ->take($numPerPage)
+                ->offset(($page-1) * $numPerPage)
+                ->get();
+
+            $totalPages= ceil($total/$numPerPage);
+
+            $smarty->assign('num_pages',$totalPages);
+            $smarty->assign('all_sms', $short_message);
+            $smarty->assign('page', $_GET['page']);
             $smarty->display('sms_send.tpl');
-        break;
+            break;
         case 'addtouser':
 
             $smarty->assign('number', $request->get('number'));

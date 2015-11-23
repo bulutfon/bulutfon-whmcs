@@ -28,11 +28,11 @@ try {
     /**
      * Lets add simple function to send sms.
      */
-    $sms = function ($gsm, $message,$relid) use ($provider, $token, $title,$repository) {
-        $check = $repository->checkMessage($message,$gsm,$relid);
-        if($check) {
-          $resp = $provider->sendMessage($token, ['title' => $title, 'content' => $message, 'receivers' => $gsm]);
-          $repository->logMessage($message,$gsm,$relid);
+    $sms = function ($gsm, $message, $relid,$userid) use ($provider, $token, $title, $repository) {
+        $check = $repository->checkMessage($message, $gsm, $relid,$userid);
+        if ($check) {
+            //$resp = $provider->sendMessage($token, ['title' => $title, 'content' => $message, 'receivers' => $gsm]);
+            $repository->logMessage($message, $gsm, $relid,$userid);
         }
     };
 

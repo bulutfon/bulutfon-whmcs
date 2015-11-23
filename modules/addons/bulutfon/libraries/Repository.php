@@ -204,27 +204,29 @@ class Repository
         return $title ? $title->value : 'FIRMA';
     }
 
-    public function checkMessage($message,$gsm,$relid)
+    public function checkMessage($message, $gsm, $relid,$userid)
     {
-      $message = Capsule::table('mod_bulutfon_messagelog')
-        ->where('message',$message)
-        ->where('gsm',$gsm)
-        ->where('relid',$relid)
-        ->first();
-      if(is_null($message)) {
-        return true;
-      }
+        $message = Capsule::table('mod_bulutfon_messagelog')
+            ->where('message', $message)
+            ->where('gsm', $gsm)
+            ->where('relid', $relid)
+            ->where('userid', $userid)
+            ->first();
+        if (is_null($message)) {
+            return true;
+        }
 
-      return false;
+        return false;
     }
 
-    public function logMessage($message,$gsm,$relid)
+    public function logMessage($message, $gsm, $relid,$userid)
     {
-       return Capsule::table('mod_bulutfon_messagelog')->insert([
-         'message'=>$message,
-         'gsm'=>$gsm,
-         'relid'=>$relid
-       ]);
+        return Capsule::table('mod_bulutfon_messagelog')->insert([
+            'message' => $message,
+            'gsm' => $gsm,
+            'relid' => $relid,
+            'userid' => $userid
+        ]);
 
     }
 }
