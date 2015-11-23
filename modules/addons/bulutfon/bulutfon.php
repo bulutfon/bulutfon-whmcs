@@ -201,7 +201,9 @@ function bulutfon_output($vars)
                 $url = http_build_query($params);
             }
 
-            $total = Capsule::table('mod_bulutfon_messagelog')->count();
+            $total = Capsule::table('mod_bulutfon_messagelog');
+            if($user) $total->where('userid',$user);
+            $total = $total->count();
             $numPerPage = 10;
 
             $short_message = Capsule::table('mod_bulutfon_messagelog');
