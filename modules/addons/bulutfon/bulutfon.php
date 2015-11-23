@@ -47,6 +47,14 @@ function bulutfon_activate()
         $table->timestamps();
     });
 
+    Capsule::schema()->create('mod_bulutfon_messagelog', function ($table) {
+        $table->increments('id');
+        $table->integer('userid');
+        $table->longText('message');
+        $table->integer('contact_id');
+        $table->timestamps();
+    });
+
     Capsule::schema()->create('mod_bulutfon_smstemplates', function ($table) {
         $table->increments('id');
         $table->string('name', 64);
