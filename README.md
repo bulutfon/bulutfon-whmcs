@@ -10,6 +10,7 @@
 ### Gereksinimler
 
 * PHP 5.5+
+* WHMCS 6+
 * WHMCS genel ayarlarınızda sistem adresinizi tanımlanmış olması.
 
 ### Kurulum
