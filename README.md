@@ -13,6 +13,8 @@
 * WHMCS 6+
 * WHMCS genel ayarlarınızda sistem adresinizi tanımlanmış olması.
 
+NOT: Eğer WHMCS 5.x sürümü kullanıyorsanız. Eklentisinin [v0.0.4 sürümünü](https://github.com/hakanersu/bulutfon-whmcs/releases/tag/0.0.4) indirip deneyebilirsiniz. 0.0.4 sürümde SMS desteği yoktur.
+
 ### Kurulum
 
 * [Bulutfon Whmcs v0.1.6](https://github.com/hakanersu/bulutfon-whmcs/releases/download/0.1.6/bulutfon-whmcs-0.1.6.zip) dosyalarını indirin.
