@@ -1,4 +1,4 @@
-# Bulutfon WHMCS ADDON 
+# Bulutfon WHMCS 6.X ADDON 
 
 ### Özellikler
 
@@ -11,6 +11,7 @@
 
 * PHP 5.5+
 * WHMCS 6+
+* CURL ve SSL
 * WHMCS genel ayarlarınızda sistem adresinizi tanımlanmış olması.
 
 NOT: Eğer WHMCS 5.x sürümü kullanıyorsanız. Eklentisinin [v0.0.4 sürümünü](https://github.com/hakanersu/bulutfon-whmcs/releases/tag/0.0.4) indirip deneyebilirsiniz. 0.0.4 sürümde SMS desteği yoktur.
