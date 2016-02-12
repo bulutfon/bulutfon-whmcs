@@ -1,7 +1,9 @@
 <?php
+error_reporting(1);
+ini_set('display_errors', 'On');
 include __DIR__ . '/../../../configuration.php';
 include __DIR__ . '/vendor/autoload.php';
-
+require_once __DIR__ ."/core.php";
 use Bulutfon\Libraries\Helper;
 use Bulutfon\Libraries\Repository;
 use Bulutfon\OAuth2\Client\Provider\Bulutfon;
@@ -19,12 +21,11 @@ function bulutfon_config()
     $configarray = array(
         "name" => "Bulutfon WHMCS Addon",
         "description" => "Bulutfon WHMCS Addon",
-        "version" => "0.1.0",
-        "author" => "Bulutfon",
+        "version" => "0.2.0",
+        "author" => "Hakan ERSU",
         "language" => "turkish",
         "fields" => array(
-            "clientId" => array("FriendlyName" => "cliendId", "clientId" => "Uygulama Anahtarı", "Type" => "text", "Size" => "60", "Description" => "Bulutfon API uygulama anahtarı.", "Default" => ""),
-            "clientSecret" => array("FriendlyName" => "clientSecret", "clientSecret" => "Gizli Anahtar", "Type" => "text", "Size" => "60", "Description" => "Bulutfon API gizli anahtarı.", "Default" => ""),
+            "token" => array("FriendlyName" => "Token", "token" => "Uygulama Anahtarı", "Type" => "text", "Size" => "60", "Description" => "Bulutfon API uygulama anahtarı.", "Default" => "")
         ),
     );
 
@@ -101,237 +102,5 @@ function bulutfon_smarty()
 
 function bulutfon_output($vars)
 {
-
-    $repository = new Repository();
-
-    $request = Request::createFromGlobals();
-
-    $provider = new Bulutfon($repository->getKeys());
-
-    $tokens = $repository->getTokens();
-
-    $smarty = bulutfon_smarty();
-
-    if ($tokens) {
-        $token = new AccessToken(Helper::decamelize($tokens));
-    } else {
-        Helper::outputIfAjax("<a href='{$provider->getAuthorizationUrl()}' class='button'>Yetkilendir.</a>");
-        Helper::redirect($provider->getAuthorizationUrl());
-    }
-
-    switch ($request->get('tab', 'default')) {
-
-        case 'delete':
-
-            $phone = (int) $request->get('number', false);
-
-            if ($repository->deleteNumber($phone)) {
-                Helper::json('deleted');
-            }
-
-            Helper::json('failed');
-
-            break;
-        case 'sms-templates';
-            $templates = Capsule::table('mod_bulutfon_smstemplates')->get();
-            $id = (int) $request->get('id', false);
-            if ($id) {
-
-                $template = array_where($templates, function ($key, $value) use ($id) {
-
-                    return ($value->id == "$id") ? $value : false;
-                });
-
-                $smarty->assign('template', head($template));
-                $smarty->assign('selected', $id);
-            }
-
-            if (isset($_GET['active'])) {
-                Capsule::table('mod_bulutfon_smstemplates')->where('id', $id)->update([
-                    'active' => (int) $request->get('active', false),
-                ]);
-                if ($request->get('back', false) == 'list') {
-                    header("location: addonmodules.php?module=bulutfon&tab=sms-templates");
-                } else {
-                    header("location: addonmodules.php?module=bulutfon&tab=sms-templates&id={$id}");
-                }
-
-            }
-
-            if ($request->get('template', false) && $id) {
-                try {
-                    Capsule::table('mod_bulutfon_smstemplates')->where('id', $id)->update([
-                        'template' => $request->get('template', false),
-                    ]);
-                } catch (\Exception $e) {
-
-                }
-                header("location: addonmodules.php?module=bulutfon&tab=sms-templates&id={$id}#saved");
-            }
-
-            $smarty->assign('templates', $templates);
-            $smarty->display('sms_templates.tpl');
-            break;
-        case 'sms-settings';
-            if ($request->get('sms-basligi') && ctype_alpha($request->get('sms-basligi')) && strlen($request->get('sms-basligi')) >= 3 && strlen($request->get('sms-basligi')) < 12) {
-                $title = Capsule::table('mod_bulutfon_settings')->where('name', 'title')->first();
-                if (!$title) {
-                    Capsule::table('mod_bulutfon_settings')->insert(['name' => 'title', 'value' => $request->get('sms-basligi')]);
-                } else {
-                    Capsule::table('mod_bulutfon_settings')->where('name', 'title')->update([
-                        'value' => $request->get('sms-basligi'),
-                    ]);
-                }
-
-                header("Location: addonmodules.php?module=bulutfon&tab=sms-settings");
-            }
-            $smarty->assign('title', $repository->getTitle());
-            $smarty->display('sms_settings.tpl');
-            break;
-        case 'sms-send':
-            //$smarty->assign('all_sms', $provider->getMessages($token));
-            
-            $page = isset($_GET['page']) ? $_GET['page'] : 1;
-            $user = isset($_GET['user']) ? $_GET['user'] : false;
-
-            $url = http_build_query([]);
-
-            if($user){
-                $params = array("user" => $user);
-                $url = http_build_query($params);
-            }
-
-            $total = Capsule::table('mod_bulutfon_messagelog');
-            if($user) $total->where('userid',$user);
-            $total = $total->count();
-            $numPerPage = 10;
-
-            $short_message = Capsule::table('mod_bulutfon_messagelog');
-            $short_message->take($numPerPage);
-            $short_message->offset(($page-1) * $numPerPage);
-            if($user) $short_message->where('userid',$user);
-            $short_message=$short_message->get();
-
-            $totalPages= ceil($total/$numPerPage);
-
-            $smarty->assign('num_pages',$totalPages);
-            $smarty->assign('url',$url);
-            $smarty->assign('all_sms', $short_message);
-            $smarty->assign('page', $_GET['page']);
-            $smarty->display('sms_send.tpl');
-            break;
-        case 'addtouser':
-
-            $smarty->assign('number', $request->get('number'));
-
-            if ($request->get('clientid')) {
-                $validator = new Valitron\Validator($_POST);
-
-                $rules = array(
-                    'required' => array(
-                        array('telefon-numarasi'),
-                        array('clientid'),
-                        array('value'),
-                    ),
-                    'integer' => array(
-                        array('telefon-numarasi'),
-                        array('clientid'),
-                    ),
-                    'lengthMin' => array(
-                        array('telefon-numarasi', 10),
-                    ),
-                    'lengthMax' => array(
-                        array('telefon-numarasi', 20),
-                    ),
-                );
-
-                $validator->rules($rules);
-
-                function show_errors($array, $value, $smarty)
-            {
-                    $errors = "<div style='color: #a94442;background-color: #f2dede;border:1px solid #ebccd1;padding:5px'><ul style='padding:0'>";
-                    if (isset($array)) {
-                        foreach ($array as $e) {
-                            $errors .= "<li>{$e}</li>";
-                        }
-                        $smarty->assign($value, "{$errors}</ul></div>");
-                    }
-                }
-
-                if ($validator->validate()) {
-
-                    $add = $repository->addNumber(
-                        $request->get('clientid'),
-                        $request->get('telefon-numarasi')
-                    );
-
-                    if ($add) {
-                        $smarty->assign('success', 'Kayıt başarıyla eklenmiştir.');
-                    } else {
-                        $errors = array();
-                        $errors['telefon-numarasi'] = array('Bu telefon numarası zaten kayıtlı.');
-                        show_errors($errors['telefon-numarasi'], 'telefon', $smarty);
-                        $smarty->assign('number', $request->get('telefon-numarasi'));
-                    }
-
-                } else {
-                    // really hate smarty and i am a bit lazy.
-                    $errors = $validator->errors();
-                    // it must be handled by smarty but i cant figure out
-                    show_errors($errors['telefon-numarasi'], 'telefon', $smarty);
-                    show_errors($errors['clientid'], 'user', $smarty);
-                    show_errors($errors['value'], 'user', $smarty);
-                }
-            }
-
-            $smarty->display('adduser.tpl');
-            break;
-        default:
-
-            $page = $request->get('page', 1);
-
-            $userid = $request->get('userid');
-
-            // 100 results a bit overkill setted to 10.
-            $filters = array('limit' => (int) $request->get('limit', 10));
-
-            $fields = true;
-
-            if ($userid) {
-
-                $smarty->assign('userid', $userid);
-
-                $numbers = $repository->getUserNumbers($userid);
-
-                if (!$numbers) {
-                    Helper::json("<p>Kayıtlı telefon numarası bulunamadı.</p>");
-                }
-
-                $smarty->assign('userNumbers', $numbers);
-
-                foreach ($numbers as $number) {
-                    if (strlen($number) > 9 && strlen($number) < 12) {
-                        array_push($numbers, '90' . ltrim($number, '0'));
-                    }
-                }
-
-                $numbers = Helper::imp($numbers);
-
-                $filters['caller_or_callee'] = $numbers;
-            }
-
-            $smarty->assign('cdrs', $provider->getCdrs($token, $filters, $page)->cdrs);
-
-            $smarty->assign('fields', $fields);
-
-            $smarty->assign('page', $page);
-
-            $smarty->assign('limit', (int) $request->get('limit', 10));
-
-            Helper::outputIfAjax($smarty->fetch('cdr.tpl'));
-
-            $smarty->display('cdr.tpl');
-
-            break;
-    }
+    (new Xuma\App($vars['token']));
 }
