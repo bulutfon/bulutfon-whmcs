@@ -27,10 +27,60 @@ class SmsController extends Controller
      */
     public function edit()
     {
-        $id = $this->request->get('id');
+        $id = $this->id();
+        $template = $this->sms->get($id);
+        if (!$template) {
+            $this->redirect('addonmodules.php?module=bulutfon&action=sms');
+        }
+        $this->set('template', $template);
+        $this->view('sms/edit');
+    }
+
+    /**
+     * Update given template.
+     */
+    public function update()
+    {
+        $id = $this->id();
+        $update = $this->sms->update($id,$this->request->get('template'));
+        if (!$update) {
+            $this->redirect('addonmodules.php?module=bulutfon&action=sms');
+        }
+        $this->redirect('addonmodules.php?module=bulutfon&action=sms&work=edit&id='.$id);
+    }
+
+    /**
+     * Activate given template
+     * @return response
+     */
+    public function activate()
+    {
+        $id = $this->id();
+        $this->sms->setStatus($id,1);
+        $this->redirect('addonmodules.php?module=bulutfon&action=sms');
+    }
+
+    /**
+     * Deactivate given template
+     * @return response
+     */
+    public function deactivate()
+    {
+        $id = $this->id();
+        $this->sms->setStatus($id,0);
+        $this->redirect('addonmodules.php?module=bulutfon&action=sms');
+    }
+
+    /**
+     * Get requested id.
+     * @return mixed
+     */
+    private function id()
+    {
+        $id = $this->request->get('id',1);
         if (!$id) {
             $this->redirect('addonmodules.php?module=bulutfon');
         }
-        $this->view('sms/edit');
+        return $id;
     }
 }

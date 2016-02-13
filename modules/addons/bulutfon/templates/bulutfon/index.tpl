@@ -11,6 +11,13 @@
             }
             return ' ';
         };
+        var audio_url = function(value,item) {
+            if(value=='Var') {
+                return '<audio  controls="" type="audio/ogg;"><source src="https://api.bulutfon.com/call-records/'+item.uuid+'/stream?access_token={$token}" type="audio/wav"></audio>';
+            }
+            return "Arama Kaydi Yok";
+        };
+
         $("#dtable").jsGrid({
             width: "100%",
             height: "400px",
@@ -25,14 +32,9 @@
             fields: [
                 { name: "caller", type: "text", width: 25,title: "Arayan" },
                 { name: "callee", type: "text", width: 25 ,title: "Aranan"},
-                { name: "call_record", type: "text", title: "Arama Kaydi",itemTemplate: function(value, item) {
-                    if(value=='Var') {
-                        return '<audio  controls=""><source src="https://api.bulutfon.com/call-records/'+item.uuid+'/stream?access_token={$token}" type="audio/wav"></audio>';
-                    }
-                    return "Arama Kaydi Yok";
-                }},
+                { name: "call_record", type: "text", title: "Arama Kaydi",itemTemplate: function(value, item) { return audio_url(value,item); }},
                 { name: "call_time", type: "text", width: 50 ,title: "Arama Zamani",itemTemplate: function(value){ return format_date(value); }},
-                { name: "answer_time", type: "text", width: 50 ,title: "Cevaplanma Zamani",itemTemplate: function(value){ return format_date(value); }},
+                { name: "hangup_time", type: "text", width: 50 ,title: "Kapatma Zamani",itemTemplate: function(value){ return format_date(value); }},
             ]
         });
     });

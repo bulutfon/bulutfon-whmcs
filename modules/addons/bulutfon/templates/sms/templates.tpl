@@ -19,8 +19,14 @@
                     <td>{$template->name}</td>
                     <td>{$template->template}</td>
                     <td>{$template->description}</td>
-                    <td>{$template->active}</td>
-                    <td>Duzenle</td>
+                    <td>
+                        {if $template->active == 0}
+                            <a href="addonmodules.php?module=bulutfon&action=sms&work=activate&id={$template->id}" class="btn btn-success btn-sm">Aktive Et</a>
+                        {else}
+                            <a href="addonmodules.php?module=bulutfon&action=sms&work=deactivate&id={$template->id}" class="btn btn-danger btn-sm">Deaktive Et</a>
+                        {/if}
+                    </td>
+                    <td><a href="addonmodules.php?module=bulutfon&action=sms&work=edit&id={$template->id}" class="btn btn-primary btn-sm">Düzenle</a></td>
                 </tr>
             {/foreach}
         </table>
