@@ -4,6 +4,13 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.4.0/jsgrid.min.js"></script>
 <script>
     $(function(){
+        var format_date = function(value) {
+            if(value) {
+                var d = new Date(value);
+                return ("0" + (d.getUTCDate())).slice(-2)+'-'+ ("0" + (d.getMonth() + 1)).slice(-2)+'-'+ d.getFullYear()+' '+("0" + (d.getHours())).slice(-2)+':'+("0" + (d.getMinutes())).slice(-2)+':'+ ("0" + (d.getSeconds())).slice(-2);
+            }
+            return ' ';
+        };
         $("#dtable").jsGrid({
             width: "100%",
             height: "400px",
@@ -24,8 +31,8 @@
                     }
                     return "Arama Kaydi Yok";
                 }},
-                { name: "call_time", type: "text", width: 50 ,title: "Arama Zamani"},
-                { name: "answer_time", type: "text", width: 50 ,title: "Cevaplanma Zamani"},
+                { name: "call_time", type: "text", width: 50 ,title: "Arama Zamani",itemTemplate: function(value){ return format_date(value); }},
+                { name: "answer_time", type: "text", width: 50 ,title: "Cevaplanma Zamani",itemTemplate: function(value){ return format_date(value); }},
             ]
         });
     });
