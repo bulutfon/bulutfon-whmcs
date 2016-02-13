@@ -84,22 +84,6 @@ function bulutfon_deactivate()
     return array('status' => 'success', 'description' => 'Bulutfon succesfully deactivated :(');
 }
 
-function bulutfon_upgrade()
-{
-
-}
-
-function bulutfon_smarty()
-{
-    $smarty = new Smarty();
-
-    $smarty->template_dir = __DIR__ . '/templates/';
-
-    $smarty->compile_dir = $GLOBALS['templates_compiledir'];
-
-    return $smarty;
-}
-
 function bulutfon_output($vars)
 {
     (new Xuma\App($vars['token']));
