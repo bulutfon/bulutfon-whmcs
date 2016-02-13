@@ -16,6 +16,11 @@ if (!defined("WHMCS")) {
     die("This file cannot be accessed directly");
 }
 
+function jj($data)
+{
+    echo "<pre>",var_dump($data),"</pre>";
+    exit;
+}
 function bulutfon_config()
 {
     $configarray = array(

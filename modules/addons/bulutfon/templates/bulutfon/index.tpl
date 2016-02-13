@@ -1,28 +1,29 @@
-{include file='header.tpl'}
+{include file='../layout/header.tpl'}
 <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.4.0/jsgrid.min.css">
 <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.4.0/jsgrid-theme.min.css">
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.4.0/jsgrid.min.js"></script>
 <script>
-   $(function(){
-       $("#dtable").jsGrid({
-           width: "100%",
-           height: "400px",
-           filtering: false,
-           editing: false,
-           sorting: false,
-           paging: false,
-           rowClick: function(args) {
+    $(function(){
+        $("#dtable").jsGrid({
+            width: "100%",
+            height: "400px",
+            filtering: false,
+            editing: false,
+            sorting: false,
+            paging: false,
+            rowClick: function(args) {
 
-           },
-           data: {{$cdrs}},
-           fields: [
-               { name: "caller", type: "text", width: 25,title: "Arayan" },
-               { name: "callee", type: "text", width: 25 ,title: "Aranan"},
-               { name: "call_time", type: "text", width: 50 ,title: "Arama Zamani"},
-               { name: "answer_time", type: "text", width: 50 ,title: "Cevaplanma Zamani"},
-           ]
-       });
-   });
+            },
+            data: {{$cdrs}},
+            fields: [
+                { name: "caller", type: "text", width: 25,title: "Arayan" },
+                { name: "callee", type: "text", width: 25 ,title: "Aranan"},
+                { name: "call_record", type: "text", width: 25 ,title: "Arama Kaydi"},
+                { name: "call_time", type: "text", width: 50 ,title: "Arama Zamani"},
+                { name: "answer_time", type: "text", width: 50 ,title: "Cevaplanma Zamani"},
+            ]
+        });
+    });
 
 </script>
 <div class="bulutfon_wrapper">
@@ -39,6 +40,6 @@
         </ul>
         <div class="clear-fix"></div>
     </div>
- </div>
-       
-{include file='footer.tpl'}
+</div>
+
+{include file='../layout/footer.tpl'}

@@ -18,6 +18,7 @@ class Controller
     ];
 
     protected $smarty;
+
     protected $client;
 
 
@@ -35,6 +36,13 @@ class Controller
     public function view($view='index')
     {
         $this->smarty->display($view.'.tpl');
+    }
+
+    public function json($data)
+    {
+        header('Content-Type: application/json');
+        echo json_encode($data);
+        exit;
     }
 
     /**
@@ -64,10 +72,15 @@ class Controller
     public function redirect($url)
     {
         header("Location:{$url}");
-
         exit;
     }
 
+    /**
+     * Create request from given url.
+     * @param $url
+     * @param bool|false $params
+     * @return array
+     */
     public function get($url,$params = false)
     {
         try {
@@ -79,6 +92,12 @@ class Controller
         return $results;
     }
 
+    /**
+     * Guzzle client for requests.
+     * @param $token
+     * @param bool|false $params
+     * @return $this
+     */
     public function client($token,$params = false)
     {
         $query =  ['access_token' => $token];

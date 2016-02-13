@@ -61,7 +61,10 @@
 .bulutfon_content.no-padding  .jsgrid-pager{
     padding:15px 20px;
 }
-
+.bulutfon_content.no-padding  .table{
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
  #content_container #content #content_padded #clienttabs ul li.bulutfon-link.selected a{
 
      font-weight:bold;

@@ -5,13 +5,19 @@ use Illuminate\Database\Capsule\Manager as DB;
 
 class Sms
 {
-    public function saveTemplate()
+    public function save()
     {
 
     }
 
-    public function getTemplate()
+    public function get()
     {
 
+    }
+
+    public function all()
+    {
+        $templates = DB::table('mod_bulutfon_smstemplates')->get();
+        return $templates;
     }
 }
