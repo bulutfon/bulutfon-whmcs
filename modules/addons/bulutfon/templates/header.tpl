@@ -1,3 +1,4 @@
+
 <div class="row bulutfon-row">
 {if !$smarty.get.userid}
     <div class="col-md-2">
