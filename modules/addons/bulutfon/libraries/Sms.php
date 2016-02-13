@@ -56,4 +56,10 @@ class Sms
         ]);
         return $update;
     }
+
+    public function activeHooks()
+    {
+        $hooks = DB::table('mod_bulutfon_smstemplates')->where('active',1)->get();
+        return $hooks;
+    }
 }
