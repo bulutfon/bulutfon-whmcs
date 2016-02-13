@@ -4,23 +4,6 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.4.0/jsgrid.min.js"></script>
 <script>
     $(function(){
-        var AudioField = function(config) {
-            jsGrid.Field.call(this, config);
-        };
-
-        AudioField.prototype = new jsGrid.Field({
-            test: "foo",
-            itemTemplate: function(value) {
-                console.log(this);
-                if (value=='Var') {
-                    return '<audio controls="'+this.test+'"><source src="https://api.bulutfon.com/call-records/4cf7932a-3688-4cf4-b1d2-3c130142f4a0/stream?access_token={$token}" type="audio/wav"></audio>';
-                }
-                return "Arama Kaydi Yok";
-            }
-        });
-
-        jsGrid.fields.audio = AudioField;
-
         $("#dtable").jsGrid({
             width: "100%",
             height: "400px",
