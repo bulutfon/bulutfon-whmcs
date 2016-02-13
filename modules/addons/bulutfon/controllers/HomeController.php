@@ -3,6 +3,10 @@ namespace Xuma\Controllers;
 
 class HomeController extends Controller
 {
+    /**
+     * Home page to list numbers.
+     * @return array
+     */
     public function index()
     {
         $page = $this->request->get('page', 1);
@@ -12,11 +16,10 @@ class HomeController extends Controller
         return $this->view('cdr');
     }
 
-    public function templates()
-    {
-        return $this->view('index');
-    }
-
+    /**
+     * Helper for setting pagination variables.
+     * @param $page
+     */
     private function paginate($page)
     {
         $previous = ($page >1) ? ($page - 1) : 1;
