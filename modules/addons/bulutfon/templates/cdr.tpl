@@ -10,7 +10,7 @@
            filtering: false,
            editing: false,
            sorting: false,
-           paging: true,
+           paging: false,
            rowClick: function(args) {
 
            },
@@ -31,6 +31,13 @@
     </div>
     <div class="bulutfon_content no-padding">
         <div id="dtable"></div>
+    </div>
+    <div class="bulutfon_footer">
+        <ul>
+            <li><a href="addonmodules.php?module=bulutfon&page={$previous}"><i class="fa fa-chevron-left"></i> Onceki</a></li>
+            <li><a href="addonmodules.php?module=bulutfon&page={$next}">Sonraki <i class="fa fa-chevron-right"></i></a></li>
+        </ul>
+        <div class="clear-fix"></div>
     </div>
  </div>
        

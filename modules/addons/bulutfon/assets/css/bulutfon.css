@@ -145,7 +145,10 @@ table.form.bulutfon-table {
     width: 100%;
     bottom: 0;
 }
-
+.bulutfon_footer {
+    background: rgb(245,245,245);
+    padding: 15px 20px;
+}
 .bulutfon_content .parsley-error-list li {
     position: absolute;
     display: block;
@@ -244,3 +247,23 @@ table.form.bulutfon-table {
     background-color: transparent;
 }
 
+.bulutfon_footer ul {
+    padding:0;
+    margin:0;
+}
+.bulutfon_footer ul li {
+    list-style: none;
+}
+.bulutfon_footer ul li:first-child {
+    float: left;
+}
+
+.bulutfon_footer ul li:last-child {
+    float: right;
+}
+.clear-fix {
+    clear: both;
+}
+.jsgrid-edit-row tr:last-child > td {
+    border:none;
+}
