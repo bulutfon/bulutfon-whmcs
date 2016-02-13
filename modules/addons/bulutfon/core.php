@@ -39,6 +39,7 @@ class App
 
         if(method_exists($this->controller, $method)){
             $reflection = new ReflectionMethod($this->controller, $method);
+            //var_dump($reflection);die();
             if($reflection->isPublic()) {
                 $this->method = $method;
             }

@@ -79,13 +79,20 @@ class Controller
         return $results;
     }
 
-    public function client($token)
+    public function client($token,$params = false)
     {
+        $query =  ['access_token' => $token];
+
+        if ($params) {
+            $query = array_merge($query, $params);
+        }
+
         $client = new Client([
             'base_uri' => 'http://api.bulutfon.com/',
-            'query'   => ['access_token' => $token],
+            'query'   => $query,
             'debug'=> false
         ]);
+
         $this->client = $client;
         return $this;
     }
