@@ -5,4 +5,4 @@
 vendor
 .idea
 bfxm.php
-
+*.log
