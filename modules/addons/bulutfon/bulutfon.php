@@ -1,16 +1,10 @@
 <?php
-error_reporting(1);
-ini_set('display_errors', 'On');
 include __DIR__ . '/../../../configuration.php';
 include __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ ."/core.php";
 use Bulutfon\Libraries\Helper;
 use Bulutfon\Libraries\Repository;
-use Bulutfon\OAuth2\Client\Provider\Bulutfon;
 use Illuminate\Database\Capsule\Manager as Capsule;
-use League\OAuth2\Client\Token\AccessToken;
-use Symfony\Component\HttpFoundation\Request;
-
 
 if (!defined("WHMCS")) {
     die("This file cannot be accessed directly");
@@ -21,7 +15,7 @@ function bulutfon_config()
     $configarray = array(
         "name" => "Bulutfon WHMCS Addon",
         "description" => "Bulutfon WHMCS Addon",
-        "version" => "1.2.0",
+        "version" => "1.0.0",
         "author" => "Hakan ERSU",
         "language" => "turkish",
         "fields" => array(
@@ -58,20 +52,6 @@ function bulutfon_config()
 
 function bulutfon_activate()
 {
-    Capsule::schema()->create('mod_bulutfon_phonenumbers', function ($table) {
-        $table->increments('id');
-        $table->integer('userid');
-        $table->string('phonenumber', 20)->unique();
-        $table->timestamps();
-    });
-
-    Capsule::schema()->create('mod_bulutfon_settings', function ($table) {
-        $table->increments('id');
-        $table->string('name', 64)->unique();
-        $table->longText('value');
-        $table->timestamps();
-    });
-
     Capsule::schema()->create('mod_bulutfon_messagelog', function ($table) {
         $table->increments('id');
         $table->integer('userid');
@@ -101,8 +81,6 @@ function bulutfon_activate()
 
 function bulutfon_deactivate()
 {
-    Capsule::schema()->dropIfExists('mod_bulutfon_phonenumbers');
-    Capsule::schema()->dropIfExists('mod_bulutfon_settings');
     Capsule::schema()->dropIfExists('mod_bulutfon_smstemplates');
     Capsule::schema()->dropIfExists('mod_bulutfon_messagelog');
     return array('status' => 'success', 'description' => 'Bulutfon succesfully deactivated :(');
