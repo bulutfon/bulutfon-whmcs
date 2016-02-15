@@ -25,7 +25,14 @@ function bulutfon_config()
         "author" => "Hakan ERSU",
         "language" => "turkish",
         "fields" => array(
-            "token" => array("FriendlyName" => "Token", "token" => "Uygulama Anahtarı", "Type" => "text", "Size" => "60", "Description" => "Bulutfon API uygulama anahtarı.", "Default" => ""),
+            "token" => array(
+                "FriendlyName" => "Token",
+                "token" => "Uygulama Anahtarı",
+                "Type" => "text",
+                "Size" => "60",
+                "Description" => "Bulutfon API uygulama anahtarı.",
+                "Default" => ""
+            ),
             'env' => array(
                 'FriendlyName' => 'Urun Ortami',
                 'Type' => 'dropdown',
@@ -34,7 +41,15 @@ function bulutfon_config()
                     'dev' => 'Gelistirme Ortami'
                 ),
                 'Description' => 'Gelistirme ortami secerek gonderilecek sms\'leri gonderilmeden gorebilirisiniz.',
-            )
+            ),
+            "smstitle" => array(
+                "FriendlyName" => "SMS Basligi",
+                "smstitle" => "Sms Basligi",
+                "Type" => "text",
+                "Size" => "36",
+                "Description" => "Bulutfon Uzerinden gonderilecek sms'ler icin baslik. Bu basligin onaylanmis olmasi gerekmektedir.",
+                "Default" => ""
+            ),
         ),
     );
 

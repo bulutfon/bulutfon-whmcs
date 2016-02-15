@@ -16,6 +16,8 @@ class Sender extends User
 
     protected $env;
 
+    protected $title;
+
     public function __construct($logger)
     {
         $this->logger = $logger;
@@ -64,7 +66,7 @@ class Sender extends User
         if(!$number) return false;
 
         $data = array(
-            'title' => 'NETINTERNET',
+            'title' => $this->title,
             'content' => $this->getMessage($message),
             'receivers' => $number
         );
@@ -98,6 +100,10 @@ class Sender extends User
 
             if ($setting->setting == 'env') {
                 $this->env = $setting->value;
+            }
+
+            if ($setting->setting == 'smstitle') {
+                $this->title = $setting->value;
             }
         }
     }
