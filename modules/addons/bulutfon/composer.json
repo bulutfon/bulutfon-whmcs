@@ -6,10 +6,14 @@
         "vlucas/valitron": "dev-master",
         "hipchat/hipchat-php": ">=1.0.0",
         "xuma/bfxm": "dev-master",
-        "vlucas/phpdotenv": "2.0.*"
+        "vlucas/phpdotenv": "2.0.*",
+        "guzzlehttp/guzzle": "~6.0",
+        "nicmart/string-template": "~0.1"
     },
     "autoload": {
-        "psr-4": {"Bulutfon\\Libraries\\": "libraries/"}
+        "psr-4": {
+            "Xuma\\Libraries\\": "libraries/",
+            "Xuma\\Controllers\\": "controllers/"
+        }
     }
-
 }

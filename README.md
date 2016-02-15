@@ -3,31 +3,42 @@
 ### Özellikler
 
 * Gelen/giden aramaları listeleme.
-* Gelen/giden aramaları kullanıcı profil sayfasından listeleme.
-* Kullanıcıya birden fazla numara tanımlama.
 * WHMCS kancaları ile kullanıcılara SMS gönderebilme.
 
 ### Gereksinimler
 
 * PHP 5.5+
 * WHMCS 6+
-* CURL ve SSL
-* WHMCS genel ayarlarınızda sistem adresinizi tanımlanmış olması.
-
-NOT: Eğer WHMCS 5.x sürümü kullanıyorsanız. Eklentisinin [v0.0.4 sürümünü](https://github.com/hakanersu/bulutfon-whmcs/releases/tag/0.0.4) indirip deneyebilirsiniz. 0.0.4 sürümde SMS desteği yoktur.
+* CURL
 
 ### Kurulum
 
-* [Bulutfon Whmcs v0.1.6](https://github.com/hakanersu/bulutfon-whmcs/releases/download/0.1.6/bulutfon-whmcs-0.1.6.zip) dosyalarını indirin.
-* İndirmiş olduğunuz dosyaları whmcs dizinine yapıştırınız veya indirmiş olduğunuz dosya içerisinden **/modules/addons/bulutfon** klasörünü WHMCS **/modules/addons/** klasörüne taşıyınız.
-* WHMCS Setup > Addon Modules menüsünü tıklayıp, yüklü addon modüller arasından **Bulutfon WHMCS Addon**'u aktif ediniz.
-* **Bulutfon WHMCS Addon** aktif ediltikten sonra **Configure** butonu ile Bulutfon **cliendId** ve **clientSecret** alanlarını doldurunuz.(clientID ve clientSecret anahtarlarını bulutfon panelinizden almanız gerekmekte.)
-* SMS özelliğini kullanmak istiyorsanız lütfen Sms ayarlarından gönderici ismini belirleyiniz.
-* Modül için gerekli izinleri **Access Control** kısmından verdikten sonra ayarlarınız kaydederek **Bulutfon WHMCS Addon**'u kullanmaya başlayabilirsiniz.(Addon ilk kullanımda Bulutfon oAuth2 sunucusundan izin almak için sizi bu adrese yönlendirecektir)
-* Yukleme islemi sonunda modules/addons/bulutfon/install dizini silebilirsiniz.
+* Github addon sayfasinda bulunan [releases](https://github.com/hakanersu/bulutfon-whmcs/releases) linkini kullanarak en guncel dagitimi indirin.
+* Zip dosyasini actiktan sonra addons **modules** dizini WHMCS ana dizinine yapistirin veya modules/addons/bulutfon klasorunu whmcs dizini icerisinde modules/addons/ klasoru icerisine yapistirin.
 
-### Ekran Görüntüleri
+### Ayarlar
 
-![Bulutfon WHMCS](https://github.com/hakanersu/bulutfon-whmcs/blob/sms/screen-1.png "Bulutfon WHMCS Client Area")
+Modulu aktiflestirdikten sonra **Token** kismina Bulutfon master token anahtarini girmeniz gerekmektedir.
 
-![Bulutfon WHMCS](https://github.com/hakanersu/bulutfon-whmcs/blob/sms/screen-2.png "Bulutfon WHMCS Add Number")
+Urun ortami kisminda mesajlarin gonderimini test etmek amaciyla **Gelistirme Ortami** secenegini secebilirsiniz. Bu secenek /modules/addons/bulutfon/logs/bulutfon.log adli bir dosya olusturarak gonderilecek mesaj ve bilgileri bu log dosyasina kaydeder. Bu log dosyasinin disardan erisilebilir olmamasina dikkat ediniz. **Urun Ortami** ise mesajlarinizin bulutfon uzerinden gonderilmesini saglayacaktir.
+
+**SMS Basligi** secenegi mesajinizin basligini belirtmenizi saglar. Bu baslik Bulutfon panelinizden onayli olmalidir.
+
+### SMS Kancalari
+
+SMS kancalari belirli durumlar mesaj gonderebilmeniz icin hazirlanmistir. Belirtilen degiskenler ile size uygun mesajlar olusturmanizi saglar. Suan icin sinirli sayida kanca bulunmaktadir. Ihtiyac duydugunuz kancalar varsa Github deposu uzerinden bildirebilirsiniz.
+
+### Guncelleme
+
+#### v1.0.0
+* Bu versiyon ile addon kod yapisi uzerinde koklu degisikliklere gidildi.
+* Panel uzerinden ses kayitlarini dinleme ozelligi eklendi.
+* Kullanici sayfalarinda Bulutfon sekmesi kaldirildi.
+* Addon sayfasinda bulunan ayarlarin bircogu addon ayarlari sayfasina tasindi.
+* oAuth2 teknolojisi master token ile degistirildi.
+
+
+
+
+
+

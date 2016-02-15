@@ -58,7 +58,13 @@
     padding:0;
 }
 
-
+.bulutfon_content.no-padding  .jsgrid-pager{
+    padding:15px 20px;
+}
+.bulutfon_content.no-padding  .table{
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
  #content_container #content #content_padded #clienttabs ul li.bulutfon-link.selected a{
 
      font-weight:bold;
@@ -107,31 +113,6 @@ table.form.bulutfon-table {
     -webkit-transition: all 0.2s;
 }
 
-.bulutfon_content input[type=text] {
-    width: 100%;
-    background: #fff;
-    color: #62B9ED;
-
-    outline: 0;
-    border: 1px solid #ccc;
-    position: relative;
-    padding: 24px 8px 6px;
-    font: 18px Helvetica Neue, Helvetica, sans-serif;
-    transition: all 0.2s;
-    -moz-transition: all 0.2s;
-    -webkit-transition: all 0.2s;
-}
-.bulutfon_content input[type=text]:focus {
-  
-}
-.bulutfon_content input[type=text].parsley-error {
-    border-color: red;
-    color: red;
-}
-.bulutfon_content input[type=text].parsley-success {
-    width: 238px;
-    padding: 24px 48px 6px 8px;
-}
 
 .bulutfon_content input + span {
     background: url("http://assets.atjayjo.com/img/green-check.svg") no-repeat;
@@ -167,7 +148,10 @@ table.form.bulutfon-table {
     width: 100%;
     bottom: 0;
 }
-
+.bulutfon_footer {
+    background: rgb(245,245,245);
+    padding: 15px 20px;
+}
 .bulutfon_content .parsley-error-list li {
     position: absolute;
     display: block;
@@ -264,4 +248,25 @@ table.form.bulutfon-table {
 .bulutfon_content table.form {
     border-color: transparent;
     background-color: transparent;
+}
+
+.bulutfon_footer ul {
+    padding:0;
+    margin:0;
+}
+.bulutfon_footer ul li {
+    list-style: none;
+}
+.bulutfon_footer ul li:first-child {
+    float: left;
+}
+
+.bulutfon_footer ul li:last-child {
+    float: right;
+}
+.clear-fix {
+    clear: both;
+}
+.jsgrid-edit-row tr:last-child > td {
+    border:none;
 }
