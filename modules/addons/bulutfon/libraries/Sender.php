@@ -63,7 +63,10 @@ class Sender extends User
     {
         $this->getSettings();
         $number = $this->formatPhoneNumber($this->user['phonenumber']);
-        if(!$number) return false;
+
+        if(!$number || $this->title=="") {
+            return false;
+        }
 
         $data = array(
             'title' => $this->title,
