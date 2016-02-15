@@ -32,10 +32,10 @@ SMS kancalari belirli durumlar mesaj gonderebilmeniz icin hazirlanmistir. Belirt
 
 #### v1.0.0
 * Bu versiyon ile addon kod yapisi uzerinde koklu degisikliklere gidildi.
-* Panel uzerinden ses kayitlarini stream etme ozelligi eklendi.
+* Panel uzerinden ses kayitlarini dinleme ozelligi eklendi.
 * Kullanici sayfalarinda Bulutfon sekmesi kaldirildi.
 * Addon sayfasinda bulunan ayarlarin bircogu addon ayarlari sayfasina tasindi.
-* oAuth2 teknoloji master token ile degistirildi.
+* oAuth2 teknolojisi master token ile degistirildi.
 
 
 
