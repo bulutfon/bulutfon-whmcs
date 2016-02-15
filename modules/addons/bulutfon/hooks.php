@@ -1,20 +1,18 @@
 <?php
-include 'libraries/Sms.php';
-include 'libraries/User.php';
-include 'libraries/Sender.php';
-
+include __DIR__ . '/vendor/autoload.php';
 
 use Xuma\Libraries\Sms;
 use Xuma\Libraries\Sender;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
+define('ENV','DEV');
 
-$log = new Logger('bulutfon');
-$log->pushHandler(new StreamHandler(__DIR__.'/logs/bulutfon.log', Logger::WARNING));
+$logger = new Logger('bulutfon');
+$logger->pushHandler(new StreamHandler(__DIR__.'/logs/bulutfon.log', Logger::WARNING));
 
 $templates = new Sms;
-$sender = new Sender;
+$sender = new Sender($logger);
 $hooks = $templates->activeHooks();
 foreach ($hooks as $hook) add_hook($hook->name, 1, require_once ("hooks/{$hook->name}.php"));
 

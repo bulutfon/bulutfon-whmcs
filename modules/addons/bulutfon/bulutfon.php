@@ -16,11 +16,6 @@ if (!defined("WHMCS")) {
     die("This file cannot be accessed directly");
 }
 
-function jj($data)
-{
-    echo "<pre>",var_dump($data),"</pre>";
-    exit;
-}
 function bulutfon_config()
 {
     $configarray = array(
@@ -30,7 +25,16 @@ function bulutfon_config()
         "author" => "Hakan ERSU",
         "language" => "turkish",
         "fields" => array(
-            "token" => array("FriendlyName" => "Token", "token" => "Uygulama Anahtarı", "Type" => "text", "Size" => "60", "Description" => "Bulutfon API uygulama anahtarı.", "Default" => "")
+            "token" => array("FriendlyName" => "Token", "token" => "Uygulama Anahtarı", "Type" => "text", "Size" => "60", "Description" => "Bulutfon API uygulama anahtarı.", "Default" => ""),
+            'env' => array(
+                'FriendlyName' => 'Urun Ortami',
+                'Type' => 'dropdown',
+                'Options' => array(
+                    'production' => 'Uretim Ortami',
+                    'dev' => 'Gelistirme Ortami'
+                ),
+                'Description' => 'Gelistirme ortami secerek gonderilecek sms\'leri gonderilmeden gorebilirisiniz.',
+            )
         ),
     );
 

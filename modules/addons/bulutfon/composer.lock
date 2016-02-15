@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e67edfd325b9b1b5edce78389f53e758",
-    "content-hash": "97812207efbb0853d12d6c6e9085bc82",
+    "hash": "78ca55c79596c065b3d8c0b5e5807153",
+    "content-hash": "e416a9833cdecda234e0e5a3b95645e5",
     "packages": [
         {
             "name": "bulutfon/php-sdk",
@@ -413,6 +413,47 @@
                 "single sign on"
             ],
             "time": "2015-06-20 16:06:31"
+        },
+        {
+            "name": "nicmart/string-template",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nicmart/StringTemplate.git",
+                "reference": "7158532e745e05ac3f071242766c767601fdd337"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nicmart/StringTemplate/zipball/7158532e745e05ac3f071242766c767601fdd337",
+                "reference": "7158532e745e05ac3f071242766c767601fdd337",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "satooshi/php-coveralls": "dev-master"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "StringTemplate": "src/",
+                    "StringTemplate\\Test": "tests"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolò Martini",
+                    "email": "nicmartnic@gmail.com",
+                    "homepage": "http://nicolo.martini.io"
+                }
+            ],
+            "description": "StringTemplate is a very simple string template engine for php. I've written it to have a thing like sprintf, but with named and nested substutions.",
+            "time": "2013-11-04 17:08:53"
         },
         {
             "name": "psr/http-message",

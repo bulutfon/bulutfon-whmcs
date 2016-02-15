@@ -1,9 +1,7 @@
 <?php
 if (!isset($InvoiceCreated)) {
     $InvoiceCreated = function ($args) use ($hooks,$sender) {
-        $invoiceid = $args['invoiceid'];
-        $user = $args['user'];
-        die($user);
+        $sender->find($args, 'invoiceid')->send('InvoiceCreated');
     };
 }
 return $InvoiceCreated;
