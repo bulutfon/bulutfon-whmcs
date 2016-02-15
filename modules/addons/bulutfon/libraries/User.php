@@ -11,6 +11,7 @@ class User
     {
         $user = DB::table('tblinvoices')
             ->where('tblinvoices.id', $invoiceId)
+            ->where('tblinvoices.total','!=',0)
             ->join('tblclients', 'tblinvoices.userid', '=', 'tblclients.id')
             ->first();
         $this->user = $user;
