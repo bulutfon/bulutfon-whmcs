@@ -37,6 +37,9 @@ SMS kancalari belirli durumlar mesaj gonderebilmeniz icin hazirlanmistir. Belirt
 * Addon sayfasinda bulunan ayarlarin bircogu addon ayarlari sayfasina tasindi.
 * oAuth2 teknolojisi master token ile degistirildi.
 
+![Bulutfon WHMCS](https://github.com/hakanersu/bulutfon-whmcs/blob/master/whmcs-callrecords.png "Call Records")
+
+![Bulutfon WHMCS](https://github.com/hakanersu/bulutfon-whmcs/blob/master/whmcs-smstemplates.png "SMS Templates")
 
 
 
