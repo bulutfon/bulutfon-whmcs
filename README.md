@@ -20,7 +20,7 @@
 
 Modulu aktiflestirdikten sonra **Token** kismina Bulutfon master token anahtarini girmeniz gerekmektedir.
 
-Urun ortami kisminda mesajlarin gonderimini test etmek amaciyla **Gelistirme Ortami** secenegini secebilirsiniz. Bu secenek /modules/addons/bulutfon/logs/bulutfon.log adli bir dosya olusturarak gonderilecek mesaj ve bilgileri bu log dosyasina kaydeder. Bu log dosyasinin disardan erisilebilir olmamasina dikkat ediniz. **Urun Ortami** ise mesajlarinizin bulutfon uzerinden gonderilmesini saglayacaktir.
+Urun ortami kisminda mesajlarin gonderimini test etmek amaciyla **Gelistirme Ortami** secenegini secebilirsiniz. Gelistirme secenegi ile mesajlariniz SMS olarak gitmeden panelinizdeki Debug bolumune islenecektir. Ozellikle ilk kurulumlarda eklentiyi bir sure debug modunda kullanip gonderilecek SMS'leri takip etmenizi tavsiye ederim.
 
 **SMS Basligi** secenegi mesajinizin basligini belirtmenizi saglar. Bu baslik Bulutfon panelinizden onayli olmalidir.
 
@@ -37,9 +37,6 @@ SMS kancalari belirli durumlar mesaj gonderebilmeniz icin hazirlanmistir. Belirt
 * Addon sayfasinda bulunan ayarlarin bircogu addon ayarlari sayfasina tasindi.
 * oAuth2 teknolojisi master token ile degistirildi.
 
-![Bulutfon WHMCS](https://github.com/hakanersu/bulutfon-whmcs/blob/master/whmcs-callrecords.png "Call Records")
-
-![Bulutfon WHMCS](https://github.com/hakanersu/bulutfon-whmcs/blob/master/whmcs-smstemplates.png "SMS Templates")
 
 
 
