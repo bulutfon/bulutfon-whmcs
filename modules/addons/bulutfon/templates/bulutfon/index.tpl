@@ -32,6 +32,7 @@
             fields: [
                 { name: "caller", type: "text", width: 25,title: "Arayan" },
                 { name: "callee", type: "text", width: 25 ,title: "Aranan"},
+                { name: "direction", type: "text", width: 25 ,title: "Arama Yonu"},
                 { name: "call_record", type: "text", title: "Arama Kaydi",itemTemplate: function(value, item) { return audio_url(value,item); }},
                 { name: "call_time", type: "text", width: 50 ,title: "Arama Zamani",itemTemplate: function(value){ return format_date(value); }},
                 { name: "hangup_time", type: "text", width: 50 ,title: "Kapatma Zamani",itemTemplate: function(value){ return format_date(value); }},
