@@ -9,7 +9,7 @@ use Monolog\Handler\StreamHandler;
 define('ENV','DEV');
 
 $logger = new Logger('bulutfon');
-$logger->pushHandler(new StreamHandler(__DIR__.'/logs/bulutfon.log', Logger::WARNING));
+$logger->pushHandler(new StreamHandler(__DIR__.'/logs/bulutfon.log', Logger::DEBUG));
 
 $templates = new Sms;
 $sender = new Sender($logger);

@@ -75,7 +75,7 @@ class Sender extends User
         );
 
         if($this->env == 'dev') {
-            $this->logger->addError(json_encode($data));
+            $this->logger->addInfo(json_encode($data));
             return;
         }
 
