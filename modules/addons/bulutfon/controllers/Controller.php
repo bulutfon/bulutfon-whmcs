@@ -115,4 +115,16 @@ class Controller
         $this->client = $client;
         return $this;
     }
+
+    /**
+     * Helper for setting pagination variables.
+     * @param $page
+     */
+    protected function paginate($page)
+    {
+        $previous = ($page >1) ? ($page - 1) : 1;
+        $next = $page + 1;
+        $this->set('previous', $previous);
+        $this->set('next', $next);
+    }
 }

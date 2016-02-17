@@ -57,7 +57,7 @@ function bulutfon_activate()
         $table->integer('userid');
         $table->string('gsm');
         $table->longText('message');
-        $table->integer('relid');
+        $table->string('type');
         $table->timestamps();
     });
 

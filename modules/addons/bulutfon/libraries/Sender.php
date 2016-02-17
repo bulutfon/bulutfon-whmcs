@@ -75,13 +75,15 @@ class Sender extends User
         );
 
         if($this->env == 'dev') {
-            $this->logger->addInfo(json_encode($data));
+            $this->logMessage($this->user['id'], $this->getMessage($message), 'debug', $number);
             return;
         }
 
         curlCall("http://api.bulutfon.com/messages?access_token={$this->token}", $data, [
             'CURLOPT_TIMEOUT' => '300'
         ]);
+
+        $this->logMessage($this->user['id'], $this->getMessage($message), 'bulutfon', $number);
 
         return true;
     }
@@ -162,4 +164,22 @@ class Sender extends User
         echo "<pre>",var_dump($data);die();
     }
 
+    /**
+     * Log message to database.
+     * @param $userid
+     * @param $message
+     * @param $type
+     * @param $gsm
+     * @return bool
+     */
+    protected function logMessage($userid,$message,$type,$gsm)
+    {
+        DB::table('mod_bulutfon_messagelog')->insert([
+            'userid' => $userid,
+            'message' => $message,
+            'type' => $type,
+            'gsm' => $gsm
+        ]);
+        return true;
+    }
 }

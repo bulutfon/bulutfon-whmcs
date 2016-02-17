@@ -62,4 +62,15 @@ class Sms
         $hooks = DB::table('mod_bulutfon_smstemplates')->where('active',1)->get();
         return $hooks;
     }
+
+    public function debugMessages($numPerPage,$page)
+    {
+        $messages = DB::table('mod_bulutfon_messagelog')
+            ->take($numPerPage)
+            ->offset(($page-1) * $numPerPage)
+            ->orderBy('id','DESC')
+            ->get();
+        return $messages ?: false;
+    }
+
 }

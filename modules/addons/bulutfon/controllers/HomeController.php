@@ -18,15 +18,5 @@ class HomeController extends Controller
         return $this->view('bulutfon/index');
     }
 
-    /**
-     * Helper for setting pagination variables.
-     * @param $page
-     */
-    private function paginate($page)
-    {
-        $previous = ($page >1) ? ($page - 1) : 1;
-        $next = $page + 1;
-        $this->set('previous', $previous);
-        $this->set('next', $next);
-    }
+
 }

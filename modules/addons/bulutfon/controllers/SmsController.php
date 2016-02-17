@@ -71,6 +71,16 @@ class SmsController extends Controller
         $this->redirect('addonmodules.php?module=bulutfon&action=sms');
     }
 
+    public function debug()
+    {
+        $page = $this->request->get('page', 1);
+        $page = ($page<=0) ? 1 : $page;
+        $this->paginate($page);
+        $messages = $this->sms->debugMessages(10,$page);
+        $this->set('data', json_encode($messages));
+        return $this->view('bulutfon/debug');
+    }
+
     /**
      * Get requested id.
      * @return mixed
