@@ -30,6 +30,11 @@ SMS kancalari belirli durumlar mesaj gonderebilmeniz icin hazirlanmistir. Belirt
 
 ### Guncelleme
 
+#### v1.0.2
+* ClientChangePassword,ClientAreaRegister,TicketAdminReply hooklari eklendi.
+* Addon deaktivasyonunda meydana gelen bir hata giderildi.
+* Debug metodu gelistirildi ve yeni bir debug menusu eklendi.
+
 #### v1.0.0
 * Bu versiyon ile addon kod yapisi uzerinde koklu degisikliklere gidildi.
 * Panel uzerinden ses kayitlarini dinleme ozelligi eklendi.
