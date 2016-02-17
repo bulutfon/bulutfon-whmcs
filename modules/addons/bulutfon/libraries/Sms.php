@@ -59,8 +59,10 @@ class Sms
 
     public function activeHooks()
     {
+        $table = DB::select("SHOW TABLES LIKE 'mod_bulutfon_smstemplates'");
+        if (count($table)<=0) return false;
         $hooks = DB::table('mod_bulutfon_smstemplates')->where('active',1)->get();
-        return $hooks;
+        return $hooks ?: false;
     }
 
     public function debugMessages($numPerPage,$page)
