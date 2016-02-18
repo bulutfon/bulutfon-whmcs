@@ -90,3 +90,16 @@ function bulutfon_output($vars)
 {
     (new Xuma\App($vars['token']));
 }
+
+function bulutfon_clientarea($vars)
+{
+    $bulutfon['pagetitle'] = 'SMS Bildirim Ayarlari';
+
+    $bulutfon['breadcrumb'] = array('index.php?m=cdn' => 'SMS Ayarlari');
+
+    $bulutfon['requirelogin'] = true;
+
+    $bulutfon['templatefile'] = 'templates/clientarea/index';
+
+    return $bulutfon;
+}
