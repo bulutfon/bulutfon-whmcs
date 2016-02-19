@@ -15,7 +15,7 @@ function bulutfon_config()
     $configarray = array(
         "name" => "Bulutfon WHMCS Addon",
         "description" => "Bulutfon WHMCS Addon",
-        "version" => "1.0.2",
+        "version" => "1.0.3",
         "author" => "Hakan ERSU",
         "language" => "turkish",
         "fields" => array(
