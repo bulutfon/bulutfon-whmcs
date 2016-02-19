@@ -76,7 +76,7 @@ function bulutfon_activate()
 
     Capsule::schema()->create('mod_bulutfon_usersettings', function ($table) {
         $table->increments('id');
-        $table->integer('clientid');
+        $table->integer('clientid')->unique();
         $table->string('setting');
     });
 
