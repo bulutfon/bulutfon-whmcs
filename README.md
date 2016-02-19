@@ -30,6 +30,10 @@ SMS kancalari belirli durumlar mesaj gonderebilmeniz icin hazirlanmistir. Belirt
 
 ### Guncelleme
 
+#### v1.0.3
+* Musterilerin istedikleri sms'leri secebilmeleri icin addon musteri arayuzu hazirlandi.
+* SMS acikalamalarini duzenleme ozelligi getirildi. Boylelikle musteri alaninda gosterilecek aciklamalar duzenlenebilecek.
+
 #### v1.0.2
 * ClientChangePassword,ClientAreaRegister,TicketAdminReply hooklari eklendi.
 * Addon deaktivasyonunda meydana gelen bir hata giderildi.

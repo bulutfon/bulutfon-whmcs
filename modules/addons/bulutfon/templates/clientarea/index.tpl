@@ -3,12 +3,12 @@
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Mesaj</th>
-                <th>Aktif</th>
+                <th>SMS</th>
+                <th>Durum</th>
             </tr>
         </thead>
         {foreach from=$hooks item=hook}
-            {if $hook->active==1}
+            {if $hook->active==1 && $hook->name!='ClientAreaRegister'}
             <tr>
                 <td>{$hook->description}</td>
                 <td>
