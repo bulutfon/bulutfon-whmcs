@@ -62,10 +62,18 @@ class Sender extends User
     public function send($message)
     {
         $this->getSettings();
+
         $number = $this->formatPhoneNumber($this->user['phonenumber']);
 
         if(!$number || $this->title=="") {
             return false;
+        }
+
+        if(isset($this->user['setting'])) {
+            $userSetting = json_decode($this->user['setting']);
+            if($userSetting->all == 1 || $userSetting->{$message} == 0) {
+                return false;
+            }
         }
 
         $data = array(

@@ -74,6 +74,12 @@ function bulutfon_activate()
         $table->timestamps();
     });
 
+    Capsule::schema()->create('mod_bulutfon_usersettings', function ($table) {
+        $table->increments('id');
+        $table->integer('clientid');
+        $table->string('setting');
+    });
+
     Capsule::unprepared(file_get_contents(__DIR__ . "/install/templates.sql"));
 
     return array('status' => 'success', 'description' => 'Bulutfon succesfully activated :)');
@@ -83,6 +89,7 @@ function bulutfon_deactivate()
 {
     Capsule::schema()->dropIfExists('mod_bulutfon_smstemplates');
     Capsule::schema()->dropIfExists('mod_bulutfon_messagelog');
+    Capsule::schema()->dropIfExists('mod_bulutfon_usersettings');
     return array('status' => 'success', 'description' => 'Bulutfon succesfully deactivated :(');
 }
 
@@ -93,13 +100,31 @@ function bulutfon_output($vars)
 
 function bulutfon_clientarea($vars)
 {
-    $bulutfon['pagetitle'] = 'SMS Bildirim Ayarlari';
+    $hooks = Capsule::table('mod_bulutfon_smstemplates')->get();
+    $settings = Capsule::table('mod_bulutfon_usersettings')->where('clientid',$_SESSION['uid'])->first();
+    $postArray = [];
 
-    $bulutfon['breadcrumb'] = array('index.php?m=cdn' => 'SMS Ayarlari');
-
-    $bulutfon['requirelogin'] = true;
-
-    $bulutfon['templatefile'] = 'templates/clientarea/index';
-
-    return $bulutfon;
+    if ($_POST) {
+        foreach($hooks as $hook) {
+            $postArray[$hook->name] = isset($_POST[$hook->name]) ? 1 : 0;
+        }
+        $postArray['all'] = isset($_POST['all']) ? 1 : 0;
+        $postArray = json_encode($postArray);
+        Capsule::statement('INSERT INTO mod_bulutfon_usersettings (clientid,setting) VALUES(?,?) ON DUPLICATE KEY UPDATE setting = ?',[
+            $_SESSION['uid'],
+            $postArray,
+            $postArray
+        ]);
+        header('Location:index.php?m=bulutfon');
+    }
+    return array(
+        'pagetitle' => 'SMS Bildirim Ayarlari',
+        'breadcrumb' => array('index.php?m=bulutfon'=>'SMS Ayarlari'),
+        'templatefile' => 'templates/clientarea/index',
+        'requirelogin' => true,
+        'vars' => array(
+            'hooks' => $hooks,
+            'settings'=> (array)json_decode($settings->setting)
+        ),
+    );
 }

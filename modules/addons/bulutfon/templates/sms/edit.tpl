@@ -23,6 +23,10 @@
                 <td><textarea name="template" id="" cols="30" rows="10" style="width:100%">{$template->template}</textarea></td>
             </tr>
             <tr>
+                <td>Aciklama:</td>
+                <td><textarea name="description" id="" cols="30" rows="10" style="width:100%">{$template->description}</textarea></td>
+            </tr>
+            <tr>
                 <td colspan="2">
                     <p class="text-center">
                         <input type="submit" value="Kaydet" class="btn btn-primary">

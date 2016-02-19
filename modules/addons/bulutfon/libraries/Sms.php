@@ -49,10 +49,11 @@ class Sms
      * @param $template
      * @return mixed
      */
-    public function update($id,$template)
+    public function update($id,$template,$description)
     {
         $update = DB::table('mod_bulutfon_smstemplates')->where('id', $id)->update([
-            'template' => $template
+            'template' => $template,
+            'description' => $description
         ]);
         return $update;
     }

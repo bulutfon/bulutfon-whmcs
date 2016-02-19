@@ -42,7 +42,7 @@ class SmsController extends Controller
     public function update()
     {
         $id = $this->id();
-        $update = $this->sms->update($id,$this->request->get('template'));
+        $update = $this->sms->update($id,$this->request->get('template'),$this->request->get('description'));
         if (!$update) {
             $this->redirect('addonmodules.php?module=bulutfon&action=sms');
         }
