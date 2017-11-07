@@ -1,6 +1,6 @@
 <?php
 if (!isset($TicketAdminReply)) {
-    $TicketAdminReply = function ($args) use ($hooks,$sender) {
+    $TicketAdminReply = function ($args) use ($hooks, $sender) {
         $sender->find($args, 'ticketid')->send('TicketAdminReply');
     };
 }

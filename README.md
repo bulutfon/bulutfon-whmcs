@@ -1,4 +1,4 @@
-# Bulutfon WHMCS 6.X ADDON 
+# Bulutfon WHMCS 6.X/7.X ADDON
 
 ### Özellikler
 

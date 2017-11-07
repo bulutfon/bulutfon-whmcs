@@ -6,3 +6,4 @@ vendor
 .idea
 bfxm.php
 *.log
+.DS_Store

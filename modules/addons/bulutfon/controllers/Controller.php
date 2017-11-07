@@ -1,26 +1,23 @@
 <?php
 namespace Xuma\Controllers;
 
-use GuzzleHttp\Client;
+use Xuma\Libraries\Client;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class Controller
 {
-    protected $request;
-
     public $settings = [
-        'templatefile'=>'templates/',
+        'templatefile' => 'templates/',
         'vars' => [
-            'message'=>'',
-            'flash'=> false
+            'message' => '',
+            'flash' => false
         ]
     ];
+    protected $request;
 
     protected $smarty;
 
     protected $client;
-
 
     public function __construct()
     {
@@ -33,7 +30,7 @@ class Controller
      * @param string $view
      * @return array
      */
-    public function view($view='index')
+    public function view($view = 'index')
     {
         $this->smarty->display($view.'.tpl');
     }
@@ -46,21 +43,11 @@ class Controller
     }
 
     /**
-     * Set smarty options.
-     */
-    private function setSmarty()
-    {
-        $this->smarty = new \Smarty();
-        $this->smarty->template_dir = __DIR__.'/../templates/';
-        $this->smarty->compile_dir = $GLOBALS['templates_compiledir'];
-    }
-
-    /**
      * Set smarty values.
      * @param $key
      * @param $value
      */
-    public function set($key,$value)
+    public function set($key, $value)
     {
         $this->smarty->assign($key, $value);
     }
@@ -81,14 +68,14 @@ class Controller
      * @param bool|false $params
      * @return array
      */
-    public function get($url,$params = false)
+    public function get($url, $params = false)
     {
         try {
-            $response = $this->client->request('GET',$url);
-            $results = $response->getBody()->getContents();
+            $results = $this->client->request('GET', $url);
         } catch (Exception $e) {
-            $results = ['error'=>'Api error.'];
+            $results = ['error' => 'Api error.'];
         }
+
         return $results;
     }
 
@@ -98,21 +85,20 @@ class Controller
      * @param bool|false $params
      * @return $this
      */
-    public function client($token,$params = false)
+    public function client($token, $params = false)
     {
-        $query =  ['access_token' => $token];
+        $query = ['access_token' => $token];
 
         if ($params) {
             $query = array_merge($query, $params);
         }
 
-        $client = new Client([
-            'base_uri' => 'http://api.bulutfon.com/',
-            'query'   => $query,
-            'debug'=> false
-        ]);
+        $client = new Client($token, $params);
+        
+        $client->base_url = 'http://api.bulutfon.com/';
 
         $this->client = $client;
+
         return $this;
     }
 
@@ -122,9 +108,19 @@ class Controller
      */
     protected function paginate($page)
     {
-        $previous = ($page >1) ? ($page - 1) : 1;
+        $previous = ($page > 1) ? ($page - 1) : 1;
         $next = $page + 1;
         $this->set('previous', $previous);
         $this->set('next', $next);
+    }
+
+    /**
+     * Set smarty options.
+     */
+    private function setSmarty()
+    {
+        $this->smarty = new \Smarty();
+        $this->smarty->template_dir = __DIR__.'/../templates/';
+        $this->smarty->compile_dir = $GLOBALS['templates_compiledir'];
     }
 }
