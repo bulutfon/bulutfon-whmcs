@@ -34,10 +34,6 @@ class Client
         return $this->client->get($this->base_url);
     }
 
-    public function post()
-    {
-    }
-
     public function request($type, $url)
     {
         $type = strtolower($type);

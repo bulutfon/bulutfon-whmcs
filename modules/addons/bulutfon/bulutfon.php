@@ -52,13 +52,18 @@ function bulutfon_config()
 
 function bulutfon_activate()
 {
+    Capsule::schema()->dropIfExists('mod_bulutfon_smstemplates');
+    Capsule::schema()->dropIfExists('mod_bulutfon_messagelog');
+    Capsule::schema()->dropIfExists('mod_bulutfon_usersettings');
+
     Capsule::schema()->create('mod_bulutfon_messagelog', function ($table) {
         $table->increments('id');
         $table->integer('userid');
         $table->string('gsm');
         $table->longText('message');
         $table->string('type');
-        $table->timestamps();
+        $table->timestamp('created_at')->useCurrent();
+        $table->timestamp('updated_at')->default(Capsule::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
     });
 
     Capsule::schema()->create('mod_bulutfon_smstemplates', function ($table) {
@@ -71,7 +76,8 @@ function bulutfon_activate()
         $table->tinyInteger('active');
         $table->string('extra', 3);
         $table->text('description');
-        $table->timestamps();
+        $table->timestamp('created_at')->useCurrent();
+        $table->timestamp('updated_at')->default(Capsule::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
     });
 
     Capsule::schema()->create('mod_bulutfon_usersettings', function ($table) {
@@ -110,13 +116,17 @@ function bulutfon_clientarea($vars)
         }
         $postArray['all'] = isset($_POST['all']) ? 1 : 0;
         $postArray = json_encode($postArray);
+
         Capsule::statement('INSERT INTO mod_bulutfon_usersettings (clientid,setting) VALUES(?,?) ON DUPLICATE KEY UPDATE setting = ?',[
             $_SESSION['uid'],
             $postArray,
             $postArray
         ]);
+
+
         header('Location:index.php?m=bulutfon');
     }
+
     return array(
         'pagetitle' => 'SMS Bildirim Ayarlari',
         'breadcrumb' => array('index.php?m=bulutfon'=>'SMS Ayarlari'),
