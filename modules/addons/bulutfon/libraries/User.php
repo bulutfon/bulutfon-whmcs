@@ -21,7 +21,7 @@ class User
     protected function userById($id)
     {
         $user = DB::table('tblclients')
-            ->where('id', $id)
+            ->where('tblclients.id', $id)
             ->leftJoin('mod_bulutfon_usersettings', 'tblclients.id', '=', 'mod_bulutfon_usersettings.clientid')
             ->first();
         $this->user = $user;
