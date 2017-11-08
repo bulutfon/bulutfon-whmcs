@@ -31,7 +31,17 @@ SMS kancaları belirli durumlarda mesaj gönderebilmeniz için hazırlanmıştı
 #### Kullanıcların SMS gönderimini düzenlemesi
 index.php?m=bulutfon linki üzerinden kullanıcılar hangi sms'leri alıp almayacaklarını seçebilirler.
 
-### Guncelleme
+### Güncellemeler
+
+#### v1.1.2
+* Hooklardan kaynaklı hatalar giderildi.
+- [ ] InvoiceCreated
+- [x] AcceptOrder
+- [x] InvoicePaid
+- [x] TicketAdminReply
+- [ ] InvoicePaymentReminder
+- [x] ClientAreaRegister
+- [x] ClientChangePassword
 
 #### v1.1.0
 * Whmcs 7 için güncelleme yapıldı.
