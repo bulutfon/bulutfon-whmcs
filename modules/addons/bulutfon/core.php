@@ -5,13 +5,12 @@ use ReflectionMethod;
 
 class App
 {
+    public $init;
     protected $controller = 'home';
 
-    protected $method =  'index';
+    protected $method = 'index';
 
     protected $params = [];
-
-    public $init;
 
     public function __construct($token)
     {
@@ -20,11 +19,11 @@ class App
         $method = $this->method;
 
         if (isset($_GET['action'])) {
-            $url = filter_var(rtrim($_GET['action']),FILTER_SANITIZE_URL);
+            $url = filter_var(rtrim($_GET['action']), FILTER_SANITIZE_URL);
         }
 
         if (isset($_GET['work'])) {
-            $method = filter_var(rtrim($_GET['work']),FILTER_SANITIZE_URL);
+            $method = filter_var(rtrim($_GET['work']), FILTER_SANITIZE_URL);
         }
 
         if (file_exists(__DIR__ ."/controllers/".ucwords($url).'Controller.php')) {
@@ -37,13 +36,13 @@ class App
         $this->controller = new $this->controller;
         $this->controller->token = $token;
 
-        if(method_exists($this->controller, $method)){
+        if (method_exists($this->controller, $method)) {
             $reflection = new ReflectionMethod($this->controller, $method);
-            if($reflection->isPublic()) {
+            if ($reflection->isPublic()) {
                 $this->method = $method;
             }
         }
 
-        $this->init = call_user_func_array([$this->controller, $this->method],[]);
+        $this->init = call_user_func_array([$this->controller, $this->method], []);
     }
 }

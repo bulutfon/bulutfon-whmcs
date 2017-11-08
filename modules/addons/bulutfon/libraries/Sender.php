@@ -1,8 +1,8 @@
 <?php
 namespace Xuma\Libraries;
 
-use StringTemplate\Engine;
 use Curl\Curl;
+use StringTemplate\Engine;
 use Illuminate\Database\Capsule\Manager as DB;
 
 class Sender extends User
