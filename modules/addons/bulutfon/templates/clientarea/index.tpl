@@ -12,7 +12,7 @@
             <tr>
                 <td>{$hook->description}</td>
                 <td>
-                    <input type="checkbox" name="{$hook->name}" {if $settings[$hook->name]==1}checked{/if}>
+                    <input type="checkbox" name="{$hook->name}" {if $settings[$hook->name] == 1 || is_null($settings[$hook->name])}checked{/if}>
                 </td>
             </tr>
             {/if}

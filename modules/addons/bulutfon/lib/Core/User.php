@@ -1,5 +1,5 @@
 <?php
-namespace Xuma\Libraries;
+namespace WHMCS\Module\Addon\Bulutfon\Core;
 
 use Illuminate\Database\Capsule\Manager as DB;
 
@@ -11,9 +11,9 @@ class User
     {
         $user = DB::table('tblinvoices')
             ->where('tblinvoices.id', $invoiceId)
-            ->where('tblinvoices.total','!=',0)
+            ->where('tblinvoices.total', '!=', 0)
             ->join('tblclients', 'tblinvoices.userid', '=', 'tblclients.id')
-            ->leftJoin('mod_bulutfon_usersettings','tblinvoices.userid','=','mod_bulutfon_usersettings.clientid')
+            ->leftJoin('mod_bulutfon_usersettings', 'tblinvoices.userid', '=', 'mod_bulutfon_usersettings.clientid')
             ->first();
         $this->user = $user;
     }
@@ -21,8 +21,8 @@ class User
     protected function userById($id)
     {
         $user = DB::table('tblclients')
-            ->where('id', $id)
-            ->leftJoin('mod_bulutfon_usersettings','tblclients.id','=','mod_bulutfon_usersettings.clientid')
+            ->where('tblclients.id', $id)
+            ->leftJoin('mod_bulutfon_usersettings', 'tblclients.id', '=', 'mod_bulutfon_usersettings.clientid')
             ->first();
         $this->user = $user;
     }
@@ -32,7 +32,7 @@ class User
         $user = DB::table('tbltickets')
             ->where('tbltickets.id', $ticketId)
             ->join('tblclients', 'tbltickets.userid', '=', 'tblclients.id')
-            ->leftJoin('mod_bulutfon_usersettings','tbltickets.userid','=','mod_bulutfon_usersettings.clientid')
+            ->leftJoin('mod_bulutfon_usersettings', 'tbltickets.userid', '=', 'mod_bulutfon_usersettings.clientid')
             ->first();
         $this->user = $user;
     }
@@ -42,7 +42,7 @@ class User
         $user = DB::table('tblorders')
             ->where('tblorders.id', $orderId)
             ->join('tblclients', 'tblorders.userid', '=', 'tblclients.id')
-            ->leftJoin('mod_bulutfon_usersettings','tblorders.userid','=','mod_bulutfon_usersettings.clientid')
+            ->leftJoin('mod_bulutfon_usersettings', 'tblorders.userid', '=', 'mod_bulutfon_usersettings.clientid')
             ->first();
         $this->user = $user;
     }

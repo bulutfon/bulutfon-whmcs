@@ -1,60 +1,87 @@
 {include file='../layout/header.tpl'}
-<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.4.0/jsgrid.min.css">
-<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.4.0/jsgrid-theme.min.css">
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.4.0/jsgrid.min.js"></script>
-<script>
-    $(function(){
-        var format_date = function(value) {
-            if(value) {
-                var d = new Date(value);
-                return ("0" + (d.getUTCDate())).slice(-2)+'-'+ ("0" + (d.getMonth() + 1)).slice(-2)+'-'+ d.getFullYear()+' '+("0" + (d.getHours())).slice(-2)+':'+("0" + (d.getMinutes())).slice(-2)+':'+ ("0" + (d.getSeconds())).slice(-2);
-            }
-            return ' ';
-        };
-        var audio_url = function(value,item) {
-            if(value=='Var') {
-                return '<audio  controls="" type="audio/ogg;"><source src="https://api.bulutfon.com/call-records/'+item.uuid+'/stream?access_token={$token}" type="audio/wav"></audio>';
-            }
-            return "Arama Kaydi Yok";
-        };
+<div class="tab-content client-tabs">
+    <div class="tab-pane active">
+        <div class="tablebg">
+            <table id="sortabletbl0" class="datatable mb-0" width="100%" cellspacing="1" cellpadding="3" border="0">
+                <tbody>
+                    <tr>
+                        <th>ID</th>
+                        <th>Arayan</th>
+                        <th>Aranan</th>
+                        <th>Cagri Tipi</th>
+                        <th>Arama Kaydi</th>
+                        <th>Arama Zamani</th>
+                        <th>Kapatma Zamani</th>
+                        <th>Cagri Durumu</th>
+                    </tr>
+                    {foreach from=$cdrs item=cdr}
+                        <tr>
+                            <td>
+                                {if $cdr->user}
+                                    <a href="clientssummary.php?userid={$cdr->user->id}">{$cdr->user->id}</a>
+                                {else}
+                                    -
+                                {/if}
+                            </td>
+                            <td>
+                                {if $cdr->user}
+                                    <a href="clientssummary.php?userid={$cdr->user->id}">{$cdr->user->firstname} {$cdr->user->lastname}</a>
+                                    <div style="font-size: 12px;background: #e3e3e3;display: inherit;border-radius: 4px;padding: 2px 5px;">{$cdr->caller}</div>
+                                {else}
+                                    {$cdr->caller}
+                                {/if}
+                            </td>
+                            <td>{$cdr->callee}</td>
+                            <td class="text-center">
 
-        $("#dtable").jsGrid({
-            width: "100%",
-            height: "400px",
-            filtering: false,
-            editing: false,
-            sorting: false,
-            paging: false,
-            rowClick: function(args) {
+                                {if $cdr->direction eq "IN"}
+                                    <span class="label active">GELEN ÇAĞRI</span>
+                                {else}
+                                    <span class="label inactive">GİDEN ÇAĞRI</span>
+                                {/if}
+                            </td>
+                            <td class="text-center">
 
-            },
-            data: {{$cdrs}},
-            fields: [
-                { name: "caller", type: "text", width: 25,title: "Arayan" },
-                { name: "callee", type: "text", width: 25 ,title: "Aranan"},
-                { name: "direction", type: "text", width: 25 ,title: "Arama Yonu"},
-                { name: "call_record", type: "text", title: "Arama Kaydi",itemTemplate: function(value, item) { return audio_url(value,item); }},
-                { name: "call_time", type: "text", width: 50 ,title: "Arama Zamani",itemTemplate: function(value){ return format_date(value); }},
-                { name: "hangup_time", type: "text", width: 50 ,title: "Kapatma Zamani",itemTemplate: function(value){ return format_date(value); }},
-            ]
-        });
-    });
+                                {if $cdr->missing_call eq "NO"}
+                                    <span class="label closed">YOK</span>
+                                {else}
+                                    Yes
+                                {/if}
+                            </td>
 
-</script>
-<div class="bulutfon_wrapper">
-    <div class="bulutfon_header">
-        Arama Kayitlari
-    </div>
-    <div class="bulutfon_content no-padding">
-        <div id="dtable"></div>
-    </div>
-    <div class="bulutfon_footer">
-        <ul>
-            <li><a href="addonmodules.php?module=bulutfon&page={$previous}"><i class="fa fa-chevron-left"></i> Onceki</a></li>
-            <li><a href="addonmodules.php?module=bulutfon&page={$next}">Sonraki <i class="fa fa-chevron-right"></i></a></li>
-        </ul>
-        <div class="clear-fix"></div>
-    </div>
-</div>
+                            <td>{$cdr->answer_time}</td>
+                            <td>{$cdr->hangup_time}</td>
+                            <td class="text-center">
+
+                                {if $cdr->missing_call}
+                                    <span class="label closed">Kaçan Çağrı</span>
+                                    {else}
+                                    <span class="label active">Aktif</span>
+                                {/if}
+                            </td>
+                        </tr>
+                    {/foreach}
+
+                </tbody>
+                <tfoot>
+                <tr>
+
+                        <td>
+                            {if $page neq 1}
+                            <a href="addonmodules.php?module=bulutfon&page={$previous}"><i class="fa fa-chevron-left"></i> Önceki Sayfa</a>
+                            {/if}
+                        </td>
+                        <td colspan="6"></td>
+                        <td class="text-right"><a href="addonmodules.php?module=bulutfon&page={$next}">Sonraki Sayfa<i class="fa fa-chevron-right"></i></a></td>
+
+                </tr>
+                </tfoot>
+            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+
 
 {include file='../layout/footer.tpl'}

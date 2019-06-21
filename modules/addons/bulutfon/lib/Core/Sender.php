@@ -1,9 +1,8 @@
 <?php
-namespace Xuma\Libraries;
+namespace WHMCS\Module\Addon\Bulutfon\Core;
 
-use Monolog\Logger;
+use Curl\Curl;
 use StringTemplate\Engine;
-use Monolog\Handler\StreamHandler;
 use Illuminate\Database\Capsule\Manager as DB;
 
 class Sender extends User
@@ -29,21 +28,24 @@ class Sender extends User
      * @param $type
      * @return $this
      */
-    public function find($data,$type)
+    public function find($data, $type)
     {
-        switch ($type)
-        {
+        switch ($type) {
             case 'invoiceid':
                 $this->userFromInvoice($data[$type]);
+
                 break;
             case 'userid':
                 $this->userById($data[$type]);
+
                 break;
             case 'ticketid':
                 $this->userFromTicket($data[$type]);
+
                 break;
             case 'orderid':
                 $this->userFromOrder($data[$type]);
+
                 break;
             default:
                 break;
@@ -51,6 +53,7 @@ class Sender extends User
 
         // Merge hook data with user.
         $this->user = array_merge((array)$this->user, $data);
+
         return $this;
     }
 
@@ -65,33 +68,34 @@ class Sender extends User
 
         $number = $this->formatPhoneNumber($this->user['phonenumber']);
 
-        if(!$number || $this->title=="") {
+        if (!$number || $this->title == "") {
             return false;
         }
 
-        if(isset($this->user['setting'])) {
+        if (isset($this->user['setting'])) {
             $userSetting = json_decode($this->user['setting']);
-            if($userSetting->all == 1 || $userSetting->{$message} == 0) {
+            if ($userSetting->all == 1 || $userSetting->{$message} == 0) {
                 return false;
             }
         }
 
-        $data = array(
+        $data = [
             'title' => $this->title,
             'content' => $this->getMessage($message),
             'receivers' => $number
-        );
+        ];
 
-        if($this->env == 'dev') {
-            $this->logMessage($this->user['id'], $this->getMessage($message), 'debug', $number);
+        if ($this->env == 'dev') {
+            $this->logMessage($this->user['userid'], $this->getMessage($message), 'debug', $number);
+
             return;
         }
 
-        curlCall("http://api.bulutfon.com/messages?access_token={$this->token}", $data, [
-            'CURLOPT_TIMEOUT' => '300'
-        ]);
+        $curl = new Curl();
+        $data = array_merge($data, ['access_token' => $this->token]);
+        $curl->post('http://api.bulutfon.com/messages', $data);
 
-        $this->logMessage($this->user['id'], $this->getMessage($message), 'bulutfon', $number);
+        $this->logMessage($this->user['userid'], $this->getMessage($message), 'bulutfon', $number);
 
         return true;
     }
@@ -103,7 +107,7 @@ class Sender extends User
     protected function getSettings()
     {
         $settings = DB::table('tbladdonmodules')
-            ->where('module','bulutfon')
+            ->where('module', 'bulutfon')
             ->get();
 
         foreach ($settings as $setting) {
@@ -130,7 +134,7 @@ class Sender extends User
     protected function getMessage($name)
     {
         $message = DB::table('mod_bulutfon_smstemplates')
-            ->where('name',$name)
+            ->where('name', $name)
             ->first();
 
         return $this->parseTemplate($message);
@@ -145,6 +149,7 @@ class Sender extends User
     {
         $engine = new Engine();
         $sms = $engine->render($template->template, $this->user);
+
         return $sms;
     }
 
@@ -160,16 +165,8 @@ class Sender extends User
         if (strlen($number) == 10 && $number[0] == 5) {
             return "90{$number}";
         }
-        return false;
-    }
 
-    /**
-     * Testing function.
-     * @param $data
-     */
-    private function dd($data)
-    {
-        echo "<pre>",var_dump($data);die();
+        return false;
     }
 
     /**
@@ -180,7 +177,7 @@ class Sender extends User
      * @param $gsm
      * @return bool
      */
-    protected function logMessage($userid,$message,$type,$gsm)
+    protected function logMessage($userid, $message, $type, $gsm)
     {
         DB::table('mod_bulutfon_messagelog')->insert([
             'userid' => $userid,
@@ -188,6 +185,17 @@ class Sender extends User
             'type' => $type,
             'gsm' => $gsm
         ]);
+
         return true;
+    }
+
+    /**
+     * Testing function.
+     * @param $data
+     */
+    private function dd($data)
+    {
+        echo "<pre>",var_dump($data);
+        die();
     }
 }

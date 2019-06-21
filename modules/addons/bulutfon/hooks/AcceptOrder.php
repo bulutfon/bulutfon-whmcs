@@ -1,6 +1,6 @@
 <?php
 if (!isset($AcceptOrder)) {
-    $AcceptOrder = function ($args) use ($hooks,$sender) {
+    $AcceptOrder = function ($args) use ($hooks, $sender) {
         $sender->find($args, 'orderid')->send('AcceptOrder');
     };
 }

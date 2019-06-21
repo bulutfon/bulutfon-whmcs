@@ -1,7 +1,9 @@
 <?php
-namespace Xuma\Controllers;
+namespace WHMCS\Module\Addon\Bulutfon\Controllers;
 
-use Xuma\Libraries\Sms;
+
+
+use WHMCS\Module\Addon\Bulutfon\Core\Sms;
 
 class SmsController extends Controller
 {
@@ -42,7 +44,7 @@ class SmsController extends Controller
     public function update()
     {
         $id = $this->id();
-        $update = $this->sms->update($id,$this->request->get('template'),$this->request->get('description'));
+        $update = $this->sms->update($id, $this->request->get('template'), $this->request->get('description'));
         if (!$update) {
             $this->redirect('addonmodules.php?module=bulutfon&action=sms');
         }
@@ -56,7 +58,7 @@ class SmsController extends Controller
     public function activate()
     {
         $id = $this->id();
-        $this->sms->setStatus($id,1);
+        $this->sms->setStatus($id, 1);
         $this->redirect('addonmodules.php?module=bulutfon&action=sms');
     }
 
@@ -67,7 +69,7 @@ class SmsController extends Controller
     public function deactivate()
     {
         $id = $this->id();
-        $this->sms->setStatus($id,0);
+        $this->sms->setStatus($id, 0);
         $this->redirect('addonmodules.php?module=bulutfon&action=sms');
     }
 
@@ -78,10 +80,11 @@ class SmsController extends Controller
     public function debug()
     {
         $page = $this->request->get('page', 1);
-        $page = ($page<=0) ? 1 : $page;
+        $page = ($page <= 0) ? 1 : $page;
         $this->paginate($page);
-        $messages = $this->sms->debugMessages(10,$page);
+        $messages = $this->sms->debugMessages(10, $page);
         $this->set('data', json_encode($messages));
+
         return $this->view('bulutfon/debug');
     }
 
@@ -91,10 +94,11 @@ class SmsController extends Controller
      */
     private function id()
     {
-        $id = $this->request->get('id',1);
+        $id = $this->request->get('id', 1);
         if (!$id) {
             $this->redirect('addonmodules.php?module=bulutfon');
         }
+
         return $id;
     }
 }
