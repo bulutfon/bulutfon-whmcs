@@ -59,6 +59,17 @@ Modulu aktifleştirdikten sonra **Token** kısmına Bulutfon master token anahta
 * oAuth2 teknolojisi master token ile degistirildi.
 
 
+## Ekran Görüntüleri
+
+#### Çağrı Kayıtları Listeleme
+![alt text](https://raw.githubusercontent.com/hakanersu/bulutfon-whmcs/master/screenshots/whmcs-1.PNG)
+
+#### SMS Kayıtları Listeleme
+![alt text](https://raw.githubusercontent.com/hakanersu/bulutfon-whmcs/master/screenshots/whmcs-2.PNG)
+
+#### Profil Sayfası Çağrı Kayıtları
+![alt text](https://raw.githubusercontent.com/hakanersu/bulutfon-whmcs/master/screenshots/whmcs-3.PNG)
+
 
 
 
