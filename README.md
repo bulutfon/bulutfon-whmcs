@@ -13,8 +13,7 @@
 
 ### Kurulum
 
-* Github addon sayfasında bulunan [releases](https://github.com/hakanersu/bulutfon-whmcs/releases) linkini kullanarak en güncel dağıtımı indirin.
-
+* [Bu linke](https://github.com/hakanersu/bulutfon-whmcs/releases/download/2.0.0/modules.zip) tıklayarak addonu direkt olarak indirebilirsiniz veya Github addon sayfasında bulunan [releases](https://github.com/hakanersu/bulutfon-whmcs/releases) linkini kullanarak en güncel dağıtımı indirebilirsiniz.
 * Zip dosyasini açtıktan sonra addons **modules** dizini WHMCS ana dizinine yapıştırın veya modules/addons/bulutfon klasörünü whmcs dizini içerisinde modules/addons/ klasörü içerisine yapıştırın.
 
 ### Ayarlar
@@ -27,6 +26,7 @@ Modulu aktifleştirdikten sonra **Token** kısmına Bulutfon master token anahta
 
 * Arama kayıtları ve sms kayıtları listeleme sayfaları performansı güncellendi ve kullanıcı eşleştirme süreçleri iyileştirildi.
 * SMS gönderme ve web kancaları ilerleyen versiyonlarda yeni yapıya uygun olarak eklenmek üzere devre dışı bırakıldı.
+* Dış bağımlılıklar kaldırıldı.
 
 #### v1.1.2
 * Hooklardan kaynaklı hatalar giderildi.
