@@ -3,11 +3,12 @@
 ### Özellikler
 
 * Gelen/giden aramaları listeleme.
+* Gönderilen SMS'leri listeleme.
 * ~~WHMCS kancaları ile kullanıcılara SMS gönderebilme.~~
 
 ### Gereksinimler
 
-* PHP 5.5+
+* PHP 7+
 * WHMCS 7+
 * CURL
 
@@ -27,6 +28,7 @@ Modulu aktifleştirdikten sonra **Token** kısmına Bulutfon master token anahta
 * Arama kayıtları ve sms kayıtları listeleme sayfaları performansı güncellendi ve kullanıcı eşleştirme süreçleri iyileştirildi.
 * SMS gönderme ve web kancaları ilerleyen versiyonlarda yeni yapıya uygun olarak eklenmek üzere devre dışı bırakıldı.
 * Dış bağımlılıklar kaldırıldı.
+* Hooklar ve sms şablonları  bu versiyonda devre dışı bırakıldı.
 
 #### v1.1.2
 * Hooklardan kaynaklı hatalar giderildi.
