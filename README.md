@@ -14,7 +14,7 @@
 
 ### Kurulum
 
-* [Bu linke](https://github.com/hakanersu/bulutfon-whmcs/releases/download/2.0.0/modules.zip) tıklayarak addonu direkt olarak indirebilirsiniz veya Github addon sayfasında bulunan [releases](https://github.com/hakanersu/bulutfon-whmcs/releases) linkini kullanarak en güncel dağıtımı indirebilirsiniz.
+* [Bu linke](https://github.com/hakanersu/bulutfon-whmcs/releases/download/2.0.1/modules.zip) tıklayarak addonu direkt olarak indirebilirsiniz veya Github addon sayfasında bulunan [releases](https://github.com/hakanersu/bulutfon-whmcs/releases) linkini kullanarak en güncel dağıtımı indirebilirsiniz.
 * Zip dosyasini açtıktan sonra addons **modules** dizini WHMCS ana dizinine yapıştırın veya modules/addons/bulutfon klasörünü whmcs dizini içerisinde modules/addons/ klasörü içerisine yapıştırın.
 
 ### Ayarlar
