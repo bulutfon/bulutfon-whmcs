@@ -23,7 +23,7 @@
                 <th>Aranan</th>
                 <th>Arama Zamanı</th>
                 <th>Çağrı Durumu</th>
-                <th>Arama Kaydı</th>
+                <th class="text-center">Arama Kaydı</th>
             </tr>
         </thead>
             <tbody>
@@ -31,12 +31,12 @@
                     <td>
                         <span class="loading-bar"></span>
                         <span class="text">
-                              {{ item.caller }}
+                            <a :href="'tel:+'+item.caller">{{ item.caller }}</a>
                         </span>
                     </td>
                     <td>
                         <span class="loading-bar"></span>
-                        <span class="text">{{ item.callee }}</span>
+                        <span class="text"><a :href="'tel:+'+item.callee">{{ item.callee }}</a></span>
                     </td>
                     <td>
                         <span class="loading-bar"></span>
