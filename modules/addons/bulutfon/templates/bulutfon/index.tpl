@@ -23,16 +23,16 @@
                         <span class="loading-bar"></span>
                         <span class="text">
                               <div class="wrapper">
-                                <a :href="getNumberCount(item.caller) > 1 ? '#' : 'clientsprofile.php?userid='+getUserInfo(item.caller, 'id')" class="bf-flex bf-align-center bf-relative" v-if="isExists(item.caller)">
+                                <div class="bf-flex bf-align-center bf-relative" v-if="isExists(item.caller)">
                                     <span class="bf-success bf-mr-2"  style="padding-top: 0;">{{ getNumberCount(item.caller) }}</span>
                                     <div>
-                                        <span style="display: block;">{{ getUserInfo(item.caller, 'firstname')}} {{ getUserInfo(item.caller, 'lastname')}}</span>
-                                        {{ item.caller }}
+                                        <a style="display: block;" :href="getNumberCount(item.caller) > 1 ? '#' : 'clientsprofile.php?userid='+getUserInfo(item.caller, 'id')">{{ getUserInfo(item.caller, 'firstname')}} {{ getUserInfo(item.caller, 'lastname')}}</a>
+                                        <a :href="'tel:+'+item.caller">{{ item.caller }}</a> 
                                     </div>
-                                </a>
+                                </div>
                                 <span v-else>
                                     <span class="bf-danger bf-mr-2" style="padding-top: 0;">0</span>
-                                    {{ item.caller }}
+                                    <a :href="'tel:+'+item.caller">{{ item.caller }}</a>
                                 </span>
                                 <div class="tooltip" v-if="isExists(item.caller) && getNumberCount(item.caller) > 1">
                                     <table class="bf-tooltop-table">
@@ -41,7 +41,6 @@
                                             <td>
                                                 <a :href="'clientsprofile.php?userid='+user.id">{{ user.firstname }} {{ user.lastname }}</a>
                                             </td>
-                                            
                                         </tr>
                                       
                                     </table>
@@ -51,7 +50,9 @@
                     </td>
                     <td>
                         <span class="loading-bar"></span>
-                        <span class="text">{{ item.callee }}</span>
+                        <span class="text">
+                        <a :href="'tel:+'+item.callee">{{ item.callee }}</a>
+                        </span>
                     </td>
                     <td>
                         <span class="loading-bar"></span>

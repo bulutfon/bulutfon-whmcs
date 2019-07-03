@@ -29,16 +29,19 @@
                             <span class="loading-bar"></span>
                             <span class="text">
                                 <div class="wrapper">
-                                <a :href="getNumberCount(message.recipients) > 1 ? '#' : 'clientsprofile.php?userid='+getUserInfo(message.recipients, 'id')" class="bf-flex bf-align-center bf-relative" v-if="isExists(message.recipients)">
-                                    <span class="bf-success bf-mr-2"  style="padding-top: 0;">{{ getNumberCount(message.recipients) }}</span>
-                                    <div>
-                                        <span style="display: block;">{{ getUserInfo(message.recipients, 'firstname')}} {{ getUserInfo(message.recipients, 'lastname')}}</span>
-                                        {{ message.recipients }}
+                                    <div class="bf-flex bf-align-center bf-relative"  v-if="isExists(message.recipients)">
+                                        <span class="bf-success bf-mr-2"  style="padding-top: 0;">{{ getNumberCount(message.recipients) }}</span>
+                                        <div>
+                                            <a style="display: block;" :href="getNumberCount(message.recipients) > 1 ? '#' : 'clientsprofile.php?userid='+getUserInfo(message.recipients, 'id')">
+                                                {{ getUserInfo(message.recipients, 'firstname')}} {{ getUserInfo(message.recipients, 'lastname')}}
+                                            </a>
+                                            <a :href="'tel:+'+message.recipients">{{ message.recipients }}</a> 
+                                        </div>
                                     </div>
-                                </a>
+                               
                                 <span v-else>
                                     <span class="bf-danger bf-mr-2" style="padding-top: 0;">0</span>
-                                    {{ message.recipients }}
+                                    <a :href="'tel:+'+message.recipients">{{ message.recipients }}</a>
                                 </span>
                                 <div class="tooltip" v-if="isExists(message.recipients) && getNumberCount(message.recipients) > 1">
                                     <table class="bf-tooltop-table">

@@ -1,34 +1,33 @@
-var tabs = $('ul.client-tabs').not('.dont-inject')
-tabs.append('<li class="tab bulutfon-tab"><a href="#">Bulutfon</a></li>')
-
-
-$('ul.client-tabs').on('click', '.bulutfon-tab', function(e) {
-    e.preventDefault();
-    $('ul.client-tabs li').removeClass('active');
-    $(this).addClass('active');
-    var urlParams = new URLSearchParams(window.location.search);
-   
-    $('.tab-pane.active').html('<iframe id="bf-iframe" src="addonmodules.php?module=bulutfon&action=home&work=user&userid='+urlParams.get('userid')+'" style="width:100%;height: 1000px;border:none;"></iframe>')
-
-   
-  
-});
 $(function () {
-    
-    
+    var tabs = $('ul.client-tabs').not('.dont-inject')
+    tabs.append('<li class="tab bulutfon-tab"><a href="#">Bulutfon</a></li>')
+
+    $('ul.client-tabs').on('click', '.bulutfon-tab', function (e) {
+        e.preventDefault();
+        $('ul.client-tabs li').removeClass('active');
+        $(this).addClass('active');
+        var urlParams = new URLSearchParams(window.location.search);
+
+        $('.tab-pane.active').html('<iframe id="bf-iframe" src="addonmodules.php?module=bulutfon&action=home&work=user&userid=' + urlParams.get('userid') + '" style="width:100%;height: 1000px;border:none;"></iframe>')
+    });
+
+    var profilePhone = $("#summary-reset-password").parents("ul").prev("table").find("tr:last-child td:last-child")
+    if (profilePhone.length > 0) {
+        profilePhone.html("<a href='tel:" + profilePhone.text().replace('.', '') + "'>" + profilePhone.text() + "</a>")
+    }
 })
 
 $('#contentarea h1, #content h1').hide();
 
 Number.prototype.pad = function (len) {
-    return (new Array(len+1).join("0") + this).slice(-len);
+    return (new Array(len + 1).join("0") + this).slice(-len);
 }
 
 function isValidDate(d) {
     return d instanceof Date && !isNaN(d);
 }
 
-if ($('#app').length > 0) { 
+if ($('#app').length > 0) {
     var app = new Vue({
         el: '#app',
         mixins: [paginator],
@@ -49,7 +48,7 @@ if ($('#app').length > 0) {
     });
 }
 
-if ($('#sms').length > 0) { 
+if ($('#sms').length > 0) {
     var sms = new Vue({
         el: '#sms',
         mixins: [paginator],
@@ -71,22 +70,21 @@ if ($('#sms').length > 0) {
         },
         methods: {
             showMessage: function (uuid) {
-                
                 var that = this;
-        
-                
-                axios.get(this.getUrl({url: true}, 'messages/'+uuid))
-                .then(function (response) {
-                    that.messageContent = response.data.message.content;
-                    that.shown = !that.shown;
-                   
-                })
-                .catch(function (error) {
-                    console.log(error);
-                })
-                .finally(function () {
-                    // always executed
-                });
+                axios.get(this.getUrl({
+                        url: true
+                    }, 'messages/' + uuid))
+                    .then(function (response) {
+                        that.messageContent = response.data.message.content;
+                        that.shown = !that.shown;
+
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+                    .finally(function () {
+                        // always executed
+                    });
             }
         }
     });

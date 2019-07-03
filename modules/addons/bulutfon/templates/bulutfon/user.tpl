@@ -22,8 +22,6 @@
                 <th>Arayan</th>
                 <th>Aranan</th>
                 <th>Arama Zamanı</th>
-                <th>Cevaplama Zamanı</th>
-                <th>Kapatma Zamanı</th>
                 <th>Çağrı Durumu</th>
                 <th>Arama Kaydı</th>
             </tr>
@@ -45,17 +43,9 @@
                         <span class="text" v-html="getDate(item.call_time)"></span>
                     </td>
                     <td>
-                        <span class="loading-bar"></span>
-                        <span class="text" v-html="getDate(item.answer_time)"></span>
-                    </td>
-                    <td>
-                        <span class="loading-bar"></span>
-                        <span class="text" v-html="getDate(item.hangup_time)"></span>
-                    </td>
-                    <td>
                         <span class="loading-bar" ></span>
                         <span class="text" v-bind:class="{ldelim}'badge badge-danger': item.missing_call, 'bf-success': !item.missing{rdelim}">
-                            <span v-if="item.missing_call">Kaçan Çağrı</span>
+                            <span v-if="item.missing_call">Cevapsız Çağrı</span>
                             <span v-else class="badge badge-success">Cevaplandı</span>
                         </span>
                     </td>
@@ -80,7 +70,7 @@
                         <a href="#" v-on:click="getPage(previous)" v-if="page>1">Önceki</a>
                         <span v-else class="text-muted">Önceki</span>
                     </td>
-                    <td colspan="5" class="text-center">Sayfa: <input type="text" v-model="page" style="width: 35px;" v-on:change="getPage(page)">/{{ total }}</td>
+                    <td colspan="3" class="text-center">Sayfa: <input type="text" v-model="page" style="width: 35px;" v-on:change="getPage(page)">/{{ total }}</td>
                     <td class="text-right">
                         <a href="#" v-on:click="getPage(next)" v-if="total>page">Sonraki</a>
                         <span v-else class="text-muted">Sonraki</span>
