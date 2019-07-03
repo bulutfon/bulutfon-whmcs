@@ -68,7 +68,7 @@
                     <td>
                         <span class="loading-bar" ></span>
                         <span class="text" v-bind:class="{ldelim}'bf-danger': item.missing_call, 'bf-success': !item.missing{rdelim}">
-                            <span v-if="item.missing_call">Kaçan Çağrı</span>
+                            <span v-if="item.missing_call">Cevapsız Çağrı</span>
                             <span v-else>Cevaplandı</span>
                         </span>
                     </td>
