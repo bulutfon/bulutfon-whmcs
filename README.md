@@ -12,7 +12,7 @@
 * WHMCS 7+
 * CURL
 
-### Kurulum
+### Kurulum & Ayarlar
 
 * [Bu linke](https://github.com/hakanersu/bulutfon-whmcs/releases/latest/download/modules.zip) tıklayarak addonu direkt olarak indirebilirsiniz veya Github addon sayfasında bulunan [releases](https://github.com/hakanersu/bulutfon-whmcs/releases) linkini kullanarak en güncel dağıtımı indirebilirsiniz.
 * Zip dosyasini açtıktan sonra addons **modules** dizini WHMCS ana dizinine yapıştırın veya modules/addons/bulutfon klasörünü whmcs dizini içerisinde modules/addons/ klasörü içerisine yapıştırın.
@@ -23,9 +23,6 @@
 * SMS Başlığı kısmında eğer Bulutfon tarafında size tanımlanmış bir SMS başlığı varsa bunu yazın, eğer yoksa bu alanı boş bırakın.
 * "Access Control" kısmında hangi rollerin eklentiye erişebileceğini seçtikten sonra ayarları kaydedin. 
 
-### Ayarlar
-
-Modulu aktifleştirdikten sonra **Token** kısmına Bulutfon master token anahtarını girmeniz gerekmektedir.
 
 ### Güncellemeler
 
