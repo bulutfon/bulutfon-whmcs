@@ -1,5 +1,16 @@
 # Bulutfon WHMCS 7.X ADDON
 
+ÖNEMLİ NOT: Bu eklenti artık gelişitirilmemektedir. [Bulutfon](https://www.bulutfon.com/) firması olarak artık [Hipcall](https://www.hipcall.com/tr-tr/) santrali satışlarımız olduğundan [Hipcall'un WHMCS entegrasyonuna](https://www.hipcall.com/tr-tr/entegrasyonlar/whmcs/) bakmanızı öneriyoruz.
+
+Kaynaklar
+
+1. [Hipcall websitesi](https://www.hipcall.com/tr-tr/)
+2. [Hipcall Santral websitesi](https://www.hipcall.com/tr-tr/sanal-santral/)
+3. [Hipcall WHMCS Entegrasyonu websitesi](https://www.hipcall.com/tr-tr/entegrasyonlar/whmcs/)
+
+Lütfen talepleriniz için bizlere destek@bulutfon.com adresinden ulaşınız.
+
+
 ### Özellikler
 
 * Gelen/giden aramaları listeleme.
